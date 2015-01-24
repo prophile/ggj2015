@@ -26,6 +26,13 @@ public final class Overlord {
         initSprites();
         initFont();
         initBGImages();
+        initSFX();
+    }
+
+    private static void initSFX() {
+        for (SFX sfx : SFX.values()) {
+            sfx.queueLoad();
+        }
     }
 
     private static void initFont() {

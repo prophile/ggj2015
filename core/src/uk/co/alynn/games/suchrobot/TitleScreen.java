@@ -10,6 +10,7 @@ public class TitleScreen extends ScreenMode {
     @Override
     GameMode advance(int x, int y) {
         Box box = new Box();
+        SFX.THUNK.play();
         return new MainMode(box);
     }
 
