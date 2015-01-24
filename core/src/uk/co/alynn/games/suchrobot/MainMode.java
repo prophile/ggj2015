@@ -1,6 +1,8 @@
 package uk.co.alynn.games.suchrobot;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -19,7 +21,7 @@ public class MainMode implements GameMode {
     private SpriteBatch batch = null;
     private Viewport viewport = null;
     private NodeSet nodes = null;
-    private Robot robot = null;
+    private List<Robot> robots = new ArrayList<Robot>();
     private double dayCounter;
 
     private final boolean DEBUG = false;
@@ -42,11 +44,18 @@ public class MainMode implements GameMode {
             throw new RuntimeException("Couldn't read nodes", e);
         }
 
+        int requiredRobots = box.robots;
         for (PathNode node : nodes) {
             if (node.type == NodeType.SPAWNER) {
-                robot = new Robot(nodes, node);
-                break;
+                Robot robot = new Robot(nodes, node);
+                robots.add(robot);
+                requiredRobots -= 1;
+                if (requiredRobots == 0)
+                    break;
             }
+        }
+        if (requiredRobots > 0) {
+            throw new RuntimeException("Not enough spawn pads.");
         }
 
         dayCounter = 0;
@@ -59,63 +68,66 @@ public class MainMode implements GameMode {
 
     @Override
     public GameMode tick() {
+        final float CURVE_A = 10.0f, CURVE_B = 8.0f, CURVE_C = 7.0f;
+
         batch.setProjectionMatrix(viewport.getCamera().combined);
         renderBG();
         float dt = Gdx.graphics.getDeltaTime();
-        robot.update(dt);
 
         ShapeRenderer sr = new ShapeRenderer();
         sr.setProjectionMatrix(viewport.getCamera().combined);
 
-        PathNode visited = robot.at();
-        if (visited != null) {
-            switch (visited.type) {
-            case WELL:
-                if (robot.available() && robot.accumulatedTimeAt > 2.0
-                        && visited.reserves != 0) {
-                    robot.pickUp(CargoType.WATER);
-                    if (visited.reserves > 0) {
-                        visited.reserves -= 1;
-                    }
-                }
-                break;
-            case BASE:
-                if (robot.offload(CargoType.WATER)) {
-                    box.water += 1;
-                } else if (robot.offload(CargoType.METAL)) {
-                    box.metal += 1;
-                } else if (robot.offload(CargoType.SALVAGE)) {
-                    box.salvage += 1;
-                }
-                break;
-            case WRECKAGE:
-                if (robot.available() && robot.accumulatedTimeAt > 5.0
-                        && visited.reserves != 0) {
-                    robot.pickUp(CargoType.SALVAGE);
-                    visited.reserves -= 1;
-                }
-                break;
-            case MINE:
-                if (robot.available() && robot.accumulatedTimeAt > 3.5
-                        && visited.reserves != 0) {
-                    robot.pickUp(CargoType.METAL);
-                    if (visited.reserves > 0) {
-                        visited.reserves -= 1;
-                    }
-                }
-                break;
-            default:
-                break;
-            }
-        }
+        for (Robot robot : robots) {
+            robot.update(dt);
 
-        sr.begin(ShapeType.Line);
-        sr.setColor(Color.YELLOW);
-        final float CURVE_A = 10.0f, CURVE_B = 8.0f, CURVE_C = 7.0f;
-        sr.curve(robot.x() - CURVE_A, robot.y(), robot.x() - CURVE_B, robot.y()
-                + CURVE_C, robot.x() + CURVE_B, robot.y() + CURVE_C, robot.x()
-                + CURVE_A, robot.y(), 32);
-        sr.end();
+            PathNode visited = robot.at();
+            if (visited != null) {
+                switch (visited.type) {
+                case WELL:
+                    if (robot.available() && robot.accumulatedTimeAt > 2.0
+                            && visited.reserves != 0) {
+                        robot.pickUp(CargoType.WATER);
+                        if (visited.reserves > 0) {
+                            visited.reserves -= 1;
+                        }
+                    }
+                    break;
+                case BASE:
+                    if (robot.offload(CargoType.WATER)) {
+                        box.water += 1;
+                    } else if (robot.offload(CargoType.METAL)) {
+                        box.metal += 1;
+                    } else if (robot.offload(CargoType.SALVAGE)) {
+                        box.salvage += 1;
+                    }
+                    break;
+                case WRECKAGE:
+                    if (robot.available() && robot.accumulatedTimeAt > 5.0
+                            && visited.reserves != 0) {
+                        robot.pickUp(CargoType.SALVAGE);
+                        visited.reserves -= 1;
+                    }
+                    break;
+                case MINE:
+                    if (robot.available() && robot.accumulatedTimeAt > 3.5
+                            && visited.reserves != 0) {
+                        robot.pickUp(CargoType.METAL);
+                        if (visited.reserves > 0) {
+                            visited.reserves -= 1;
+                        }
+                    }
+                    break;
+                default:
+                    break;
+                }
+            }
+            sr.begin(ShapeType.Line);
+            sr.setColor(Color.YELLOW);
+            sr.curve(robot.x() - CURVE_A, robot.y(), robot.x() - CURVE_B,
+                    robot.y() + CURVE_C, robot.x() + CURVE_B, robot.y()
+                            + CURVE_C, robot.x() + CURVE_A, robot.y(), 32);
+            sr.end();
+        }
 
         batch.begin();
         for (PathNode node : nodes) {
@@ -144,7 +156,9 @@ public class MainMode implements GameMode {
                 spr.draw(batch, node.x, node.y);
             }
         }
-        Sprite.ROBOT_IDLE.draw(batch, robot.x(), robot.y());
+        for (Robot robot : robots) {
+            Sprite.ROBOT_IDLE.draw(batch, robot.x(), robot.y());
+        }
 
         BitmapFont fnt = Overlord.get().assetManager.get("bitstream.fnt",
                 BitmapFont.class);
@@ -168,9 +182,11 @@ public class MainMode implements GameMode {
             }
         }
         sr.setColor(Color.YELLOW);
-        sr.curve(robot.x() - CURVE_A, robot.y(), robot.x() - CURVE_B, robot.y()
-                - CURVE_C, robot.x() + CURVE_B, robot.y() - CURVE_C, robot.x()
-                + CURVE_A, robot.y(), 32);
+        for (Robot robot : robots) {
+            sr.curve(robot.x() - CURVE_A, robot.y(), robot.x() - CURVE_B,
+                    robot.y() - CURVE_C, robot.x() + CURVE_B, robot.y()
+                            - CURVE_C, robot.x() + CURVE_A, robot.y(), 32);
+        }
         sr.end();
 
         dayCounter += dt;
@@ -228,7 +244,9 @@ public class MainMode implements GameMode {
                 nearestNode = node;
             }
         }
-        robot.selectTarget(nearestNode);
+        for (Robot robot : robots) {
+            robot.selectTarget(nearestNode);
+        }
     }
 
 }
