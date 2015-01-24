@@ -1,3 +1,6 @@
 node base home 0 0
-node well well_near 40 -10
+node well well_near 400 -100
+node well well_far -500 -500
 conn home well_near
+conn home well_far
+
