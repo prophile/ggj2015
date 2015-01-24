@@ -16,8 +16,9 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class MainMode implements GameMode {
-    public static final float WORLD_WIDTH = 1024.0f;
-    public static final float WORLD_HEIGHT = 640.0f;
+    private static float THE_SCALE = 1.4f;
+    public static final float WORLD_WIDTH = 1024.0f / THE_SCALE;
+    public static final float WORLD_HEIGHT = 640.0f / THE_SCALE;
     private SpriteBatch batch = null;
     private Viewport viewport = null;
     private NodeSet nodes = null;
@@ -25,7 +26,7 @@ public class MainMode implements GameMode {
     private Robot selectedRobot = null;
     private double dayCounter;
 
-    private final static boolean DEBUG = false;
+    private final static boolean DEBUG = true;
     private final Box box;
     private final Box initialBox;
 
@@ -72,10 +73,32 @@ public class MainMode implements GameMode {
     @Override
     public GameMode tick(ScreenEdge screenEdge) {
         final float CURVE_A = 10.0f, CURVE_B = 8.0f, CURVE_C = 7.0f;
+        float dt = Gdx.graphics.getDeltaTime();
+
+        switch (screenEdge) {
+        case TOP:
+            viewport.getCamera().translate(0.0f,
+                    Constants.SCROLL_SPEED.asFloat() * dt, 0.0f);
+            break;
+        case BOTTOM:
+            viewport.getCamera().translate(0.0f,
+                    -Constants.SCROLL_SPEED.asFloat() * dt, 0.0f);
+            break;
+        case LEFT:
+            viewport.getCamera().translate(
+                    -Constants.SCROLL_SPEED.asFloat() * dt, 0.0f, 0.0f);
+            break;
+        case RIGHT:
+            viewport.getCamera().translate(
+                    Constants.SCROLL_SPEED.asFloat() * dt, 0.0f, 0.0f);
+            break;
+        case NONE:
+            break;
+        }
+        viewport.getCamera().update();
 
         batch.setProjectionMatrix(viewport.getCamera().combined);
         renderBG();
-        float dt = Gdx.graphics.getDeltaTime();
 
         ShapeRenderer sr = new ShapeRenderer();
         sr.setProjectionMatrix(viewport.getCamera().combined);

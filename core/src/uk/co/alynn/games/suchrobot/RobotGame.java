@@ -99,8 +99,21 @@ public class RobotGame extends ApplicationAdapter {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Animation.update();
+        int mx = Gdx.input.getX();
+        int my = Gdx.input.getY();
+        ScreenEdge edge = ScreenEdge.NONE;
+        int margin = Constants.SCREEN_EDGE_WIDTH.asInt();
+        if (mx < margin) {
+            edge = ScreenEdge.LEFT;
+        } else if (mx > (Gdx.graphics.getWidth() - margin)) {
+            edge = ScreenEdge.RIGHT;
+        } else if (my < margin) {
+            edge = ScreenEdge.TOP;
+        } else if (my > (Gdx.graphics.getHeight() - margin)) {
+            edge = ScreenEdge.BOTTOM;
+        }
         if (mode != null) {
-            GameMode nextMode = mode.tick(ScreenEdge.NONE);
+            GameMode nextMode = mode.tick(edge);
             setMode(nextMode);
         }
     }
