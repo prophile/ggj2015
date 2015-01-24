@@ -7,16 +7,21 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public enum Sprite {
-    ROBOT_DEBUG("robot.png", 1, 1.0f, 16, 16),
-    NODE_DEBUG("node.png", 1, 1.0f, 16, 16),
-    ROBOT_IDLE("Animations/RoboidleAlpha/RoboIdle/RoboIdle_00001_%.png", 24, 0.1f, 512, 380);
+    ROBOT_DEBUG("robot.png", 1, 1.0f, 16, 16), NODE_DEBUG("node.png", 1, 1.0f,
+            16, 16), ROBOT_IDLE(
+            "Animations/RoboidleAlpha/RoboIdle/RoboIdle_00001_%.png", 24, 0.1f,
+            512, 380), NODE_MINE("NodesRough/MetalRough.png", 1, 0.1f, 425, 150), NODE_SALVAGE(
+            "NodesRough/SalvageRough.png", 1, 0.1f, 500, 354), NODE_SHIP(
+            "NodesRough/ShipRought.png", 1, 0.1f, 710, 522), NODE_WELL(
+            "NodesRough/WellRough.png", 1, 0.1f, 441, 120);
 
     private String path;
     private float scale;
     private int anchorX, anchorY;
     private int frames;
 
-    private Sprite(String path, int frameCount, float scale, int anchorX, int anchorY) {
+    private Sprite(String path, int frameCount, float scale, int anchorX,
+            int anchorY) {
         this.path = path;
         this.frames = frameCount;
         this.scale = scale;
@@ -50,6 +55,7 @@ public enum Sprite {
 
     public void draw(SpriteBatch batch, float x, float y) {
         Texture tex = getTexture();
-        batch.draw(tex, x - (this.anchorX * scale), y - (this.anchorY * scale), tex.getWidth() * scale, tex.getHeight() * scale);
+        batch.draw(tex, x - (this.anchorX * scale), y - (this.anchorY * scale),
+                tex.getWidth() * scale, tex.getHeight() * scale);
     }
 }

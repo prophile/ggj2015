@@ -25,6 +25,8 @@ public class MainMode implements GameMode {
     private double dayCounter;
     private int dayIndex = 0;
 
+    private final boolean DEBUG = false;
+
     @Override
     public void start() {
         viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT);
@@ -111,7 +113,29 @@ public class MainMode implements GameMode {
 
         batch.begin();
         for (PathNode node : nodes) {
-            Sprite.NODE_DEBUG.draw(batch, node.x, node.y);
+            Sprite spr = null;
+            switch (node.type) {
+            case WELL:
+                spr = Sprite.NODE_WELL;
+                break;
+            case MINE:
+                spr = Sprite.NODE_MINE;
+                break;
+            case BASE:
+                spr = Sprite.NODE_SHIP;
+                break;
+            case WRECKAGE:
+                spr = Sprite.NODE_SALVAGE;
+                break;
+            case WAYPOINT:
+                if (DEBUG) {
+                    spr = Sprite.NODE_DEBUG;
+                }
+                break;
+            }
+            if (spr != null) {
+                spr.draw(batch, node.x, node.y);
+            }
         }
         Sprite.ROBOT_IDLE.draw(batch, robot.x(), robot.y());
 
@@ -127,10 +151,12 @@ public class MainMode implements GameMode {
 
         sr.setColor(Color.CYAN);
         sr.begin(ShapeType.Line);
-        for (PathNode node : nodes) {
-            for (PathNode node2 : nodes.connectionsFrom(node)) {
-                if (node2.hashCode() > node.hashCode()) {
-                    sr.line(node2.x, node2.y, node.x, node.y);
+        if (DEBUG) {
+            for (PathNode node : nodes) {
+                for (PathNode node2 : nodes.connectionsFrom(node)) {
+                    if (node2.hashCode() > node.hashCode()) {
+                        sr.line(node2.x, node2.y, node.x, node.y);
+                    }
                 }
             }
         }
