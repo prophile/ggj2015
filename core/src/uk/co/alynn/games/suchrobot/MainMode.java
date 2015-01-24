@@ -155,7 +155,9 @@ public class MainMode implements GameMode {
                 spr = Sprite.NODE_SHIP;
                 break;
             case WRECKAGE:
-                spr = Sprite.NODE_SALVAGE;
+                if (node.reserves != 0) {
+                    spr = Sprite.NODE_SALVAGE;
+                }
                 break;
             case WAYPOINT:
             case SPAWNER:
