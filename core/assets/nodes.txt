@@ -1,7 +1,7 @@
-node BASE home 0 0
-node WELL well_near 400 -100
-node WAYPOINT well_far_wp_1 -150 -150
-node WELL well_far -350 -150
+node BASE home 0 0 0
+node WELL well_near 400 -100 2
+node WAYPOINT well_far_wp_1 -150 -150 0
+node WELL well_far -350 -150 3
 conn home well_near
 conn home well_far_wp_1
 conn well_far_wp_1 well_far

@@ -30,7 +30,7 @@ public class MainMode implements GameMode {
         } catch (IOException e) {
             throw new RuntimeException("Couldn't read nodes", e);
         }
-        
+
         robot = new Robot(nodes);
         robot.selectTarget(nodes.lookup("well_far"));
     }
@@ -43,13 +43,17 @@ public class MainMode implements GameMode {
     @Override
     public void draw() {
         robot.update(Gdx.graphics.getDeltaTime());
-        
+
         PathNode visited = robot.at();
         if (visited != null) {
             switch (visited.type) {
             case WELL:
-                if (robot.available() && robot.accumulatedTimeAt > 2.0) {
+                if (robot.available() && robot.accumulatedTimeAt > 2.0
+                        && visited.reserves != 0) {
                     robot.pickUp(CargoType.WATER);
+                    if (visited.reserves > 0) {
+                        visited.reserves -= 1;
+                    }
                 }
                 break;
             case BASE:
@@ -69,12 +73,13 @@ public class MainMode implements GameMode {
             Sprite.NODE_DEBUG.draw(batch, node.x, node.y);
         }
         Sprite.ROBOT_IDLE.draw(batch, robot.x(), robot.y());
-        
-        BitmapFont fnt = Overlord.get().assetManager.get("bitstream.fnt", BitmapFont.class);
+
+        BitmapFont fnt = Overlord.get().assetManager.get("bitstream.fnt",
+                BitmapFont.class);
         batch.setShader(Overlord.get().getFontShader());
         fnt.draw(batch, "Water: " + waterBase, 100, 100);
         batch.setShader(null);
-        
+
         batch.end();
     }
 
@@ -90,7 +95,8 @@ public class MainMode implements GameMode {
         PathNode nearestNode = null;
         float nearestDist = Float.POSITIVE_INFINITY;
         for (PathNode node : nodes) {
-            float dist = (float)Math.hypot(node.x - worldCoords.x, node.y - worldCoords.y);
+            float dist = (float) Math.hypot(node.x - worldCoords.x, node.y
+                    - worldCoords.y);
             if (dist <= nearestDist) {
                 nearestDist = dist;
                 nearestNode = node;
