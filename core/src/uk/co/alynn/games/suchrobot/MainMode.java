@@ -13,13 +13,13 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class MainMode implements GameMode {
     private static float THE_SCALE = 1.4f;
-    public static final float WORLD_WIDTH = 1024.0f / THE_SCALE;
-    public static final float WORLD_HEIGHT = 640.0f / THE_SCALE;
+    public static final float WORLD_WIDTH = 1024.0f;
+    public static final float WORLD_HEIGHT = 640.0f;
     private SpriteBatch batch = null;
     private Viewport viewport = null;
     private NodeSet nodes = null;
@@ -31,6 +31,8 @@ public class MainMode implements GameMode {
     private final Box box;
     private final Box initialBox;
 
+    private float offX, offY;
+
     public MainMode(Box box) {
         this.box = box;
         initialBox = box.copy();
@@ -38,7 +40,8 @@ public class MainMode implements GameMode {
 
     @Override
     public void start() {
-        viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT);
+        viewport = new ExtendViewport(WORLD_WIDTH / THE_SCALE, WORLD_HEIGHT
+                / THE_SCALE);
         batch = new SpriteBatch();
 
         viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -80,18 +83,22 @@ public class MainMode implements GameMode {
         case TOP:
             viewport.getCamera().translate(0.0f,
                     Constants.SCROLL_SPEED.asFloat() * dt, 0.0f);
+            offY += Constants.SCROLL_SPEED.asFloat() * dt;
             break;
         case BOTTOM:
             viewport.getCamera().translate(0.0f,
                     -Constants.SCROLL_SPEED.asFloat() * dt, 0.0f);
+            offY -= Constants.SCROLL_SPEED.asFloat() * dt;
             break;
         case LEFT:
             viewport.getCamera().translate(
                     -Constants.SCROLL_SPEED.asFloat() * dt, 0.0f, 0.0f);
+            offX -= Constants.SCROLL_SPEED.asFloat() * dt;
             break;
         case RIGHT:
             viewport.getCamera().translate(
                     Constants.SCROLL_SPEED.asFloat() * dt, 0.0f, 0.0f);
+            offX += Constants.SCROLL_SPEED.asFloat() * dt;
             break;
         case NONE:
             break;
@@ -101,6 +108,13 @@ public class MainMode implements GameMode {
         batch.setProjectionMatrix(new Matrix4());
         renderBG();
         batch.setProjectionMatrix(viewport.getCamera().combined);
+
+        Texture l1 = Overlord.get().assetManager.get("Layout/Rough/Level1.png",
+                Texture.class);
+        batch.begin();
+        batch.draw(l1, -WORLD_WIDTH / 2, -WORLD_HEIGHT / 2, WORLD_WIDTH,
+                WORLD_HEIGHT);
+        batch.end();
 
         ShapeRenderer sr = new ShapeRenderer();
         sr.setProjectionMatrix(viewport.getCamera().combined);
@@ -317,8 +331,6 @@ public class MainMode implements GameMode {
     }
 
     private void renderBG() {
-        Texture l1 = Overlord.get().assetManager.get("Layout/Rough/Level1.png",
-                Texture.class);
         Texture l2 = Overlord.get().assetManager.get("Layout/Rough/Level2.png",
                 Texture.class);
         Texture l3 = Overlord.get().assetManager.get("Layout/Rough/Level3.png",
@@ -328,16 +340,13 @@ public class MainMode implements GameMode {
         Texture sky = Overlord.get().assetManager.get("Layout/Rough/Sky.png",
                 Texture.class);
         batch.begin();
-        batch.draw(sky, -WORLD_WIDTH / 2, -WORLD_HEIGHT / 2, WORLD_WIDTH,
-                WORLD_HEIGHT);
-        batch.draw(mnt, -WORLD_WIDTH / 2, -WORLD_HEIGHT / 2, WORLD_WIDTH,
-                WORLD_HEIGHT);
-        batch.draw(l3, -WORLD_WIDTH / 2, -WORLD_HEIGHT / 2, WORLD_WIDTH,
-                WORLD_HEIGHT);
-        batch.draw(l2, -WORLD_WIDTH / 2, -WORLD_HEIGHT / 2, WORLD_WIDTH,
-                WORLD_HEIGHT);
-        batch.draw(l1, -WORLD_WIDTH / 2, -WORLD_HEIGHT / 2, WORLD_WIDTH,
-                WORLD_HEIGHT);
+        final float L2_FACTOR = 0.0006f;
+        final float L3_FACTOR = 0.0003f;
+        final float MNT_FACTOR = 0.00006f;
+        batch.draw(sky, -1, -1, 2, 2);
+        batch.draw(mnt, -1 - offX * MNT_FACTOR, -1 - offY * MNT_FACTOR, 2, 2);
+        batch.draw(l3, -1 - offX * L3_FACTOR, -1 - offY * L3_FACTOR, 2, 2);
+        batch.draw(l2, -1 - offX * L2_FACTOR, -1 - offY * L2_FACTOR, 2, 2);
         batch.end();
     }
 
