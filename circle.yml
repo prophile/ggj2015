@@ -1,0 +1,5 @@
+test:
+  override: gradle dist
+  post:
+    - cp desktop/build/libs/desktop-1.0 $CIRCLE_ARTIFACTS/robogame.jar
+
