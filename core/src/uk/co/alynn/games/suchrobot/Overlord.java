@@ -26,7 +26,6 @@ public final class Overlord {
         initSprites();
         initFont();
         initBGImages();
-        assetManager.finishLoading(); // TODO: improve me
     }
 
     private static void initFont() {

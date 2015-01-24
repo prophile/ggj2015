@@ -23,7 +23,7 @@ public class RobotGame extends ApplicationAdapter {
     @Override
     public void create() {
         Overlord.init();
-        setMode(new TitleScreen());
+        setMode(new LoadingScreen());
         Gdx.input.setInputProcessor(new InputProcessor() {
 
             @Override
