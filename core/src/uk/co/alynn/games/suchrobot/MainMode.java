@@ -17,7 +17,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class MainMode implements GameMode {
-    private static float THE_SCALE = 1.4f;
+    private float THE_SCALE = Constants.SCALE.asFloat();
     public static final float WORLD_WIDTH = 1024.0f;
     public static final float WORLD_HEIGHT = 640.0f;
     private SpriteBatch batch = null;
