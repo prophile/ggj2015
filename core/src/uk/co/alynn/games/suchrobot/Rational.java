@@ -3,6 +3,9 @@ package uk.co.alynn.games.suchrobot;
 public final class Rational implements Comparable<Rational> {
     public final int numerator;
     public final int denominator;
+    
+    public final static Rational ZERO = new Rational(0, 1);
+    public final static Rational ONE = new Rational(1, 1);
 
     private Rational(int num, int denom) {
         if (denom == 0) {

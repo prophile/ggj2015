@@ -14,6 +14,8 @@ public class MainMode implements GameMode {
     private SpriteBatch batch = null;
     private Viewport viewport = null;
     private NodeSet nodes = null;
+    private Robot robot = null;
+    private static final Rational dt = Rational.ratio(1, 30);
 
     @Override
     public void start() {
@@ -27,6 +29,11 @@ public class MainMode implements GameMode {
         } catch (IOException e) {
             throw new RuntimeException("Couldn't read nodes", e);
         }
+        
+        robot = new Robot();
+        robot.sourceNode = nodes.lookup("home");
+        robot.destNode = nodes.lookup("well_near");
+        robot.progress = Rational.ratio(0, 1);
     }
 
     @Override
@@ -36,14 +43,19 @@ public class MainMode implements GameMode {
 
     @Override
     public void draw() {
-        Texture img = Sprite.NODE_DEBUG.getTexture();
-
+        robot.update(dt);
+        
+        Texture debugNode = Sprite.NODE_DEBUG.getTexture();
+        Texture debugRobot = Sprite.ROBOT_DEBUG.getTexture();
+        
         batch.setProjectionMatrix(viewport.getCamera().combined);
 
         batch.begin();
         for (PathNode node : nodes) {
-            batch.draw(img, node.x.toFloat(), node.y.toFloat());
+            batch.draw(debugNode, node.x.toFloat(), node.y.toFloat());
         }
+        batch.draw(debugRobot, robot.x().toFloat(), robot.y().toFloat());
+        
         batch.end();
     }
 
