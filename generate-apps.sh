@@ -23,6 +23,6 @@ pushd distributions/windows
 zip -r ../final/robogame-win32.zip robogame
 popd
 pushd distributions/mac
-zip -r ../final/robogame.zip RoboGame.app
+zip -r ../final/robogame-mac.zip RoboGame.app
 popd
 
