@@ -16,7 +16,9 @@ public class MainMode implements GameMode {
     private Viewport viewport = null;
     private NodeSet nodes = null;
     private Robot robot = null;
-    private int waterBase;
+    private int waterBase = 1;
+    private int metalBase = 0;
+    private int salvageBase = 0;
 
     @Override
     public void start() {
@@ -59,6 +61,26 @@ public class MainMode implements GameMode {
             case BASE:
                 if (robot.offload(CargoType.WATER)) {
                     waterBase += 1;
+                } else if (robot.offload(CargoType.METAL)) {
+                    metalBase += 1;
+                } else if (robot.offload(CargoType.SALVAGE)) {
+                    salvageBase += 1;
+                }
+                break;
+            case WRECKAGE:
+                if (robot.available() && robot.accumulatedTimeAt > 5.0
+                        && visited.reserves != 0) {
+                    robot.pickUp(CargoType.SALVAGE);
+                    visited.reserves -= 1;
+                }
+                break;
+            case MINE:
+                if (robot.available() && robot.accumulatedTimeAt > 3.5
+                        && visited.reserves != 0) {
+                    robot.pickUp(CargoType.METAL);
+                    if (visited.reserves > 0) {
+                        visited.reserves -= 1;
+                    }
                 }
                 break;
             default:
@@ -77,7 +99,8 @@ public class MainMode implements GameMode {
         BitmapFont fnt = Overlord.get().assetManager.get("bitstream.fnt",
                 BitmapFont.class);
         batch.setShader(Overlord.get().getFontShader());
-        fnt.draw(batch, "Water: " + waterBase, 100, 100);
+        fnt.drawMultiLine(batch, "Water: " + waterBase + "\nMetal: "
+                + metalBase + "\nSalvg: " + salvageBase, 100, 100);
         batch.setShader(null);
 
         batch.end();
