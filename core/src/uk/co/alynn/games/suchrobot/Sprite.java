@@ -4,7 +4,6 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 
 public enum Sprite {
-    BADLOGIC("badlogic.jpg"),
     NODE_DEBUG("node.png");
     
     private String path;
