@@ -1,5 +1,7 @@
 package uk.co.alynn.games.suchrobot;
 
+import java.io.IOException;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -11,6 +13,7 @@ public class MainMode implements GameMode {
     public static final float WORLD_HEIGHT = 640.0f;
     private SpriteBatch batch = null;
     private Viewport viewport = null;
+    private NodeSet nodes = null;
 
     @Override
     public void start() {
@@ -18,6 +21,12 @@ public class MainMode implements GameMode {
         batch = new SpriteBatch();
 
         viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        try {
+            nodes = NodeSetReader.readNodeSet("nodes.txt");
+        } catch (IOException e) {
+            throw new RuntimeException("Couldn't read nodes", e);
+        }
     }
 
     @Override
