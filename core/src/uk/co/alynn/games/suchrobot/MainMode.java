@@ -25,11 +25,13 @@ public class MainMode implements GameMode {
     private Robot selectedRobot = null;
     private double dayCounter;
 
-    private final boolean DEBUG = false;
-    private Box box;
+    private final static boolean DEBUG = false;
+    private final Box box;
+    private final Box initialBox;
 
     public MainMode(Box box) {
         this.box = box;
+        initialBox = box.copy();
     }
 
     @Override
@@ -226,7 +228,6 @@ public class MainMode implements GameMode {
 
         if (dayCounter > 20) {
             final float ROBOT_SAFE_DISTANCE = 100.0f;
-            int oldRobots = box.robots;
             box.robots = 0;
             PathNode home = nodes.lookup("home");
             for (Robot robot : robots) {
@@ -239,11 +240,34 @@ public class MainMode implements GameMode {
             NightMode nm = new NightMode(box);
             List<String> messages = new ArrayList<String>();
             messages.add("Day " + box.day + " is over.");
-            if (oldRobots > box.robots) {
-                messages.add((oldRobots - box.robots) + " robots broke today.");
+            if (initialBox.robots > box.robots) {
+                messages.add((initialBox.robots - box.robots)
+                        + " robots didn't make it back.");
+            }
+            if (initialBox.salvage < box.salvage) {
+                if (initialBox.salvage == 0) {
+                    messages.add("Picked up the first parts of the ship today.");
+                } else {
+                    messages.add("Salvaged more parts from the ship.");
+                }
+            }
+            if (initialBox.metal < box.metal) {
+                messages.add("Picked up " + (box.metal - initialBox.metal)
+                        + " metal.");
             }
             if (box.water <= 1) {
                 messages.add("Water is running very low.");
+            }
+            switch (box.day) {
+            case 1:
+                messages.add("The CIA are on to me.");
+                break;
+            case 6:
+                messages.add("Got to get off this rock.");
+                break;
+            case 9:
+                messages.add("Not long now.");
+                break;
             }
             return new ResultsScreen(messages, nm);
         } else {
