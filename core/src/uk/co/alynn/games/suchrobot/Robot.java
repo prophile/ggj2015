@@ -1,24 +1,26 @@
 package uk.co.alynn.games.suchrobot;
 
+import com.badlogic.gdx.math.MathUtils;
+
 public final class Robot {
     public PathNode sourceNode;
     public PathNode destNode;
-    public Rational progress;
+    public float progress;
     
-    public Rational x() {
-        return progress.mul(destNode.x).add(Rational.ONE.sub(progress).mul(sourceNode.x));
+    public float x() {
+        return MathUtils.lerp(sourceNode.x, destNode.x, progress);
     }
     
-    public Rational y() {
-        return progress.mul(destNode.y).add(Rational.ONE.sub(progress).mul(sourceNode.y));
+    public float y() {
+        return MathUtils.lerp(sourceNode.y, destNode.y, progress);
     }
     
-    public void update(Rational dt) {
-        progress = progress.add(dt);
-        if (progress.compareTo(Rational.ONE) >= 0) {
-            progress = Rational.ONE;
+    public void update(float dt) {
+        progress += dt;
+        if (progress >= 1.0f) {
+            progress -= 1.0f;
             sourceNode = destNode;
-            // destNode = next target
+            //destNode = next target;
         }
     }
 }

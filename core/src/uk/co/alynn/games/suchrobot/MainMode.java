@@ -15,7 +15,7 @@ public class MainMode implements GameMode {
     private Viewport viewport = null;
     private NodeSet nodes = null;
     private Robot robot = null;
-    private static final Rational dt = Rational.ratio(1, 30);
+    private static final float dt = 1 / 30.0f;
 
     @Override
     public void start() {
@@ -33,7 +33,7 @@ public class MainMode implements GameMode {
         robot = new Robot();
         robot.sourceNode = nodes.lookup("home");
         robot.destNode = nodes.lookup("well_near");
-        robot.progress = Rational.ratio(0, 1);
+        robot.progress = 0;
     }
 
     @Override
@@ -52,9 +52,9 @@ public class MainMode implements GameMode {
 
         batch.begin();
         for (PathNode node : nodes) {
-            batch.draw(debugNode, node.x.toFloat(), node.y.toFloat());
+            batch.draw(debugNode, node.x, node.y);
         }
-        batch.draw(debugRobot, robot.x().toFloat(), robot.y().toFloat());
+        batch.draw(debugRobot, robot.x(), robot.y());
         
         batch.end();
     }

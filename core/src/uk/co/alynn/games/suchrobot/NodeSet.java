@@ -40,7 +40,7 @@ public class NodeSet implements Iterable<PathNode> {
         
     }
     
-    public void addNode(String type, String name, Rational x, Rational y) {
+    public void addNode(String type, String name, float x, float y) {
         PathNode newNode = new PathNode(name, x, y);
         nodes.add(newNode);
         directConnections.put(name, new ArrayList<PathNode>());
