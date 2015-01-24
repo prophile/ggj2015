@@ -47,10 +47,9 @@ public class MainMode implements GameMode {
         
         PathNode visited = robot.at();
         if (visited != null) {
-            boolean miningTick = Animation.startedFrame() && (Animation.frameIndex() == 0 || Animation.frameIndex() == 12);
             switch (visited.type) {
             case WELL:
-                if (miningTick && robot.available()) {
+                if (robot.available() && robot.accumulatedTimeAt > 2.0) {
                     robot.pickUp(CargoType.WATER);
                 }
                 break;

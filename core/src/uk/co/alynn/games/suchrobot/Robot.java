@@ -11,6 +11,7 @@ public final class Robot {
     public PathNode finalTarget;
     public float progress = 0.0f;
     public CargoType carrying = CargoType.NOTHING;
+    public float accumulatedTimeAt = 0.0f;
     
     public Robot(NodeSet nodes) {
         nodeSet = nodes;
@@ -62,6 +63,11 @@ public final class Robot {
     }
     
     public void update(float dt) {
+        if (at() == null) {
+            accumulatedTimeAt = 0;
+        } else {
+            accumulatedTimeAt += dt;
+        }
         if (sourceNode == destNode) {
             if (destNode != finalTarget) {
                 destNode = nodeSet.nextNodeFor(sourceNode, finalTarget);
