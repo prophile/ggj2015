@@ -197,7 +197,17 @@ public class MainMode implements GameMode {
 
         dayCounter += dt;
 
-        if (dayCounter > 15) {
+        if (dayCounter > 60) {
+            final float ROBOT_SAFE_DISTANCE = 100.0f;
+            box.robots = 0;
+            PathNode home = nodes.lookup("home");
+            for (Robot robot : robots) {
+                float distance = (float) Math.hypot(robot.x() - home.x,
+                        robot.y() - home.y);
+                if (distance <= ROBOT_SAFE_DISTANCE) {
+                    box.robots += 1;
+                }
+            }
             return new NightMode(box);
         } else {
             return this;
