@@ -2,9 +2,11 @@ package uk.co.alynn.games.suchrobot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class NodeSet implements Iterable<PathNode> {
     private static final class RoutingKey {
@@ -58,13 +60,77 @@ public class NodeSet implements Iterable<PathNode> {
             System.err.println("- " + node);
             runDijkstra(node);
         }
+        System.err.println("-- RT DATABASE --");
+        System.err.println("src\tdst\tnext");
+        for (Map.Entry<RoutingKey, PathNode> entry : nextHops.entrySet()) {
+            System.err.println(entry.getKey().sourceNode + "\t" + entry.getKey().destNode + "\t" + entry.getValue().name);
+        }
+        System.err.println("--");
     }
     
     private void runDijkstra(PathNode node) {
-        // Not Dijkstra's algorithm!
+        Map<String, Float> distances = new HashMap<String, Float>();
+        Map<String, String> predecessors = new HashMap<String, String>();
+        Set<String> unvisited = new HashSet<String>();
+        for (PathNode allNodes : this) {
+            unvisited.add(allNodes.name);
+        }
+        distances.put(node.name, 0.0f);
+        PathNode currentNode = node;
+        while (true) {
+            System.err.println("\texploring node " + currentNode.name);
+            float currentDistance = distances.getOrDefault(currentNode.name, Float.POSITIVE_INFINITY);
+            for (PathNode neighbour : connectionsFrom(currentNode)) {
+                if (!(unvisited.contains(neighbour.name))) {
+                    System.err.println("\tskipping " + neighbour.name + " since it has been visited");
+                    continue;
+                }
+                float baseDistance = (float)Math.hypot(neighbour.x - currentNode.x, neighbour.y - currentNode.y);
+                float tentative = currentDistance + baseDistance;
+                float assignedDist = distances.getOrDefault(neighbour.name, Float.POSITIVE_INFINITY);
+                if (tentative < assignedDist) {
+                    distances.put(neighbour.name, tentative);
+                    predecessors.put(neighbour.name, currentNode.name);
+                    System.err.println("\tnew best path for " + neighbour.name + " discovered: via " + currentNode.name);
+                } else {
+                    System.err.println("\tnew path to " + neighbour.name + " discovered but suboptimal: " + tentative + " rather than " + assignedDist);
+                }
+            }
+            unvisited.remove(currentNode.name);
+            String bestOption = null;
+            float bestDistance = Float.POSITIVE_INFINITY;
+            for (String option : unvisited) {
+                float calcDist = distances.getOrDefault(option, Float.POSITIVE_INFINITY);
+                if (calcDist <= bestDistance) {
+                    bestOption = option;
+                    bestDistance = calcDist;
+                }
+            }
+            if (bestOption == null)
+                break;
+            currentNode = lookup(bestOption);
+        }
+        
+        for (Map.Entry<String, String> pred : predecessors.entrySet()) {
+            System.err.println("PRED TABLE " + pred.getValue() + " -> " + pred.getKey());
+        }
+        
         for (PathNode targetNode : this) {
             RoutingKey key = new RoutingKey(node.name, targetNode.name);
-            nextHops.put(key, targetNode);
+            if (targetNode == node) {
+                nextHops.put(key,  targetNode);
+                continue;
+            }
+            System.err.println("\tbacktracking from " + targetNode.name);
+            String last = targetNode.name;
+            while (true) {
+                String backtrack = predecessors.get(last);
+                if (backtrack.equals(node.name)) {
+                    nextHops.put(key, lookup(last));
+                    break;
+                }
+                last = backtrack;
+            }
         }
     }
     
