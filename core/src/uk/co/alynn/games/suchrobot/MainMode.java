@@ -172,6 +172,23 @@ public class MainMode implements GameMode {
         }
         for (Robot robot : robots) {
             Sprite.ROBOT_IDLE.draw(batch, robot.x(), robot.y());
+            final float ICON_OFFSET = 60.0f;
+            switch (robot.carrying) {
+            case NOTHING:
+                break;
+            case WATER:
+                Sprite.ICON_WATER.draw(batch, robot.x(), robot.y()
+                        + ICON_OFFSET);
+                break;
+            case METAL:
+                Sprite.ICON_METAL.draw(batch, robot.x(), robot.y()
+                        + ICON_OFFSET);
+                break;
+            case SALVAGE:
+                Sprite.ICON_SALVAGE.draw(batch, robot.x(), robot.y()
+                        + ICON_OFFSET);
+                break;
+            }
         }
 
         BitmapFont fnt = Overlord.get().assetManager.get("bitstream.fnt",
