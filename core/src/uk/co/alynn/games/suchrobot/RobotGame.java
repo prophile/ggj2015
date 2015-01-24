@@ -31,7 +31,7 @@ public class RobotGame extends ApplicationAdapter {
             mode.draw();
         }
     }
-    
+
     @Override
     public void resize(int screenWidth, int screenHeight) {
         if (mode != null) {
