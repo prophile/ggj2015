@@ -6,23 +6,45 @@ node SPAWNER spwn_1 0 0 0
 node SPAWNER spwn_4 50 0 0
 node SPAWNER spwn_5 100 0 0
 
-node WAYPOINT y0_1 -650 100 0
-node WAYPOINT y0_2 -500 100 0
-node WAYPOINT y0_3 -400 100 0
-node WAYPOINT y0_4 -250 0 0
-node WAYPOINT y0_5 250 0 0
-node WAYPOINT y0_6 400 100 0
-node WAYPOINT y0_7 550 100 0
-node WAYPOINT y0_8 700 100 0
-node WAYPOINT y0_9 800 0 0
+node WAYPOINT 01 -650 100 0
+node WAYPOINT 02 -500 100 0
+node WAYPOINT 03 -400 100 0
+node WAYPOINT 04 -250 0 0
+node WAYPOINT 05 250 0 0
+node WAYPOINT 06 400 100 0
+node WAYPOINT 07 550 100 0
+node WAYPOINT 08 700 100 0
+node WAYPOINT 09 800 0 0
 
-node WAYPOINT y1_1 -250 150 0
-node WAYPOINT y1_2 -400 250 0
-node WAYPOINT y1_3 -550 250 0
-node WAYPOINT y1_4 -700 300 0
-node WAYPOINT y1_5 650 200 0
-node WAYPOINT y1_6 750 200 0
-node WAYPOINT y1_7 800 300 0
+node WAYPOINT 10 400 0 0
+node WAYPOINT 11 -250 150 0
+node WAYPOINT 12 -400 250 0
+node WAYPOINT 13 -550 250 0
+node WAYPOINT 14 -700 300 0
+node WAYPOINT 15 650 200 0
+node WAYPOINT 16 750 200 0
+node WAYPOINT 17 800 300 0
+
+node WAYPOINT 18 500 -100 0
+node WAYPOINT 19 650 -100 0
+node WAYPOINT 20 800 -150 0
+node WAYPOINT 21 600 -300 0
+node WAYPOINT 22 500 -300 0
+node WAYPOINT 23 500 -200 0
+node WAYPOINT 24 400 -200 0
+node WAYPOINT 25 -350 -100 0
+node WAYPOINT 26 -500 -100 0
+node WAYPOINT 27 -600 -200 0
+node WAYPOINT 28 -700 -200 0
+node WAYPOINT 29 -350 -200 0
+node WAYPOINT 30 -150 -100 0
+node WAYPOINT 31 0 -100 0
+node WAYPOINT 32 0 -200 0
+node WAYPOINT 33 -250 -200 0
+node WAYPOINT 34 250 -200 0
+node WAYPOINT 35 350 -100 0
+node WAYPOINT 36 250 -100 0
+node WAYPOINT 37 150 -50 0
 
 conn home spwn_1
 conn spwn_1 spwn_2
@@ -30,22 +52,23 @@ conn spwn_2 spwn_3
 conn spwn_1 spwn_4
 conn spwn_4 spwn_5
 
-conn spwn_1 y0_4
-conn y0_4 y0_3
-conn y0_3 y0_2
-conn y0_3 y1_1
-conn y0_3 y0_2
-conn y0_2 y0_1
-conn y1_1 y1_2
-conn y1_2 y1_3
-conn y1_3 y1_4
+conn spwn_3 04
+conn 04 03
+conn 03 02
+conn 03 11
+conn 03 02
+conn 02 01
+conn 11 12
+conn 12 13
+conn 13 14
 
-conn spwn_5 y0_5
-conn y0_6 y0_5
-conn y0_6 y0_7
-conn y0_8 y0_7
-conn y0_8 y0_9
-conn y0_7 y1_5
-conn y1_6 y1_5
-conn y1_6 y1_7
+conn spwn_5 05
+conn 06 05
+conn 06 07
+conn 08 07
+conn 08 09
+conn 07 15
+conn 16 15
+conn 16 17
 
+conn 10 05
