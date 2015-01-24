@@ -54,7 +54,7 @@ public class MainMode implements GameMode {
     }
 
     @Override
-    public void draw() {
+    public GameMode tick() {
         batch.setProjectionMatrix(viewport.getCamera().combined);
         renderBG();
         float dt = Gdx.graphics.getDeltaTime();
@@ -169,6 +169,12 @@ public class MainMode implements GameMode {
         sr.end();
 
         dayCounter += dt;
+
+        if (dayCounter > 60) {
+            return new NightMode(box);
+        } else {
+            return this;
+        }
     }
 
     private void renderBG() {

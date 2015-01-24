@@ -13,6 +13,8 @@ public class NightMode implements GameMode {
     private final Box box;
     private Viewport viewport;
 
+    private boolean update = false;
+
     public NightMode(Box box) {
         this.box = box;
     }
@@ -23,6 +25,7 @@ public class NightMode implements GameMode {
         viewport = new FitViewport(1417, 1276);
         viewport.getCamera().translate(1417 / 2.0f, 1276 / 2.0f, 0.0f);
         viewport.apply();
+        box.day += 1;
     }
 
     @Override
@@ -31,7 +34,7 @@ public class NightMode implements GameMode {
     }
 
     @Override
-    public void draw() {
+    public GameMode tick() {
         batch.setProjectionMatrix(viewport.getCamera().combined);
         Texture tex = Overlord.get().assetManager.get(
                 "UI/NightUIRough/NextDayUI.png", Texture.class);
@@ -43,6 +46,8 @@ public class NightMode implements GameMode {
         batch.setShader(Overlord.get().getFontShader());
         fnt.draw(batch, "mtl " + box.metal, 0, 60);
         batch.end();
+
+        return update ? new MainMode(box) : this;
     }
 
     @Override
@@ -52,6 +57,7 @@ public class NightMode implements GameMode {
 
     @Override
     public void click(int mouseX, int mouseY) {
+        update = true;
     }
 
 }

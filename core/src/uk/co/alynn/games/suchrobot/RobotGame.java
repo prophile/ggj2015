@@ -10,6 +10,8 @@ public class RobotGame extends ApplicationAdapter {
     Box box;
 
     public void setMode(GameMode newMode) {
+        if (newMode == mode)
+            return;
         if (mode != null) {
             mode.stop();
         }
@@ -23,7 +25,7 @@ public class RobotGame extends ApplicationAdapter {
     public void create() {
         Overlord.init();
         box = new Box();
-        setMode(new NightMode(box));
+        setMode(new MainMode(box));
         Gdx.input.setInputProcessor(new InputProcessor() {
 
             @Override
@@ -88,7 +90,8 @@ public class RobotGame extends ApplicationAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Animation.update();
         if (mode != null) {
-            mode.draw();
+            GameMode nextMode = mode.tick();
+            setMode(nextMode);
         }
     }
 
