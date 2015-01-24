@@ -13,6 +13,7 @@ public final class PathNode {
         y = nodeY;
     }
     
+    @Override
     public String toString() {
         return "<PathNode " + name + ">";
     }

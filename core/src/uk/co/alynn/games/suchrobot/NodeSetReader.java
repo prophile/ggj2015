@@ -20,7 +20,7 @@ public abstract class NodeSetReader {
                 String name = scan.next();
                 int x = scan.nextInt();
                 int y = scan.nextInt();
-                nodes.addNode(type, name, (float)x, (float)y);
+                nodes.addNode(type, name, x, y);
             } else if (command.equals("conn")) {
                 String source = scan.next();
                 String dest = scan.next();

@@ -3,7 +3,6 @@ package uk.co.alynn.games.suchrobot;
 import java.io.IOException;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -86,7 +85,7 @@ public class MainMode implements GameMode {
 
     @Override
     public void click(int mouseX, int mouseY) {
-        Vector2 worldCoords = viewport.unproject(new Vector2((float)mouseX, (float)mouseY));
+        Vector2 worldCoords = viewport.unproject(new Vector2(mouseX, mouseY));
 
         PathNode nearestNode = null;
         float nearestDist = Float.POSITIVE_INFINITY;
