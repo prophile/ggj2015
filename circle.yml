@@ -1,6 +1,13 @@
+dependencies:
+  pre:
+    - ./download-jres.sh
+  cache_directories:
+    - jres
 test:
   override:
     - gradle dist
   post:
     - cp desktop/build/libs/desktop-1.0.jar $CIRCLE_ARTIFACTS/robogame.jar
+    - ./generate-apps.sh
+    - cp distributions/windows/robogame.exe $CIRCLE_ARTIFACTS/robogame.exe
 
