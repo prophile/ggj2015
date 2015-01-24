@@ -26,6 +26,8 @@ public final class Robot {
     }
     
     public void selectTarget(PathNode target) {
+        if (target == finalTarget)
+            return;
         finalTarget = target;
         PathNode selectedNextHop = nodeSet.nextNodeFor(sourceNode, finalTarget);
         if (selectedNextHop != destNode) {

@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -60,6 +61,22 @@ public class MainMode implements GameMode {
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height);
+    }
+
+    @Override
+    public void click(int mouseX, int mouseY) {
+        Vector2 worldCoords = viewport.unproject(new Vector2((float)mouseX, (float)mouseY));
+        // TODO Auto-generated method stub
+        PathNode nearestNode = null;
+        float nearestDist = Float.POSITIVE_INFINITY;
+        for (PathNode node : nodes) {
+            float dist = (float)Math.hypot(node.x - worldCoords.x, node.y - worldCoords.y);
+            if (dist <= nearestDist) {
+                nearestDist = dist;
+                nearestNode = node;
+            }
+        }
+        robot.selectTarget(nearestNode);
     }
 
 }

@@ -5,4 +5,5 @@ public interface GameMode {
     public void stop();
     public void draw();
     public void resize(int width, int height);
+    public void click(int mouseX, int mouseY);
 }
