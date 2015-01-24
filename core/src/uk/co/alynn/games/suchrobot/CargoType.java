@@ -1,6 +1,5 @@
 package uk.co.alynn.games.suchrobot;
 
 public enum CargoType {
-    NOTHING,
-    WATER;
+    NOTHING, WATER, METAL, SALVAGE;
 }
