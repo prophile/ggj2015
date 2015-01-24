@@ -68,6 +68,14 @@ public class NodeSet implements Iterable<PathNode> {
         System.err.println("--");
     }
     
+    private static float getOrDefault(Map<String, Float> map, String key, float dfl) {
+        if (map.containsKey(key)) {
+            return map.get(key);
+        } else {
+            return dfl;
+        }
+    }
+    
     private void runDijkstra(PathNode node) {
         Map<String, Float> distances = new HashMap<String, Float>();
         Map<String, String> predecessors = new HashMap<String, String>();
@@ -79,7 +87,7 @@ public class NodeSet implements Iterable<PathNode> {
         PathNode currentNode = node;
         while (true) {
             System.err.println("\texploring node " + currentNode.name);
-            float currentDistance = distances.getOrDefault(currentNode.name, Float.POSITIVE_INFINITY);
+            float currentDistance = getOrDefault(distances, currentNode.name, Float.POSITIVE_INFINITY);
             for (PathNode neighbour : connectionsFrom(currentNode)) {
                 if (!(unvisited.contains(neighbour.name))) {
                     System.err.println("\tskipping " + neighbour.name + " since it has been visited");
@@ -87,7 +95,7 @@ public class NodeSet implements Iterable<PathNode> {
                 }
                 float baseDistance = (float)Math.hypot(neighbour.x - currentNode.x, neighbour.y - currentNode.y);
                 float tentative = currentDistance + baseDistance;
-                float assignedDist = distances.getOrDefault(neighbour.name, Float.POSITIVE_INFINITY);
+                float assignedDist = getOrDefault(distances, neighbour.name, Float.POSITIVE_INFINITY);
                 if (tentative < assignedDist) {
                     distances.put(neighbour.name, tentative);
                     predecessors.put(neighbour.name, currentNode.name);
@@ -100,7 +108,7 @@ public class NodeSet implements Iterable<PathNode> {
             String bestOption = null;
             float bestDistance = Float.POSITIVE_INFINITY;
             for (String option : unvisited) {
-                float calcDist = distances.getOrDefault(option, Float.POSITIVE_INFINITY);
+                float calcDist = getOrDefault(distances, option, Float.POSITIVE_INFINITY);
                 if (calcDist <= bestDistance) {
                     bestOption = option;
                     bestDistance = calcDist;
