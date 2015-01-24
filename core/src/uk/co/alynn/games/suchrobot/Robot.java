@@ -3,6 +3,7 @@ package uk.co.alynn.games.suchrobot;
 import com.badlogic.gdx.math.MathUtils;
 
 public final class Robot {
+    private static final float SPEED = 60.0f;
     public final NodeSet nodeSet;
     public PathNode sourceNode;
     public PathNode destNode;
@@ -39,7 +40,17 @@ public final class Robot {
     }
     
     public void update(float dt) {
-        progress += dt * 0.1f;
+        if (sourceNode == destNode) {
+            if (destNode != finalTarget) {
+                destNode = nodeSet.nextNodeFor(sourceNode, finalTarget);
+                progress = 0.0f;
+            } else {
+                return;
+            }
+        }
+        float distance = (float)Math.hypot(sourceNode.x - destNode.x, sourceNode.y - destNode.y);
+        float increment = SPEED*dt / distance;
+        progress += increment;
         if (progress >= 1.0f) {
             progress -= 1.0f;
             sourceNode = destNode;

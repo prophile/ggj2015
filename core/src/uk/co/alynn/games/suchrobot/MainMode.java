@@ -17,7 +17,6 @@ public class MainMode implements GameMode {
     private Viewport viewport = null;
     private NodeSet nodes = null;
     private Robot robot = null;
-    private static final float dt = 1 / 30.0f;
 
     @Override
     public void start() {
@@ -43,7 +42,7 @@ public class MainMode implements GameMode {
 
     @Override
     public void draw() {
-        robot.update(dt);
+        robot.update(Gdx.graphics.getDeltaTime());
         
         Texture debugNode = Sprite.NODE_DEBUG.getTexture();
         Texture debugRobot = Sprite.ROBOT_DEBUG.getTexture();
