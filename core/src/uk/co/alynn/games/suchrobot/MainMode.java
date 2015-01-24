@@ -30,10 +30,8 @@ public class MainMode implements GameMode {
             throw new RuntimeException("Couldn't read nodes", e);
         }
         
-        robot = new Robot();
-        robot.sourceNode = nodes.lookup("home");
-        robot.destNode = nodes.lookup("well_near");
-        robot.progress = 0;
+        robot = new Robot(nodes);
+        robot.selectTarget(nodes.lookup("well_far"));
     }
 
     @Override

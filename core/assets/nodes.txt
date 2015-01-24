@@ -1,6 +1,8 @@
 node base home 0 0
 node well well_near 400 -100
-node well well_far -500 -500
+node waypoint well_far_wp_1 -150 -150
+node well well_far -350 -150
 conn home well_near
-conn home well_far
+conn home well_far_wp_1
+conn well_far_wp_1 well_far
 
