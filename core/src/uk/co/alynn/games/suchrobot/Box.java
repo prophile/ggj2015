@@ -28,7 +28,7 @@ public class Box {
             return true;
         if (day > Constants.LAST_DAY.asInt())
             return true;
-        if (robots == 0)
+        if (robots == 0 && metal < Constants.ROBOT_METAL_COST.asInt())
             return true;
         return false;
     }

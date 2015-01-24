@@ -46,7 +46,7 @@ public class NightMode implements GameMode {
         BitmapFont fnt = Overlord.get().assetManager.get("bitstream.fnt",
                 BitmapFont.class);
         batch.setShader(Overlord.get().getFontShader());
-        fnt.draw(batch, "mtl " + box.metal, 0, 60);
+        fnt.draw(batch, "mtl " + box.metal + " / rob " + box.robots, 0, 60);
         batch.end();
 
         return update ? new MainMode(box) : this;
@@ -64,6 +64,11 @@ public class NightMode implements GameMode {
 
     @Override
     public void rightClick(int mouseX, int mouseY) {
+        int robotCost = Constants.ROBOT_METAL_COST.asInt();
+        if (box.metal >= robotCost && box.robots < Constants.MAX_ROBOTS.asInt()) {
+            box.robots += 1;
+            box.metal -= robotCost;
+        }
     }
 
 }
