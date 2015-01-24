@@ -25,7 +25,7 @@ public class MainMode implements GameMode {
     private Robot selectedRobot = null;
     private double dayCounter;
 
-    private final static boolean DEBUG = false;
+    private final boolean DEBUG = Constants.DEBUG_NODES.asBoolean();
     private final Box box;
     private final Box initialBox;
 
