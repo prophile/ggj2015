@@ -80,7 +80,7 @@ public final class Robot {
         float increment = SPEED * dt / distance;
         progress += increment;
         if (progress >= 1.0f) {
-            progress -= 1.0f;
+            progress = 0.0f;
             sourceNode = destNode;
             destNode = nodeSet.nextNodeFor(sourceNode, finalTarget);
         }

@@ -237,6 +237,12 @@ public class MainMode implements GameMode {
                     box.robots += 1;
                 }
             }
+
+            if (box.isWin())
+                return new VictoryMode();
+            if (box.isLoss())
+                return new GameOverMode();
+
             NightMode nm = new NightMode(box);
             List<String> messages = new ArrayList<String>();
             messages.add("Day " + box.day + " is over.");

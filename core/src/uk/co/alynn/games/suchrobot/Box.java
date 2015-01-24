@@ -18,4 +18,18 @@ public class Box {
         cp.day = day;
         return cp;
     }
+
+    public boolean isWin() {
+        return salvage >= 10;
+    }
+
+    public boolean isLoss() {
+        if (water <= 0)
+            return true;
+        if (day > 10)
+            return true;
+        if (robots == 0)
+            return true;
+        return false;
+    }
 }

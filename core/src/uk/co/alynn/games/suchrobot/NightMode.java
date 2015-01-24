@@ -49,11 +49,6 @@ public class NightMode implements GameMode {
         fnt.draw(batch, "mtl " + box.metal, 0, 60);
         batch.end();
 
-        if (box.salvage >= 1)
-            return new VictoryMode();
-        if (box.water < 0 || box.day > 10 || box.robots == 0)
-            return new GameOverMode();
-
         return update ? new MainMode(box) : this;
     }
 
