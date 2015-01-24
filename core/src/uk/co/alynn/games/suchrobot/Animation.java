@@ -8,7 +8,7 @@ public class Animation {
     private static boolean startedFrame;
     
     public static int frameIndex() {
-        return (int)(baseTime * FPS) % FPS;
+        return (int)(baseTime * FPS);
     }
     
     public static void update() {

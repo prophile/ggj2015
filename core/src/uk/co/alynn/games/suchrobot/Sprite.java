@@ -14,9 +14,11 @@ public enum Sprite {
     private String path;
     private float scale;
     private int anchorX, anchorY;
+    private int frames;
 
     private Sprite(String path, int frameCount, float scale, int anchorX, int anchorY) {
-        this.path = path.replace("%", "00000");
+        this.path = path;
+        this.frames = frameCount;
         this.scale = scale;
         this.anchorX = anchorX;
         this.anchorY = anchorY;
@@ -27,12 +29,19 @@ public enum Sprite {
         param.minFilter = TextureFilter.MipMapLinearLinear;
         param.genMipMaps = true;
         AssetManager mgr = Overlord.get().assetManager;
-        mgr.load(path, Texture.class);
+        for (int i = 0; i < this.frames; ++i) {
+            String longDigits = String.format("%05d", i);
+            String truePath = this.path.replace("%", longDigits);
+            mgr.load(truePath, Texture.class, param);
+        }
     }
     
     private Texture getTexture() {
         AssetManager mgr = Overlord.get().assetManager;
-        Texture tex = mgr.get(path, Texture.class);
+        int frameIndex = Animation.frameIndex() % this.frames;
+        String longDigits = String.format("%05d", frameIndex);
+        String truePath = this.path.replace("%", longDigits);
+        Texture tex = mgr.get(truePath, Texture.class);
         if (tex == null) {
             throw new RuntimeException("Could not get texture " + name());
         }
