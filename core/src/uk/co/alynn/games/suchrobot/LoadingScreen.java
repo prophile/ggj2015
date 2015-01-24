@@ -35,7 +35,8 @@ public class LoadingScreen implements GameMode {
         renderer.setColor(Color.WHITE);
         renderer.begin(ShapeType.Filled);
         renderer.arc(0.0f, 0.0f, Gdx.graphics.getHeight() * 0.02f, 90.0f,
-                -360.0f * mgr.getProgress(), (int) (180 * mgr.getProgress()));
+                -360.0f * mgr.getProgress(),
+                3 + (int) (180 * mgr.getProgress()));
         renderer.end();
         return this;
     }

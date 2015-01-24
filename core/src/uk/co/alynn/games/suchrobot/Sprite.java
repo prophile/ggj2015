@@ -13,7 +13,9 @@ public enum Sprite {
             512, 380), NODE_MINE("NodesRough/MetalRough.png", 1, 0.1f, 425, 150), NODE_SALVAGE(
             "NodesRough/SalvageRough.png", 1, 0.1f, 500, 354), NODE_SHIP(
             "NodesRough/ShipRought.png", 1, 0.1f, 710, 522), NODE_WELL(
-            "NodesRough/WellRough.png", 1, 0.1f, 441, 120);
+            "NodesRough/WellRough.png", 1, 0.1f, 441, 120), NODE_WELL_DEPLETED(
+            "NodesRough/WellBrokenRough.png", 1, 0.1f, 441, 120), NODE_MINE_DEPLETED(
+            "NodesRough/MetalEmptyrough.png", 1, 0.1f, 425, 150);
 
     private String path;
     private float scale;

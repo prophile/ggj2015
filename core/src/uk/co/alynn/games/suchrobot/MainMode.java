@@ -138,10 +138,18 @@ public class MainMode implements GameMode {
             Sprite spr = null;
             switch (node.type) {
             case WELL:
-                spr = Sprite.NODE_WELL;
+                if (node.reserves == 0) {
+                    spr = Sprite.NODE_WELL_DEPLETED;
+                } else {
+                    spr = Sprite.NODE_WELL;
+                }
                 break;
             case MINE:
-                spr = Sprite.NODE_MINE;
+                if (node.reserves == 0) {
+                    spr = Sprite.NODE_MINE_DEPLETED;
+                } else {
+                    spr = Sprite.NODE_MINE;
+                }
                 break;
             case BASE:
                 spr = Sprite.NODE_SHIP;
