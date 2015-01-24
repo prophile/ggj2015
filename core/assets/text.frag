@@ -12,5 +12,5 @@ const float smoothing = 0.06;
 void main() {
     float distance = texture2D(u_texture, v_texCoord).a;
     float alpha = smoothstep(0.5 - smoothing, 0.5 + smoothing, distance);
-    gl_FragColor = vec4(v_color.rgb, alpha);
+    gl_FragColor = vec4(v_color.rgb, alpha*v_color.a);
 }
