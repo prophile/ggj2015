@@ -2,10 +2,10 @@ node BASE home 0 0 0
 node WELL well_near 400 -100 2
 node WAYPOINT well_far_wp_1 -150 -150 0
 node WELL well_far -350 -150 3
-node WAYPOINT mine_far_wp_1 -100 100 0
-node WRECKAGE mine_far_wp_2 -170 100 1
-node WAYPOINT mine_far_wp_3 -250 130 0
-node MINE mine_far -250 170 4
+node WAYPOINT mine_far_wp_1 -100 70 0
+node WRECKAGE mine_far_wp_2 -170 70 1
+node WAYPOINT mine_far_wp_3 -250 80 0
+node MINE mine_far -250 130 4
 conn home well_near
 conn home well_far_wp_1
 conn well_far_wp_1 well_far

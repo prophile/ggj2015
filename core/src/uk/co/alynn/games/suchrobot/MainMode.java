@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -53,6 +54,8 @@ public class MainMode implements GameMode {
 
     @Override
     public void draw() {
+        batch.setProjectionMatrix(viewport.getCamera().combined);
+        renderBG();
         float dt = Gdx.graphics.getDeltaTime();
         robot.update(dt);
 
@@ -108,8 +111,6 @@ public class MainMode implements GameMode {
                 + CURVE_C, robot.x() + CURVE_B, robot.y() + CURVE_C, robot.x()
                 + CURVE_A, robot.y(), 32);
         sr.end();
-
-        batch.setProjectionMatrix(viewport.getCamera().combined);
 
         batch.begin();
         for (PathNode node : nodes) {
@@ -167,6 +168,31 @@ public class MainMode implements GameMode {
         sr.end();
 
         dayCounter += dt;
+    }
+
+    private void renderBG() {
+        Texture l1 = Overlord.get().assetManager.get("Layout/Rough/Level1.png",
+                Texture.class);
+        Texture l2 = Overlord.get().assetManager.get("Layout/Rough/Level2.png",
+                Texture.class);
+        Texture l3 = Overlord.get().assetManager.get("Layout/Rough/Level3.png",
+                Texture.class);
+        Texture mnt = Overlord.get().assetManager.get(
+                "Layout/Rough/Decorativemountains.png", Texture.class);
+        Texture sky = Overlord.get().assetManager.get("Layout/Rough/Sky.png",
+                Texture.class);
+        batch.begin();
+        batch.draw(sky, -WORLD_WIDTH / 2, -WORLD_HEIGHT / 2, WORLD_WIDTH,
+                WORLD_HEIGHT);
+        batch.draw(mnt, -WORLD_WIDTH / 2, -WORLD_HEIGHT / 2, WORLD_WIDTH,
+                WORLD_HEIGHT);
+        batch.draw(l3, -WORLD_WIDTH / 2, -WORLD_HEIGHT / 2, WORLD_WIDTH,
+                WORLD_HEIGHT);
+        batch.draw(l2, -WORLD_WIDTH / 2, -WORLD_HEIGHT / 2, WORLD_WIDTH,
+                WORLD_HEIGHT);
+        batch.draw(l1, -WORLD_WIDTH / 2, -WORLD_HEIGHT / 2, WORLD_WIDTH,
+                WORLD_HEIGHT);
+        batch.end();
     }
 
     @Override
