@@ -220,6 +220,18 @@ public class MainMode implements GameMode {
             Sprite drawnSprite = Sprite.ROBOT_IDLE;
             if (robot.sourceNode != robot.destNode) {
                 drawnSprite = Sprite.ROBOT_WALK;
+            } else if (robot.available()) {
+                switch (robot.sourceNode.type) {
+                case WELL:
+                    drawnSprite = Sprite.ROBOT_EAT_WATER;
+                    break;
+                case WRECKAGE:
+                case MINE:
+                    drawnSprite = Sprite.ROBOT_EAT_DIRT;
+                    break;
+                default:
+                    break;
+                }
             }
             if (robot.flipped) {
                 drawnSprite.drawFlipped(batch, robot.x(), robot.y());

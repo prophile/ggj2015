@@ -11,9 +11,12 @@ public enum Sprite {
             16, 16), ROBOT_IDLE(
             "Animations/RoboidleAlpha/RoboIdle/RoboIdle_00001_%.png", 24, 0.1f,
             512, 380), ROBOT_WALK("Animations/Robowalk/RoboWalk_%.png", 24,
-            0.1f, 512, 380), NODE_MINE("NodesRough/MetalRough.png", 1, 0.1f,
-            425, 150), NODE_SALVAGE("NodesRough/SalvageRough.png", 1, 0.1f,
-            500, 354), NODE_SHIP("NodesRough/ShipRought.png", 1, 0.1f, 710, 522), NODE_WELL(
+            0.1f, 512, 380), ROBOT_EAT_DIRT(
+            "Animations/RobColDirt/RobColDirt_%.png", 24, 0.1f, 512, 380), ROBOT_EAT_WATER(
+            "Animations/RobColWat/RobColWat_%.png", 24, 0.1f, 512, 380), NODE_MINE(
+            "NodesRough/MetalRough.png", 1, 0.1f, 425, 150), NODE_SALVAGE(
+            "NodesRough/SalvageRough.png", 1, 0.1f, 500, 354), NODE_SHIP(
+            "NodesRough/ShipRought.png", 1, 0.1f, 710, 522), NODE_WELL(
             "NodesRough/WellRough.png", 1, 0.1f, 441, 120), NODE_WELL_DEPLETED(
             "NodesRough/WellBrokenRough.png", 1, 0.1f, 441, 120), NODE_MINE_DEPLETED(
             "NodesRough/MetalEmptyrough.png", 1, 0.1f, 425, 150), ICON_WATER(
