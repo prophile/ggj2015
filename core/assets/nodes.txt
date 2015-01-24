@@ -1,22 +1,51 @@
-node BASE home 0 0 0
-node WELL well_near 400 -100 2
-node WAYPOINT well_far_wp_1 -150 -150 0
-node WELL well_far -350 -150 3
-node WAYPOINT mine_far_wp_1 -100 70 0
-node WRECKAGE mine_far_wp_2 -170 70 1
-node WAYPOINT mine_far_wp_3 -250 80 0
-node MINE mine_far -250 130 4
-node SPAWNER spwn_lft -30 -20 0
-node SPAWNER spwn_ctr 0 -30 0
-node SPAWNER spwn_rgt 30 -20 0
-conn home well_near
-conn home well_far_wp_1
-conn well_far_wp_1 well_far
-conn home mine_far_wp_1
-conn mine_far_wp_1 mine_far_wp_2
-conn mine_far_wp_2 mine_far_wp_3
-conn mine_far_wp_3 mine_far
-conn home spwn_lft
-conn home spwn_ctr
-conn home spwn_rgt
+node BASE home 0 100 0
+
+node SPAWNER spwn_3 -100 0 0
+node SPAWNER spwn_2 -50 0 0
+node SPAWNER spwn_1 0 0 0
+node SPAWNER spwn_4 50 0 0
+node SPAWNER spwn_5 100 0 0
+
+node WAYPOINT y0_1 -650 100 0
+node WAYPOINT y0_2 -500 100 0
+node WAYPOINT y0_3 -400 100 0
+node WAYPOINT y0_4 -250 0 0
+node WAYPOINT y0_5 250 0 0
+node WAYPOINT y0_6 400 100 0
+node WAYPOINT y0_7 550 100 0
+node WAYPOINT y0_8 700 100 0
+node WAYPOINT y0_9 800 0 0
+
+node WAYPOINT y1_1 -250 150 0
+node WAYPOINT y1_2 -400 250 0
+node WAYPOINT y1_3 -550 250 0
+node WAYPOINT y1_4 -700 300 0
+node WAYPOINT y1_5 650 200 0
+node WAYPOINT y1_6 750 200 0
+node WAYPOINT y1_7 800 300 0
+
+conn home spwn_1
+conn spwn_1 spwn_2
+conn spwn_2 spwn_3
+conn spwn_1 spwn_4
+conn spwn_4 spwn_5
+
+conn spwn_1 y0_4
+conn y0_4 y0_3
+conn y0_3 y0_2
+conn y0_3 y1_1
+conn y0_3 y0_2
+conn y0_2 y0_1
+conn y1_1 y1_2
+conn y1_2 y1_3
+conn y1_3 y1_4
+
+conn spwn_5 y0_5
+conn y0_6 y0_5
+conn y0_6 y0_7
+conn y0_8 y0_7
+conn y0_8 y0_9
+conn y0_7 y1_5
+conn y1_6 y1_5
+conn y1_6 y1_7
 
