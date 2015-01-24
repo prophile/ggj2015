@@ -10,7 +10,7 @@ public enum Sprite {
     ROBOT_DEBUG("robot.png", 1, 1.0f, 16, 16),
     NODE_DEBUG("node.png", 1, 1.0f, 16, 16),
     ROBOT_IDLE("Animations/RoboidleAlpha/RoboIdle/RoboIdle_00001_%.png", 24, 0.1f, 512, 380);
-    
+
     private String path;
     private float scale;
     private int anchorX, anchorY;
@@ -23,7 +23,7 @@ public enum Sprite {
         this.anchorX = anchorX;
         this.anchorY = anchorY;
     }
-    
+
     public void queueLoad() {
         TextureParameter param = new TextureParameter();
         param.minFilter = TextureFilter.MipMapLinearLinear;
@@ -35,7 +35,7 @@ public enum Sprite {
             mgr.load(truePath, Texture.class, param);
         }
     }
-    
+
     private Texture getTexture() {
         AssetManager mgr = Overlord.get().assetManager;
         int frameIndex = Animation.frameIndex() % this.frames;
@@ -47,7 +47,7 @@ public enum Sprite {
         }
         return tex;
     }
-    
+
     public void draw(SpriteBatch batch, float x, float y) {
         Texture tex = getTexture();
         batch.draw(tex, x - (this.anchorX * scale), y - (this.anchorY * scale), tex.getWidth() * scale, tex.getHeight() * scale);
