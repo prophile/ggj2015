@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 function dl {
     SRC=$1
     TGT=$2
