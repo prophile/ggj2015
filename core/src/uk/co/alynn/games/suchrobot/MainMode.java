@@ -90,7 +90,7 @@ public class MainMode implements GameMode {
     @Override
     public void click(int mouseX, int mouseY) {
         Vector2 worldCoords = viewport.unproject(new Vector2((float)mouseX, (float)mouseY));
-        // TODO Auto-generated method stub
+
         PathNode nearestNode = null;
         float nearestDist = Float.POSITIVE_INFINITY;
         for (PathNode node : nodes) {
