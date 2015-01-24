@@ -235,14 +235,6 @@ public class MainMode implements GameMode {
             }
         }
 
-        BitmapFont fnt = Overlord.get().assetManager.get("bitstream.fnt",
-                BitmapFont.class);
-        batch.setShader(Overlord.get().getFontShader());
-        fnt.drawMultiLine(batch, "Water: " + box.water + "\nMetal: "
-                + box.metal + "\nSalvg: " + box.salvage + "\nTime: "
-                + (int) dayCounter + "\nDay: " + box.day, 100, 300);
-        batch.setShader(null);
-
         batch.end();
 
         sr.setColor(Color.CYAN);
@@ -265,6 +257,24 @@ public class MainMode implements GameMode {
                     selectedRobot.x() + CURVE_A, selectedRobot.y(), 32);
         }
         sr.end();
+
+        Matrix4 proj = new Matrix4(batch.getProjectionMatrix());
+        proj.val[12] = 0.0f;
+        proj.val[13] = 0.0f;
+        proj.val[14] = 0.0f;
+        proj.val[0] /= THE_SCALE;
+        proj.val[5] /= THE_SCALE;
+        proj.val[10] /= THE_SCALE;
+        batch.setProjectionMatrix(proj);
+        batch.begin();
+        BitmapFont fnt = Overlord.get().assetManager.get("bitstream.fnt",
+                BitmapFont.class);
+        batch.setShader(Overlord.get().getFontShader());
+        fnt.drawMultiLine(batch, "Water: " + box.water + "\nMetal: "
+                + box.metal + "\nSalvg: " + box.salvage + "\nTime: "
+                + (int) dayCounter + "\nDay: " + box.day, 100, 300);
+        batch.setShader(null);
+        batch.end();
 
         dayCounter += dt;
 
