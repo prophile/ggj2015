@@ -20,13 +20,14 @@ public class MainMode implements GameMode {
     private Viewport viewport = null;
     private NodeSet nodes = null;
     private Robot robot = null;
-    private int waterBase = 1;
-    private int metalBase = 0;
-    private int salvageBase = 0;
     private double dayCounter;
-    private int dayIndex = 0;
 
     private final boolean DEBUG = false;
+    private Box box;
+
+    public MainMode(Box box) {
+        this.box = box;
+    }
 
     @Override
     public void start() {
@@ -76,11 +77,11 @@ public class MainMode implements GameMode {
                 break;
             case BASE:
                 if (robot.offload(CargoType.WATER)) {
-                    waterBase += 1;
+                    box.water += 1;
                 } else if (robot.offload(CargoType.METAL)) {
-                    metalBase += 1;
+                    box.metal += 1;
                 } else if (robot.offload(CargoType.SALVAGE)) {
-                    salvageBase += 1;
+                    box.salvage += 1;
                 }
                 break;
             case WRECKAGE:
@@ -143,9 +144,9 @@ public class MainMode implements GameMode {
         BitmapFont fnt = Overlord.get().assetManager.get("bitstream.fnt",
                 BitmapFont.class);
         batch.setShader(Overlord.get().getFontShader());
-        fnt.drawMultiLine(batch, "Water: " + waterBase + "\nMetal: "
-                + metalBase + "\nSalvg: " + salvageBase + "\nTime: "
-                + (int) dayCounter + "\nDay: " + dayIndex, 100, 300);
+        fnt.drawMultiLine(batch, "Water: " + box.water + "\nMetal: "
+                + box.metal + "\nSalvg: " + box.salvage + "\nTime: "
+                + (int) dayCounter + "\nDay: " + box.day, 100, 300);
         batch.setShader(null);
 
         batch.end();
