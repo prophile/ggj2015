@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -97,8 +98,9 @@ public class MainMode implements GameMode {
         }
         viewport.getCamera().update();
 
-        batch.setProjectionMatrix(viewport.getCamera().combined);
+        batch.setProjectionMatrix(new Matrix4());
         renderBG();
+        batch.setProjectionMatrix(viewport.getCamera().combined);
 
         ShapeRenderer sr = new ShapeRenderer();
         sr.setProjectionMatrix(viewport.getCamera().combined);
