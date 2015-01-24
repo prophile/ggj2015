@@ -3,8 +3,11 @@ package uk.co.alynn.games.suchrobot;
 import java.io.IOException;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -104,6 +107,19 @@ public class MainMode implements GameMode {
         batch.setShader(null);
 
         batch.end();
+
+        ShapeRenderer sr = new ShapeRenderer();
+        sr.setProjectionMatrix(viewport.getCamera().combined);
+        sr.setColor(Color.CYAN);
+        sr.begin(ShapeType.Line);
+        for (PathNode node : nodes) {
+            for (PathNode node2 : nodes.connectionsFrom(node)) {
+                if (node2.hashCode() > node.hashCode()) {
+                    sr.line(node2.x, node2.y, node.x, node.y);
+                }
+            }
+        }
+        sr.end();
     }
 
     @Override
