@@ -1,5 +1,6 @@
 package uk.co.alynn.games.suchrobot;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -24,7 +25,7 @@ public class NightMode implements GameMode {
         batch = new SpriteBatch();
         viewport = new FitViewport(1417, 1276);
         viewport.getCamera().translate(1417 / 2.0f, 1276 / 2.0f, 0.0f);
-        viewport.apply();
+        viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         box.day += 1;
         box.water -= 1;
     }
@@ -48,7 +49,9 @@ public class NightMode implements GameMode {
         fnt.draw(batch, "mtl " + box.metal, 0, 60);
         batch.end();
 
-        if (box.water < 0)
+        if (box.salvage >= 1)
+            return new VictoryMode();
+        if (box.water < 0 || box.day > 10 || box.robots == 0)
             return new GameOverMode();
 
         return update ? new MainMode(box) : this;

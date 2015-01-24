@@ -5,7 +5,7 @@ public class Box {
     public int salvage;
     public int metal;
 
-    public int robots;
+    public int robots = 1;
 
     public int day = 1;
 }

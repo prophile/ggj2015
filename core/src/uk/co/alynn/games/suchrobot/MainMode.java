@@ -170,7 +170,7 @@ public class MainMode implements GameMode {
 
         dayCounter += dt;
 
-        if (dayCounter > 60) {
+        if (dayCounter > 15) {
             return new NightMode(box);
         } else {
             return this;
