@@ -42,8 +42,12 @@ public class MainMode implements GameMode {
             throw new RuntimeException("Couldn't read nodes", e);
         }
 
-        robot = new Robot(nodes);
-        robot.selectTarget(nodes.lookup("well_far"));
+        for (PathNode node : nodes) {
+            if (node.type == NodeType.SPAWNER) {
+                robot = new Robot(nodes, node);
+                break;
+            }
+        }
 
         dayCounter = 0;
     }
@@ -130,6 +134,7 @@ public class MainMode implements GameMode {
                 spr = Sprite.NODE_SALVAGE;
                 break;
             case WAYPOINT:
+            case SPAWNER:
                 if (DEBUG) {
                     spr = Sprite.NODE_DEBUG;
                 }
@@ -214,6 +219,8 @@ public class MainMode implements GameMode {
         PathNode nearestNode = null;
         float nearestDist = Float.POSITIVE_INFINITY;
         for (PathNode node : nodes) {
+            if (node.type == NodeType.SPAWNER)
+                continue;
             float dist = (float) Math.hypot(node.x - worldCoords.x, node.y
                     - worldCoords.y);
             if (dist <= nearestDist) {

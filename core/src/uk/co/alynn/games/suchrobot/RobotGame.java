@@ -11,12 +11,15 @@ public class RobotGame extends ApplicationAdapter {
     public void setMode(GameMode newMode) {
         if (newMode == mode)
             return;
+        System.err.println("STATE CHANGE");
         if (mode != null) {
             mode.stop();
+            System.err.println("  From: " + mode.getClass().getName());
         }
         mode = newMode;
         if (mode != null) {
             mode.start();
+            System.err.println("    To: " + mode.getClass().getName());
         }
     }
 

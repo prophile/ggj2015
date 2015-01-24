@@ -12,19 +12,18 @@ public final class Robot {
     public float progress = 0.0f;
     public CargoType carrying = CargoType.NOTHING;
     public float accumulatedTimeAt = 0.0f;
-    
-    public Robot(NodeSet nodes) {
+
+    public Robot(NodeSet nodes, PathNode home) {
         nodeSet = nodes;
-        PathNode home = nodes.lookup("home");
         sourceNode = home;
         destNode = home;
         finalTarget = home;
     }
-    
+
     public boolean available() {
         return carrying == CargoType.NOTHING;
     }
-    
+
     public void pickUp(CargoType cargo) {
         if (carrying != CargoType.NOTHING) {
             throw new RuntimeException("Double-stacked");
@@ -32,7 +31,7 @@ public final class Robot {
         carrying = cargo;
         selectTarget(nodeSet.lookup("home"));
     }
-    
+
     public boolean offload(CargoType cargo) {
         if (carrying == cargo) {
             carrying = CargoType.NOTHING;
@@ -40,15 +39,15 @@ public final class Robot {
         }
         return false;
     }
-    
+
     public float x() {
         return MathUtils.lerp(sourceNode.x, destNode.x, progress);
     }
-    
+
     public float y() {
         return MathUtils.lerp(sourceNode.y, destNode.y, progress);
     }
-    
+
     public void selectTarget(PathNode target) {
         if (target == finalTarget)
             return;
@@ -61,7 +60,7 @@ public final class Robot {
             progress = 1.0f - progress;
         }
     }
-    
+
     public void update(float dt) {
         if (at() == null) {
             accumulatedTimeAt = 0;
@@ -76,8 +75,9 @@ public final class Robot {
                 return;
             }
         }
-        float distance = (float)Math.hypot(sourceNode.x - destNode.x, sourceNode.y - destNode.y);
-        float increment = SPEED*dt / distance;
+        float distance = (float) Math.hypot(sourceNode.x - destNode.x,
+                sourceNode.y - destNode.y);
+        float increment = SPEED * dt / distance;
         progress += increment;
         if (progress >= 1.0f) {
             progress -= 1.0f;
@@ -85,7 +85,7 @@ public final class Robot {
             destNode = nodeSet.nextNodeFor(sourceNode, finalTarget);
         }
     }
-    
+
     public PathNode at() {
         if (sourceNode == destNode)
             return sourceNode;

@@ -6,6 +6,9 @@ node WAYPOINT mine_far_wp_1 -100 70 0
 node WRECKAGE mine_far_wp_2 -170 70 1
 node WAYPOINT mine_far_wp_3 -250 80 0
 node MINE mine_far -250 130 4
+node SPAWNER spwn_lft -30 -20 0
+node SPAWNER spwn_ctr 0 -30 0
+node SPAWNER spwn_rgt 30 -20 0
 conn home well_near
 conn home well_far_wp_1
 conn well_far_wp_1 well_far
@@ -13,4 +16,7 @@ conn home mine_far_wp_1
 conn mine_far_wp_1 mine_far_wp_2
 conn mine_far_wp_2 mine_far_wp_3
 conn mine_far_wp_3 mine_far
+conn home spwn_lft
+conn home spwn_ctr
+conn home spwn_rgt
 
