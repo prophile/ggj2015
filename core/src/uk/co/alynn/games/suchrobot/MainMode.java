@@ -62,17 +62,14 @@ public class MainMode implements GameMode {
                 break;
             }
         }
-        
-        Texture debugNode = Sprite.NODE_DEBUG.getTexture();
-        Texture debugRobot = Sprite.ROBOT_DEBUG.getTexture();
-        
+
         batch.setProjectionMatrix(viewport.getCamera().combined);
 
         batch.begin();
         for (PathNode node : nodes) {
-            batch.draw(debugNode, node.x, node.y);
+            Sprite.NODE_DEBUG.draw(batch, node.x, node.y);
         }
-        batch.draw(debugRobot, robot.x(), robot.y());
+        Sprite.ROBOT_IDLE.draw(batch, robot.x(), robot.y());
         
         BitmapFont fnt = Overlord.get().assetManager.get("bitstream.fnt", BitmapFont.class);
         batch.setShader(Overlord.get().getFontShader());
