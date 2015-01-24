@@ -23,7 +23,7 @@ public class RobotGame extends ApplicationAdapter {
     public void create() {
         Overlord.init();
         box = new Box();
-        setMode(new MainMode(box));
+        setMode(new NightMode(box));
         Gdx.input.setInputProcessor(new InputProcessor() {
 
             @Override
