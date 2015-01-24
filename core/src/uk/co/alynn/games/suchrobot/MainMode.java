@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -54,6 +55,11 @@ public class MainMode implements GameMode {
             batch.draw(debugNode, node.x, node.y);
         }
         batch.draw(debugRobot, robot.x(), robot.y());
+        
+        BitmapFont fnt = Overlord.get().assetManager.get("bitstream.fnt", BitmapFont.class);
+        batch.setShader(Overlord.get().getFontShader());
+        fnt.draw(batch, "bees", 100, 100);
+        batch.setShader(null);
         
         batch.end();
     }
