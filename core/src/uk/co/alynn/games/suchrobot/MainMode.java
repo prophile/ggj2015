@@ -224,8 +224,9 @@ public class MainMode implements GameMode {
 
         dayCounter += dt;
 
-        if (dayCounter > 60) {
+        if (dayCounter > 20) {
             final float ROBOT_SAFE_DISTANCE = 100.0f;
+            int oldRobots = box.robots;
             box.robots = 0;
             PathNode home = nodes.lookup("home");
             for (Robot robot : robots) {
@@ -235,7 +236,16 @@ public class MainMode implements GameMode {
                     box.robots += 1;
                 }
             }
-            return new NightMode(box);
+            NightMode nm = new NightMode(box);
+            List<String> messages = new ArrayList<String>();
+            messages.add("Day " + box.day + " is over.");
+            if (oldRobots > box.robots) {
+                messages.add((oldRobots - box.robots) + " robots broke today.");
+            }
+            if (box.water <= 1) {
+                messages.add("Water is running very low.");
+            }
+            return new ResultsScreen(messages, nm);
         } else {
             return this;
         }
