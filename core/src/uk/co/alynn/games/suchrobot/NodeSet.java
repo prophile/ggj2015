@@ -146,6 +146,11 @@ public class NodeSet implements Iterable<PathNode> {
             String last = targetNode.name;
             while (true) {
                 String backtrack = predecessors.get(last);
+                if (backtrack == null) {
+                    // bifurcated network, mark as stay in place
+                    nextHops.put(key, lookup(key.sourceNode));
+                    break;
+                }
                 if (backtrack.equals(node.name)) {
                     nextHops.put(key, lookup(last));
                     break;
