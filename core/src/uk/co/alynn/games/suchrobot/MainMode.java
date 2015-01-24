@@ -22,7 +22,7 @@ public class MainMode implements GameMode {
     public static final float WORLD_HEIGHT = 640.0f;
     private SpriteBatch batch = null;
     private Viewport viewport = null;
-    private NodeSet nodes = null;
+    private static NodeSet nodes = null;
     private List<Robot> robots = new ArrayList<Robot>();
     private Robot selectedRobot = null;
     private double dayCounter;
@@ -46,10 +46,12 @@ public class MainMode implements GameMode {
 
         viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        try {
-            nodes = NodeSetReader.readNodeSet("nodes.txt");
-        } catch (IOException e) {
-            throw new RuntimeException("Couldn't read nodes", e);
+        if (nodes == null) {
+            try {
+                nodes = NodeSetReader.readNodeSet("nodes.txt");
+            } catch (IOException e) {
+                throw new RuntimeException("Couldn't read nodes", e);
+            }
         }
 
         int requiredRobots = box.robots;
