@@ -1,3 +1,5 @@
+dependencies:
+  override: gradle dependencies
 test:
   override: gradle dist
   post:
