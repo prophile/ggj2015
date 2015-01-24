@@ -16,7 +16,7 @@ public class MainMode implements GameMode {
     public void start() {
         viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT);
         batch = new SpriteBatch();
-        
+
         viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
