@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.MathUtils;
 
 public final class Robot {
     private static final float SPEED = 60.0f;
+    private static final float AT_THRESHOLD = 0.05f;
     public final NodeSet nodeSet;
     public PathNode sourceNode;
     public PathNode destNode;
@@ -56,5 +57,15 @@ public final class Robot {
             sourceNode = destNode;
             destNode = nodeSet.nextNodeFor(sourceNode, finalTarget);
         }
+    }
+    
+    public PathNode at() {
+        if (sourceNode == destNode)
+            return sourceNode;
+        if (progress > (1.0f - AT_THRESHOLD))
+            return destNode;
+        if (progress < AT_THRESHOLD)
+            return sourceNode;
+        return null;
     }
 }

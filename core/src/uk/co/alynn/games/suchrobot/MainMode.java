@@ -17,6 +17,8 @@ public class MainMode implements GameMode {
     private Viewport viewport = null;
     private NodeSet nodes = null;
     private Robot robot = null;
+    private int waterRobot;
+    private int waterBase;
 
     @Override
     public void start() {
@@ -44,6 +46,26 @@ public class MainMode implements GameMode {
     public void draw() {
         robot.update(Gdx.graphics.getDeltaTime());
         
+        PathNode visited = robot.at();
+        if (visited != null) {
+            boolean miningTick = Animation.startedFrame() && (Animation.frameIndex() == 0 || Animation.frameIndex() == 12);
+            switch (visited.type) {
+            case WELL:
+                if (miningTick) {
+                    waterRobot += 1;
+                }
+                break;
+            case BASE:
+                if (waterRobot > 0 && miningTick) {
+                    waterRobot -= 1;
+                    waterBase += 1;
+                }
+                break;
+            default:
+                break;
+            }
+        }
+        
         Texture debugNode = Sprite.NODE_DEBUG.getTexture();
         Texture debugRobot = Sprite.ROBOT_DEBUG.getTexture();
         
@@ -57,7 +79,7 @@ public class MainMode implements GameMode {
         
         BitmapFont fnt = Overlord.get().assetManager.get("bitstream.fnt", BitmapFont.class);
         batch.setShader(Overlord.get().getFontShader());
-        fnt.draw(batch, "bees", 100, 100);
+        fnt.draw(batch, "Water: " + waterBase + " (" + waterRobot + " in robot)", 100, 100);
         batch.setShader(null);
         
         batch.end();
