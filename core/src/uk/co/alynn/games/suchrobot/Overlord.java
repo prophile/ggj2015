@@ -50,6 +50,7 @@ public final class Overlord {
         mgr.load("UI/NightUIRough/NextDayUI.png", Texture.class, param);
         mgr.load("UI/GameOver.png", Texture.class, param);
         mgr.load("UI/Victory.png", Texture.class, param);
+        mgr.load("UI/Titles.png", Texture.class, param);
     }
 
     private static void initSprites() {

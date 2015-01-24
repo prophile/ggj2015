@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.GL20;
 
 public class RobotGame extends ApplicationAdapter {
     GameMode mode;
-    Box box;
 
     public void setMode(GameMode newMode) {
         if (newMode == mode)
@@ -24,8 +23,7 @@ public class RobotGame extends ApplicationAdapter {
     @Override
     public void create() {
         Overlord.init();
-        box = new Box();
-        setMode(new MainMode(box));
+        setMode(new TitleScreen());
         Gdx.input.setInputProcessor(new InputProcessor() {
 
             @Override
