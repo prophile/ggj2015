@@ -61,7 +61,11 @@ public class NodeSet implements Iterable<PathNode> {
     }
     
     private void runDijkstra(PathNode node) {
-        // dijkstra's algorithm!
+        // Not Dijkstra's algorithm!
+        for (PathNode targetNode : this) {
+            RoutingKey key = new RoutingKey(node.name, targetNode.name);
+            nextHops.put(key, targetNode);
+        }
     }
     
     public PathNode lookup(String name) {
@@ -77,7 +81,8 @@ public class NodeSet implements Iterable<PathNode> {
     }
     
     public PathNode nextNodeFor(PathNode from, PathNode to) {
-        return to; // TEMP: do some pathing
+        RoutingKey key = new RoutingKey(from.name, to.name);
+        return nextHops.get(key);
     }
 
     @Override
