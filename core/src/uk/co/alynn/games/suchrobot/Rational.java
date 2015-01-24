@@ -17,6 +17,10 @@ public final class Rational implements Comparable<Rational> {
     public int intCast() {
         return numerator / denominator;
     }
+    
+    public float toFloat() {
+        return (float)numerator / (float)denominator;
+    }
 
     public static int gcd(int a, int b) {
         int tmp;

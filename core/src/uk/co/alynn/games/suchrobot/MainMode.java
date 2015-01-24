@@ -36,12 +36,14 @@ public class MainMode implements GameMode {
 
     @Override
     public void draw() {
-        Texture img = Sprite.BADLOGIC.getTexture();
+        Texture img = Sprite.NODE_DEBUG.getTexture();
 
         batch.setProjectionMatrix(viewport.getCamera().combined);
 
         batch.begin();
-        batch.draw(img, 0, 0);
+        for (PathNode node : nodes) {
+            batch.draw(img, node.x.toFloat(), node.y.toFloat());
+        }
         batch.end();
     }
 
