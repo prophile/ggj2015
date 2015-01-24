@@ -22,6 +22,8 @@ public class MainMode implements GameMode {
     private int waterBase = 1;
     private int metalBase = 0;
     private int salvageBase = 0;
+    private double dayCounter;
+    private int dayIndex = 0;
 
     @Override
     public void start() {
@@ -38,6 +40,8 @@ public class MainMode implements GameMode {
 
         robot = new Robot(nodes);
         robot.selectTarget(nodes.lookup("well_far"));
+
+        dayCounter = 0;
     }
 
     @Override
@@ -47,7 +51,8 @@ public class MainMode implements GameMode {
 
     @Override
     public void draw() {
-        robot.update(Gdx.graphics.getDeltaTime());
+        float dt = Gdx.graphics.getDeltaTime();
+        robot.update(dt);
 
         PathNode visited = robot.at();
         if (visited != null) {
@@ -103,7 +108,8 @@ public class MainMode implements GameMode {
                 BitmapFont.class);
         batch.setShader(Overlord.get().getFontShader());
         fnt.drawMultiLine(batch, "Water: " + waterBase + "\nMetal: "
-                + metalBase + "\nSalvg: " + salvageBase, 100, 100);
+                + metalBase + "\nSalvg: " + salvageBase + "\nTime: "
+                + (int) dayCounter + "\nDay: " + dayIndex, 100, 300);
         batch.setShader(null);
 
         batch.end();
@@ -120,6 +126,8 @@ public class MainMode implements GameMode {
             }
         }
         sr.end();
+
+        dayCounter += dt;
     }
 
     @Override
