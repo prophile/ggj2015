@@ -2,6 +2,7 @@ package uk.co.alynn.games.suchrobot;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.BitmapFontLoader.BitmapFontParameter;
 import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
@@ -29,7 +30,11 @@ public final class Overlord {
     }
 
     private static void initFont() {
-        s_instance.assetManager.load("bitstream.fnt", BitmapFont.class);
+        BitmapFontParameter param = new BitmapFontParameter();
+        param.genMipMaps = true;
+        param.magFilter = TextureFilter.Linear;
+        param.minFilter = TextureFilter.MipMapLinearLinear;
+        s_instance.assetManager.load("bitstream.fnt", BitmapFont.class, param);
     }
 
     private static void initBGImages() {
