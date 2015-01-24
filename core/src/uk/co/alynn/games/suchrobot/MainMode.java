@@ -54,6 +54,9 @@ public class MainMode implements GameMode {
         float dt = Gdx.graphics.getDeltaTime();
         robot.update(dt);
 
+        ShapeRenderer sr = new ShapeRenderer();
+        sr.setProjectionMatrix(viewport.getCamera().combined);
+
         PathNode visited = robot.at();
         if (visited != null) {
             switch (visited.type) {
@@ -96,6 +99,14 @@ public class MainMode implements GameMode {
             }
         }
 
+        sr.begin(ShapeType.Line);
+        sr.setColor(Color.YELLOW);
+        final float CURVE_A = 10.0f, CURVE_B = 8.0f, CURVE_C = 7.0f;
+        sr.curve(robot.x() - CURVE_A, robot.y(), robot.x() - CURVE_B, robot.y()
+                + CURVE_C, robot.x() + CURVE_B, robot.y() + CURVE_C, robot.x()
+                + CURVE_A, robot.y(), 32);
+        sr.end();
+
         batch.setProjectionMatrix(viewport.getCamera().combined);
 
         batch.begin();
@@ -114,8 +125,6 @@ public class MainMode implements GameMode {
 
         batch.end();
 
-        ShapeRenderer sr = new ShapeRenderer();
-        sr.setProjectionMatrix(viewport.getCamera().combined);
         sr.setColor(Color.CYAN);
         sr.begin(ShapeType.Line);
         for (PathNode node : nodes) {
@@ -125,6 +134,10 @@ public class MainMode implements GameMode {
                 }
             }
         }
+        sr.setColor(Color.YELLOW);
+        sr.curve(robot.x() - CURVE_A, robot.y(), robot.x() - CURVE_B, robot.y()
+                - CURVE_C, robot.x() + CURVE_B, robot.y() - CURVE_C, robot.x()
+                + CURVE_A, robot.y(), 32);
         sr.end();
 
         dayCounter += dt;
