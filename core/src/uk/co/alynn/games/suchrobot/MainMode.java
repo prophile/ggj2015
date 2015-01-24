@@ -22,6 +22,7 @@ public class MainMode implements GameMode {
     private Viewport viewport = null;
     private NodeSet nodes = null;
     private List<Robot> robots = new ArrayList<Robot>();
+    private Robot selectedRobot = null;
     private double dayCounter;
 
     private final boolean DEBUG = false;
@@ -121,13 +122,16 @@ public class MainMode implements GameMode {
                     break;
                 }
             }
-            sr.begin(ShapeType.Line);
-            sr.setColor(Color.YELLOW);
-            sr.curve(robot.x() - CURVE_A, robot.y(), robot.x() - CURVE_B,
-                    robot.y() + CURVE_C, robot.x() + CURVE_B, robot.y()
-                            + CURVE_C, robot.x() + CURVE_A, robot.y(), 32);
-            sr.end();
         }
+        sr.begin(ShapeType.Line);
+        sr.setColor(Color.YELLOW);
+        if (selectedRobot != null) {
+            sr.curve(selectedRobot.x() - CURVE_A, selectedRobot.y(),
+                    selectedRobot.x() - CURVE_B, selectedRobot.y() + CURVE_C,
+                    selectedRobot.x() + CURVE_B, selectedRobot.y() + CURVE_C,
+                    selectedRobot.x() + CURVE_A, selectedRobot.y(), 32);
+        }
+        sr.end();
 
         batch.begin();
         for (PathNode node : nodes) {
@@ -181,11 +185,13 @@ public class MainMode implements GameMode {
                 }
             }
         }
-        sr.setColor(Color.YELLOW);
-        for (Robot robot : robots) {
-            sr.curve(robot.x() - CURVE_A, robot.y(), robot.x() - CURVE_B,
-                    robot.y() - CURVE_C, robot.x() + CURVE_B, robot.y()
-                            - CURVE_C, robot.x() + CURVE_A, robot.y(), 32);
+
+        if (selectedRobot != null) {
+            sr.setColor(Color.YELLOW);
+            sr.curve(selectedRobot.x() - CURVE_A, selectedRobot.y(),
+                    selectedRobot.x() - CURVE_B, selectedRobot.y() - CURVE_C,
+                    selectedRobot.x() + CURVE_B, selectedRobot.y() - CURVE_C,
+                    selectedRobot.x() + CURVE_A, selectedRobot.y(), 32);
         }
         sr.end();
 
@@ -229,7 +235,9 @@ public class MainMode implements GameMode {
     }
 
     @Override
-    public void click(int mouseX, int mouseY) {
+    public void rightClick(int mouseX, int mouseY) {
+        if (selectedRobot == null)
+            return;
         Vector2 worldCoords = viewport.unproject(new Vector2(mouseX, mouseY));
 
         PathNode nearestNode = null;
@@ -244,9 +252,20 @@ public class MainMode implements GameMode {
                 nearestNode = node;
             }
         }
-        for (Robot robot : robots) {
-            robot.selectTarget(nearestNode);
-        }
+        selectedRobot.selectTarget(nearestNode);
     }
 
+    @Override
+    public void click(int mouseX, int mouseY) {
+        Vector2 worldCoords = viewport.unproject(new Vector2(mouseX, mouseY));
+
+        final float ROBOT_SELECT_DISTANCE = 30.0f;
+
+        selectedRobot = null;
+        for (Robot robot : robots) {
+            if (Math.hypot(robot.x() - worldCoords.x, robot.y() - worldCoords.y) < ROBOT_SELECT_DISTANCE) {
+                selectedRobot = robot;
+            }
+        }
+    }
 }

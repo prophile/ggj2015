@@ -67,4 +67,8 @@ public class NightMode implements GameMode {
         update = true;
     }
 
+    @Override
+    public void rightClick(int mouseX, int mouseY) {
+    }
+
 }

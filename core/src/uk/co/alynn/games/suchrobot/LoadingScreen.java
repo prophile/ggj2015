@@ -49,4 +49,8 @@ public class LoadingScreen implements GameMode {
     public void click(int mouseX, int mouseY) {
     }
 
+    @Override
+    public void rightClick(int mouseX, int mouseY) {
+    }
+
 }

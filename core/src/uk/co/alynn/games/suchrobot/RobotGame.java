@@ -45,11 +45,14 @@ public class RobotGame extends ApplicationAdapter {
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer,
                     int button) {
-                if (button != 0)
-                    return false;
                 if (mode == null)
                     return false;
-                mode.click(screenX, screenY);
+                if (button == 0)
+                    mode.click(screenX, screenY);
+                else if (button == 1)
+                    mode.rightClick(screenX, screenY);
+                else
+                    return false;
                 return true;
             }
 

@@ -57,4 +57,9 @@ public abstract class ScreenMode implements GameMode {
         next = advance((int) worldCoords.x, (int) worldCoords.y);
     }
 
+    @Override
+    public void rightClick(int mouseX, int mouseY) {
+        click(mouseX, mouseY);
+    }
+
 }
