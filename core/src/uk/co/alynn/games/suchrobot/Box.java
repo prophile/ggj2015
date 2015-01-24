@@ -1,11 +1,11 @@
 package uk.co.alynn.games.suchrobot;
 
 public class Box {
-    public int water;
-    public int salvage;
-    public int metal;
+    public int water = Constants.INITIAL_WATER.asInt();
+    public int salvage = Constants.INITIAL_SALVAGE.asInt();
+    public int metal = Constants.INITIAL_METAL.asInt();
 
-    public int robots = 2;
+    public int robots = Constants.INITIAL_ROBOTS.asInt();
 
     public int day = 1;
 
@@ -20,13 +20,13 @@ public class Box {
     }
 
     public boolean isWin() {
-        return salvage >= 10;
+        return salvage >= Constants.TARGET_SALVAGE.asInt();
     }
 
     public boolean isLoss() {
         if (water <= 0)
             return true;
-        if (day > 10)
+        if (day > Constants.LAST_DAY.asInt())
             return true;
         if (robots == 0)
             return true;

@@ -87,8 +87,9 @@ public class MainMode implements GameMode {
             if (visited != null) {
                 switch (visited.type) {
                 case WELL:
-                    if (robot.available() && robot.accumulatedTimeAt > 2.0
-                            && visited.reserves != 0) {
+                    if (robot.available()
+                            && robot.accumulatedTimeAt > Constants.WELL_PUMP_TIME
+                                    .asFloat() && visited.reserves != 0) {
                         robot.pickUp(CargoType.WATER);
                         if (visited.reserves > 0) {
                             visited.reserves -= 1;
@@ -105,15 +106,17 @@ public class MainMode implements GameMode {
                     }
                     break;
                 case WRECKAGE:
-                    if (robot.available() && robot.accumulatedTimeAt > 5.0
-                            && visited.reserves != 0) {
+                    if (robot.available()
+                            && robot.accumulatedTimeAt > Constants.SALVAGE_TIME
+                                    .asFloat() && visited.reserves != 0) {
                         robot.pickUp(CargoType.SALVAGE);
                         visited.reserves -= 1;
                     }
                     break;
                 case MINE:
-                    if (robot.available() && robot.accumulatedTimeAt > 3.5
-                            && visited.reserves != 0) {
+                    if (robot.available()
+                            && robot.accumulatedTimeAt > Constants.METAL_MINE_TIME
+                                    .asFloat() && visited.reserves != 0) {
                         robot.pickUp(CargoType.METAL);
                         if (visited.reserves > 0) {
                             visited.reserves -= 1;
@@ -226,8 +229,9 @@ public class MainMode implements GameMode {
 
         dayCounter += dt;
 
-        if (dayCounter > 20) {
-            final float ROBOT_SAFE_DISTANCE = 100.0f;
+        if (dayCounter > Constants.DAY_LENGTH.asFloat()) {
+            final float ROBOT_SAFE_DISTANCE = Constants.SAFE_ZONE_RADIUS
+                    .asFloat();
             box.robots = 0;
             PathNode home = nodes.lookup("home");
             for (Robot robot : robots) {

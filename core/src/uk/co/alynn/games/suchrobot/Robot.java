@@ -3,12 +3,12 @@ package uk.co.alynn.games.suchrobot;
 import com.badlogic.gdx.math.MathUtils;
 
 public final class Robot {
-    private static final float SPEED = 60.0f;
     private static final float AT_THRESHOLD = 0.05f;
     public final NodeSet nodeSet;
     public PathNode sourceNode;
     public PathNode destNode;
     public PathNode finalTarget;
+    public PathNode spawnNode;
     public float progress = 0.0f;
     public CargoType carrying = CargoType.NOTHING;
     public float accumulatedTimeAt = 0.0f;
@@ -18,6 +18,7 @@ public final class Robot {
         sourceNode = home;
         destNode = home;
         finalTarget = home;
+        spawnNode = home;
     }
 
     public boolean available() {
@@ -29,7 +30,7 @@ public final class Robot {
             throw new RuntimeException("Double-stacked");
         }
         carrying = cargo;
-        selectTarget(nodeSet.lookup("home"));
+        headHome();
     }
 
     public boolean offload(CargoType cargo) {
@@ -61,6 +62,10 @@ public final class Robot {
         }
     }
 
+    public void headHome() {
+        selectTarget(spawnNode);
+    }
+
     public void update(float dt) {
         if (at() == null) {
             accumulatedTimeAt = 0;
@@ -77,7 +82,7 @@ public final class Robot {
         }
         float distance = (float) Math.hypot(sourceNode.x - destNode.x,
                 sourceNode.y - destNode.y);
-        float increment = SPEED * dt / distance;
+        float increment = Constants.SPEED.asFloat() * dt / distance;
         progress += increment;
         if (progress >= 1.0f) {
             progress = 0.0f;

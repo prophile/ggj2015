@@ -1,5 +1,7 @@
 package uk.co.alynn.games.suchrobot;
 
+import java.util.Scanner;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
@@ -25,6 +27,10 @@ public class RobotGame extends ApplicationAdapter {
 
     @Override
     public void create() {
+        // load constants file
+        Scanner scn = new Scanner(Gdx.files.internal("constants.txt").read());
+        Constants.loadConstants(scn);
+        scn.close();
         Overlord.init();
         setMode(new LoadingScreen());
         Gdx.input.setInputProcessor(new InputProcessor() {

@@ -17,7 +17,7 @@ public enum Sprite {
             "NodesRough/WellBrokenRough.png", 1, 0.1f, 441, 120), NODE_MINE_DEPLETED(
             "NodesRough/MetalEmptyrough.png", 1, 0.1f, 425, 150), ICON_WATER(
             "UI/CarryIcons/Water.png", 1, 0.035f, 1417 / 2, 1276 / 2), ICON_METAL(
-            "UI/CarryIcons/Water.png", 1, 0.035f, 1417 / 2, 1276 / 2), ICON_SALVAGE(
+            "UI/CarryIcons/Metal.png", 1, 0.035f, 1417 / 2, 1276 / 2), ICON_SALVAGE(
             "UI/CarryIcons/Salvage.png", 1, 0.035f, 1417 / 2, 1276 / 2);
 
     private String path;
