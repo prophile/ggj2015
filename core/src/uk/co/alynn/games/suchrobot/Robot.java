@@ -12,6 +12,7 @@ public final class Robot {
     public float progress = 0.0f;
     public CargoType carrying = CargoType.NOTHING;
     public float accumulatedTimeAt = 0.0f;
+    public boolean flipped;
 
     public Robot(NodeSet nodes, PathNode home) {
         nodeSet = nodes;
@@ -19,6 +20,7 @@ public final class Robot {
         destNode = home;
         finalTarget = home;
         spawnNode = home;
+        flipped = false;
     }
 
     public boolean available() {
@@ -59,6 +61,11 @@ public final class Robot {
             destNode = sourceNode;
             sourceNode = tmp;
             progress = 1.0f - progress;
+            if (destNode.x > sourceNode.x) {
+                flipped = false;
+            } else if (destNode.x < sourceNode.x) {
+                flipped = true;
+            }
         }
     }
 
@@ -76,6 +83,11 @@ public final class Robot {
             if (destNode != finalTarget) {
                 destNode = nodeSet.nextNodeFor(sourceNode, finalTarget);
                 progress = 0.0f;
+                if (destNode.x > sourceNode.x) {
+                    flipped = false;
+                } else if (destNode.x < sourceNode.x) {
+                    flipped = true;
+                }
             } else {
                 return;
             }
@@ -88,6 +100,11 @@ public final class Robot {
             progress = 0.0f;
             sourceNode = destNode;
             destNode = nodeSet.nextNodeFor(sourceNode, finalTarget);
+            if (destNode.x > sourceNode.x) {
+                flipped = false;
+            } else if (destNode.x < sourceNode.x) {
+                flipped = true;
+            }
         }
     }
 

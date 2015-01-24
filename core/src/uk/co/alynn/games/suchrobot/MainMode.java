@@ -217,7 +217,15 @@ public class MainMode implements GameMode {
             }
         }
         for (Robot robot : robots) {
-            Sprite.ROBOT_IDLE.draw(batch, robot.x(), robot.y());
+            Sprite drawnSprite = Sprite.ROBOT_IDLE;
+            if (robot.sourceNode != robot.destNode) {
+                drawnSprite = Sprite.ROBOT_WALK;
+            }
+            if (robot.flipped) {
+                drawnSprite.drawFlipped(batch, robot.x(), robot.y());
+            } else {
+                drawnSprite.draw(batch, robot.x(), robot.y());
+            }
             final float ICON_OFFSET = 60.0f;
             switch (robot.carrying) {
             case NOTHING:
