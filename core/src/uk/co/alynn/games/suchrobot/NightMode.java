@@ -26,6 +26,7 @@ public class NightMode implements GameMode {
         viewport.getCamera().translate(1417 / 2.0f, 1276 / 2.0f, 0.0f);
         viewport.apply();
         box.day += 1;
+        box.water -= 1;
     }
 
     @Override
@@ -46,6 +47,9 @@ public class NightMode implements GameMode {
         batch.setShader(Overlord.get().getFontShader());
         fnt.draw(batch, "mtl " + box.metal, 0, 60);
         batch.end();
+
+        if (box.water < 0)
+            return new GameOverMode();
 
         return update ? new MainMode(box) : this;
     }
