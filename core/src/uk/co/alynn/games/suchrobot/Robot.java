@@ -10,6 +10,7 @@ public final class Robot {
     public PathNode destNode;
     public PathNode finalTarget;
     public float progress = 0.0f;
+    public CargoType carrying = CargoType.NOTHING;
     
     public Robot(NodeSet nodes) {
         nodeSet = nodes;
@@ -17,6 +18,26 @@ public final class Robot {
         sourceNode = home;
         destNode = home;
         finalTarget = home;
+    }
+    
+    public boolean available() {
+        return carrying == CargoType.NOTHING;
+    }
+    
+    public void pickUp(CargoType cargo) {
+        if (carrying != CargoType.NOTHING) {
+            throw new RuntimeException("Double-stacked");
+        }
+        carrying = cargo;
+        selectTarget(nodeSet.lookup("home"));
+    }
+    
+    public boolean offload(CargoType cargo) {
+        if (carrying == cargo) {
+            carrying = CargoType.NOTHING;
+            return true;
+        }
+        return false;
     }
     
     public float x() {
