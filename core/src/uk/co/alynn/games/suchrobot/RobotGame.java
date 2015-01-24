@@ -100,7 +100,7 @@ public class RobotGame extends ApplicationAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Animation.update();
         if (mode != null) {
-            GameMode nextMode = mode.tick();
+            GameMode nextMode = mode.tick(ScreenEdge.NONE);
             setMode(nextMode);
         }
     }

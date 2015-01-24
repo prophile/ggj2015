@@ -35,7 +35,7 @@ public class ResultsScreen implements GameMode {
     }
 
     @Override
-    public GameMode tick() {
+    public GameMode tick(ScreenEdge screenEdge) {
         final float FADE_TIME = Constants.RESULTS_FADE_TIME.asFloat();
         final float PAUSE_TIME = Constants.RESULTS_HOLD_TIME.asFloat();
         final float ADJUST = 60.0f;

@@ -32,7 +32,7 @@ public abstract class ScreenMode implements GameMode {
     }
 
     @Override
-    public GameMode tick() {
+    public GameMode tick(ScreenEdge screenEdge) {
         batch.setProjectionMatrix(viewport.getCamera().combined);
         batch.begin();
         batch.draw(tex, -(tex.getWidth() / 2), -(tex.getHeight() / 2));
@@ -50,8 +50,8 @@ public abstract class ScreenMode implements GameMode {
     @Override
     public void click(int mouseX, int mouseY) {
         Vector2 worldCoords = viewport.unproject(new Vector2(mouseX, mouseY));
-        worldCoords.x -= tex.getWidth() / 2;
-        worldCoords.y -= tex.getHeight() / 2;
+        worldCoords.x += tex.getWidth() / 2;
+        worldCoords.y += tex.getHeight() / 2;
         if (worldCoords.x < 0 || worldCoords.y < 0)
             return;
         if (worldCoords.x >= tex.getWidth() || worldCoords.y >= tex.getHeight())

@@ -70,7 +70,7 @@ public class MainMode implements GameMode {
     }
 
     @Override
-    public GameMode tick() {
+    public GameMode tick(ScreenEdge screenEdge) {
         final float CURVE_A = 10.0f, CURVE_B = 8.0f, CURVE_C = 7.0f;
 
         batch.setProjectionMatrix(viewport.getCamera().combined);

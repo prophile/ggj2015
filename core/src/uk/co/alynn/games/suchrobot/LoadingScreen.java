@@ -25,7 +25,7 @@ public class LoadingScreen implements GameMode {
     }
 
     @Override
-    public GameMode tick() {
+    public GameMode tick(ScreenEdge screenEdge) {
         AssetManager mgr = Overlord.get().assetManager;
         boolean complete = mgr.update(50);
         if (complete) {

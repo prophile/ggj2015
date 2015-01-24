@@ -5,7 +5,7 @@ public interface GameMode {
 
     public void stop();
 
-    public GameMode tick();
+    public GameMode tick(ScreenEdge screenEdge);
 
     public void resize(int width, int height);
 

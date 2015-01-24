@@ -36,7 +36,7 @@ public class NightMode implements GameMode {
     }
 
     @Override
-    public GameMode tick() {
+    public GameMode tick(ScreenEdge screenEdge) {
         batch.setProjectionMatrix(viewport.getCamera().combined);
         Texture tex = Overlord.get().assetManager.get(
                 "UI/NightUIRough/NextDayUI.png", Texture.class);
