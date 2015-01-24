@@ -45,6 +45,31 @@ node WAYPOINT 34 250 -200 0
 node WAYPOINT 35 350 -100 0
 node WAYPOINT 36 250 -100 0
 node WAYPOINT 37 150 -50 0
+node WAYPOINT 38 -150 -300 0
+node WAYPOINT 39 -300 -300 0
+node WAYPOINT 40 -450 -400 0
+node WAYPOINT 41 -550 -400 0
+node WAYPOINT 42 -650 -300 0
+node WAYPOINT 43 -700 -400 0
+node WAYPOINT 44 -350 -400 0
+node WAYPOINT 45 -350 -500 0
+node WAYPOINT 46 -500 -500 0
+node WAYPOINT 47 -600 -600 0
+node WAYPOINT 48 -700 -500 0
+node WAYPOINT 49 -250 -500 0
+node WAYPOINT 50 -100 -450 0
+node WAYPOINT 51 0 -300 0
+node WAYPOINT 52 -200 -400 0
+node WAYPOINT 53 200 -300 0
+node WAYPOINT 54 400 -300 0
+node WAYPOINT 55 100 -400 0
+node WAYPOINT 56 200 -500 0
+node WAYPOINT 57 0 -500 0
+node WAYPOINT 58 700 -400 0
+node WAYPOINT 59 800 -400 0
+node WAYPOINT 60 500 -400 0
+node WAYPOINT 61 300 -550 0
+node WAYPOINT 62 600 -550 0
 
 conn home spwn_1
 conn spwn_1 spwn_2
@@ -55,9 +80,8 @@ conn spwn_4 spwn_5
 conn spwn_3 04
 conn 04 03
 conn 03 02
+conn 01 02
 conn 03 11
-conn 03 02
-conn 02 01
 conn 11 12
 conn 12 13
 conn 13 14
@@ -70,5 +94,53 @@ conn 08 09
 conn 07 15
 conn 16 15
 conn 16 17
-
 conn 10 05
+
+conn 10 18
+conn 18 19
+conn 19 09
+conn 19 20
+conn 19 23
+conn 23 24
+conn 20 21
+conn 21 22
+conn 21 58
+conn 22 54
+conn 58 59
+conn 58 60
+conn 60 61
+conn 61 62
+conn 54 53
+conn 54 34
+conn 53 51
+conn 51 38
+conn 38 39
+conn 39 40
+conn 40 41
+conn 41 42
+conn 41 43
+conn 40 44
+conn 40 45
+conn 45 49
+conn 49 50
+conn 45 46
+conn 46 47
+conn 46 48
+conn 51 52
+conn 53 55
+conn 55 56
+conn 56 57
+conn 04 25
+conn 25 26
+conn 26 27
+conn 27 28
+conn 27 29
+conn 25 30
+conn 30 31
+conn 30 32
+conn 32 33
+conn 33 38
+conn 32 34
+conn 34 35
+conn 35 36
+conn 36 37
