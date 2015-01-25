@@ -194,6 +194,7 @@ public class MainMode implements GameMode {
                 break;
             case WAYPOINT:
             case SPAWNER:
+            case QUICKSAND:
                 if (DEBUG) {
                     spr = Sprite.NODE_DEBUG;
                 }
@@ -205,9 +206,19 @@ public class MainMode implements GameMode {
         }
         for (Robot robot : robots) {
             Sprite drawnSprite = Sprite.ROBOT_IDLE;
-            if (robot.sourceNode != robot.destNode) {
+            if (robot.peril > 0.0f) {
+                if (robot.perilDelta > 0.0f) {
+                    Animation.beginPhase(robot.peril);
+                    drawnSprite = Sprite.ROBOT_FLAIL_START;
+                } else if (robot.perilDelta < 0.0f) {
+                    Animation.beginPhase(1.0f - robot.peril);
+                    drawnSprite = Sprite.ROBOT_FLAIL_END;
+                } else {
+                    drawnSprite = Sprite.ROBOT_FLAIL;
+                }
+            } else if (robot.sourceNode != robot.destNode) {
                 drawnSprite = Sprite.ROBOT_WALK;
-            } else if (robot.available()) {
+            } else if (robot.available() && robot.sourceNode.reserves != 0) {
                 switch (robot.sourceNode.type) {
                 case WELL:
                     drawnSprite = Sprite.ROBOT_EAT_WATER;
@@ -225,6 +236,7 @@ public class MainMode implements GameMode {
             } else {
                 drawnSprite.draw(batch, robot.x(), robot.y());
             }
+            Animation.endPhase();
             final float ICON_OFFSET = 60.0f;
             switch (robot.carrying) {
             case NOTHING:
@@ -436,8 +448,6 @@ public class MainMode implements GameMode {
         PathNode nearestNode = null;
         float nearestDist = Float.POSITIVE_INFINITY;
         for (PathNode node : nodes) {
-            if (node.type == NodeType.SPAWNER)
-                continue;
             float dist = (float) Math.hypot(node.x - worldCoords.x, node.y
                     - worldCoords.y);
             if (dist <= nearestDist) {
@@ -458,6 +468,7 @@ public class MainMode implements GameMode {
         for (Robot robot : robots) {
             if (Math.hypot(robot.x() - worldCoords.x, robot.y() - worldCoords.y) < ROBOT_SELECT_DISTANCE) {
                 selectedRobot = robot;
+                selectedRobot.perilDelta = -1.0f;
             }
         }
     }
