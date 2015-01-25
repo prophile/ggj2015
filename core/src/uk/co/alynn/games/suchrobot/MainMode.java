@@ -33,6 +33,14 @@ public class MainMode implements GameMode {
 
     private float offX, offY;
 
+    public static void init() {
+        try {
+            nodes = NodeSetReader.readNodeSet("nodes.txt");
+        } catch (IOException e) {
+            throw new RuntimeException("Couldn't read nodes", e);
+        }
+    }
+
     public MainMode(Box box) {
         this.box = box;
         initialBox = box.copy();
@@ -47,11 +55,7 @@ public class MainMode implements GameMode {
         viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         if (nodes == null) {
-            try {
-                nodes = NodeSetReader.readNodeSet("nodes.txt");
-            } catch (IOException e) {
-                throw new RuntimeException("Couldn't read nodes", e);
-            }
+            throw new RuntimeException("nodes not initted");
         }
 
         int requiredRobots = box.robots;
