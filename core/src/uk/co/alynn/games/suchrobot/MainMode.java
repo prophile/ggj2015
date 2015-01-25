@@ -436,8 +436,6 @@ public class MainMode implements GameMode {
         PathNode nearestNode = null;
         float nearestDist = Float.POSITIVE_INFINITY;
         for (PathNode node : nodes) {
-            if (node.type == NodeType.SPAWNER)
-                continue;
             float dist = (float) Math.hypot(node.x - worldCoords.x, node.y
                     - worldCoords.y);
             if (dist <= nearestDist) {
