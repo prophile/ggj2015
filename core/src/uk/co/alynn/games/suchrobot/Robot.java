@@ -13,14 +13,16 @@ public final class Robot {
     public CargoType carrying = CargoType.NOTHING;
     public float accumulatedTimeAt = 0.0f;
     public boolean flipped;
+    public final RobotClass cls;
 
-    public Robot(NodeSet nodes, PathNode home) {
+    public Robot(RobotClass cls, NodeSet nodes, PathNode home) {
         nodeSet = nodes;
         sourceNode = home;
         destNode = home;
         finalTarget = home;
         spawnNode = home;
         flipped = false;
+        this.cls = cls;
     }
 
     public boolean available() {
@@ -95,6 +97,11 @@ public final class Robot {
         float distance = (float) Math.hypot(sourceNode.x - destNode.x,
                 sourceNode.y - destNode.y);
         float increment = Constants.SPEED.asFloat() * dt / distance;
+        if (cls == RobotClass.PAUL) {
+            increment *= Constants.L2_SPEED_FACTOR.asFloat();
+        } else if (cls == RobotClass.JOHN) {
+            increment *= Constants.L3_SPEED_FACTOR.asFloat();
+        }
         progress += increment;
         if (progress >= 1.0f) {
             progress = 0.0f;
@@ -116,5 +123,14 @@ public final class Robot {
         if (progress < AT_THRESHOLD)
             return sourceNode;
         return null;
+    }
+
+    public boolean gatheredFor(float requiredTime) {
+        if (cls == RobotClass.PAUL) {
+            requiredTime /= Constants.L2_GATHER_FACTOR.asFloat();
+        } else if (cls == RobotClass.JOHN) {
+            requiredTime /= Constants.L3_GATHER_FACTOR.asFloat();
+        }
+        return accumulatedTimeAt > requiredTime;
     }
 }
