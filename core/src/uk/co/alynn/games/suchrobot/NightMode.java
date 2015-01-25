@@ -1,7 +1,10 @@
 package uk.co.alynn.games.suchrobot;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -90,6 +93,8 @@ public class NightMode implements GameMode {
         } else {
             batch.draw(tex, 0, 0, 1417, 1276);
         }
+        String purchaseType = "";
+        int robotCost = 0;
         int maxRobots = Constants.MAX_ROBOTS.asInt();
         boolean anyPurchasesPresented = false;
         for (int i = 0; i < maxRobots; ++i) {
@@ -107,27 +112,30 @@ public class NightMode implements GameMode {
             int uby = centrePointY + h;
             boolean mo = mouseInBox(lbx, ubx, lby, uby);
             boolean purchasable = !purchased && !anyPurchasesPresented;
-            if (purchasable) {
-                if (clicked && mo) {
-                    int robotCost = Constants.ROBOT_METAL_COST.asInt()
-                            + Constants.ROBOT_ADDITIONAL_METAL_COST.asInt() * i;
+            if (purchasable && mo) {
+                robotCost = Constants.ROBOT_METAL_COST.asInt()
+                        + Constants.ROBOT_ADDITIONAL_METAL_COST.asInt() * i;
+                purchaseType = "Buy Extra Robot";
+                if (clicked) {
                     if (box.metal >= robotCost) {
                         box.robots[i] = RobotClass.GEORGE;
                         box.metal -= robotCost;
                         purchased = true;
                     }
                 }
-            } else if (purchased && box.robots[i] == RobotClass.GEORGE) {
-                if (clicked && mo) {
-                    int robotCost = Constants.ROBOT_L2_COST.asInt();
+            } else if (purchased && mo && box.robots[i] == RobotClass.GEORGE) {
+                purchaseType = "Upgrade to level 2";
+                robotCost = Constants.ROBOT_L2_COST.asInt();
+                if (clicked) {
                     if (box.metal >= robotCost) {
                         box.metal -= robotCost;
                         box.robots[i] = RobotClass.PAUL;
                     }
                 }
-            } else if (purchased && box.robots[i] == RobotClass.PAUL) {
-                if (clicked && mo) {
-                    int robotCost = Constants.ROBOT_L3_COST.asInt();
+            } else if (purchased && mo && box.robots[i] == RobotClass.PAUL) {
+                purchaseType = "Upgrade to level 3";
+                robotCost = Constants.ROBOT_L3_COST.asInt();
+                if (clicked) {
                     if (box.metal >= robotCost) {
                         box.metal -= robotCost;
                         box.robots[i] = RobotClass.JOHN;
@@ -144,6 +152,24 @@ public class NightMode implements GameMode {
             }
         }
         box.displayInfo(batch, 1030, 810);
+
+        BitmapFont fnt = Overlord.get().assetManager.get("bitstream.fnt",
+                BitmapFont.class);
+
+        batch.setShader(Overlord.get().getFontShader());
+        if (robotCost > 0) {
+            String str = purchaseType + "\n";
+            str += "Cost: " + robotCost + " metal";
+            if (robotCost > box.metal) {
+                str += "\nnot enough metal";
+            }
+            TextBounds bounds = fnt.getMultiLineBounds(str);
+            fnt.setColor(Color.BLACK);
+            fnt.drawMultiLine(batch, str, (1417 / 2) - bounds.width * 0.5f,
+                    480 + (bounds.height / 2));
+            fnt.setColor(Color.WHITE);
+        }
+        batch.setShader(null);
         batch.end();
 
         clicked = false;
