@@ -109,7 +109,8 @@ public class NightMode implements GameMode {
             boolean purchasable = !purchased && !anyPurchasesPresented;
             if (purchasable) {
                 if (clicked && mo) {
-                    int robotCost = Constants.ROBOT_METAL_COST.asInt();
+                    int robotCost = Constants.ROBOT_METAL_COST.asInt()
+                            + Constants.ROBOT_ADDITIONAL_METAL_COST.asInt() * i;
                     if (box.metal >= robotCost) {
                         box.robots[i] = RobotClass.GEORGE;
                         box.metal -= robotCost;
