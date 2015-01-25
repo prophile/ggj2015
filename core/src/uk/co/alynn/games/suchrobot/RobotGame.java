@@ -143,6 +143,7 @@ public class RobotGame extends ApplicationAdapter {
             GameMode nextMode = mode.tick(edge);
             setMode(nextMode);
         }
+        SFX.updateLoops();
     }
 
     @Override
