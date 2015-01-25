@@ -84,7 +84,6 @@ public final class Robot {
         } else {
             accumulatedTimeAt += dt;
         }
-        System.err.println("peril = " + peril + " pd = " + perilDelta);
         peril += perilDelta * dt;
         if (peril < 0.0f) {
             peril = 0.0f;
