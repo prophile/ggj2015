@@ -72,6 +72,8 @@ public class NightMode implements GameMode {
 
     @Override
     public GameMode tick(ScreenEdge screenEdge) {
+        SFX.NIGHT_AMB.loop();
+
         boolean nextSelected = mouseInND();
 
         batch.setProjectionMatrix(viewport.getCamera().combined);

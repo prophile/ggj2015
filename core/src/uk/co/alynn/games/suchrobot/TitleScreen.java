@@ -29,7 +29,8 @@ public class TitleScreen extends ScreenMode {
         for (int i = 0; i < Constants.INITIAL_ROBOTS.asInt(); ++i) {
             box.robots[i] = RobotClass.GEORGE;
         }
-        return new MainMode(box);
+        box.metal = 10;
+        return new NightMode(box);
     }
 
 }

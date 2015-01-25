@@ -12,7 +12,12 @@ public enum SFX {
             "sfx/roboto upgrade/electric saw spraying hammer.ogg"), PURCHASE_UPGRADE(
             "sfx/roboto upgrade/robo upgrade tada.ogg"), WIN(
             "sfx/lift off softer.ogg"), LOSE("sfx/new alarm.ogg"), MUSIC(
-            "music tracks/main track 70 seconds.ogg");
+            "music tracks/main track 70 seconds.ogg"), METAL_MINE(
+            "sfx/hits/eargty hit 2.ogg"), SALVAGE("sfx/hits/metal hit 1.ogg"), WATER_PUMP(
+            "sfx/hits/water loop.ogg"), QUICKSAND(
+            "sfx/robot noises/robot in distress 2.ogg"), ENGINES(
+            "sfx/engine/new engine/full rev.ogg"), NIGHT_AMB(
+            "ambience loops/wind loop ogg.ogg");
 
     private static Set<Sound> previousLooping = new HashSet<Sound>();
     private static Set<Sound> currentLooping = new HashSet<Sound>();
@@ -42,7 +47,7 @@ public enum SFX {
         return snd;
     }
 
-    public void loop(float pan) {
+    public void loop() {
         Sound snd = getSound();
         currentLooping.add(snd);
     }

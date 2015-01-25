@@ -122,6 +122,9 @@ public class MainMode implements GameMode {
                             visited.reserves -= 1;
                         }
                     }
+                    if (visited.reserves > 0) {
+                        SFX.WATER_PUMP.loop();
+                    }
                     break;
                 case SPAWNER:
                     if (visited != robot.spawnNode) {
@@ -142,6 +145,9 @@ public class MainMode implements GameMode {
                         robot.pickUp(CargoType.SALVAGE);
                         visited.reserves -= 1;
                     }
+                    if (visited.reserves > 0) {
+                        SFX.SALVAGE.loop();
+                    }
                     break;
                 case MINE:
                     if (robot.available()
@@ -152,10 +158,19 @@ public class MainMode implements GameMode {
                             visited.reserves -= 1;
                         }
                     }
+                    if (visited.reserves > 0) {
+                        SFX.METAL_MINE.loop();
+                    }
                     break;
+                case QUICKSAND:
+                    if (robot.peril > 0.0f) {
+                        SFX.QUICKSAND.loop();
+                    }
                 default:
                     break;
                 }
+            } else {
+                SFX.ENGINES.loop();
             }
         }
         sr.begin(ShapeType.Line);
