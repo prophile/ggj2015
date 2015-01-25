@@ -62,6 +62,8 @@ public class NightMode implements GameMode {
         batch.draw(buy, 708 - buy.getWidth() * 0.5f * buyScaleFactor,
                 480 - buy.getHeight() * 0.5f * buyScaleFactor, buy.getWidth()
                         * buyScaleFactor, buy.getHeight() * buyScaleFactor);
+        box.water = 4;
+        box.displayInfo(batch, 1030, 1050);
         BitmapFont fnt = Overlord.get().assetManager.get("bitstream.fnt",
                 BitmapFont.class);
         batch.setShader(Overlord.get().getFontShader());
