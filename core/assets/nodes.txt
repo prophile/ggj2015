@@ -49,7 +49,6 @@ node WRECKAGE 38 -150 -300 1
 node WAYPOINT 39 -300 -300 0
 node WELL 40 -450 -400 2
 node WAYPOINT 41 -550 -400 0
-node WAYPOINT 42 -650 -300 0
 node WRECKAGE 43 -700 -400 1
 node WAYPOINT 44 -350 -400 0
 node WAYPOINT 45 -350 -500 0
@@ -117,7 +116,6 @@ conn 51 38
 conn 38 39
 conn 39 40
 conn 40 41
-conn 41 42
 conn 41 43
 conn 40 44
 conn 40 45
