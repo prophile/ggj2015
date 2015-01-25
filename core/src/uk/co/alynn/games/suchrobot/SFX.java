@@ -4,14 +4,17 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
 
 public enum SFX {
-    WIND("audio/ambience loops/wind loop ogg.ogg"), BRAINS(
-            "audio/sfx/robot noises/robot brains.ogg"), THUNK(
-            "audio/sfx/hits/metal hit 1.ogg");
+    SELECT_ROBOT("sfx/menu sounds/click 3.ogg"), SELECT_TARGET(
+            "sfx/menu sounds/new new robo attention.ogg"), PURCHASE_NEW(
+            "sfx/roboto upgrade/electric saw spraying hammer.ogg"), PURCHASE_UPGRADE(
+            "sfx/roboto upgrade/robo upgrade tada.ogg"), WIN(
+            "sfx/lift off softer.ogg"), LOSE("sfx/new alarm.ogg"), MUSIC(
+            "music tracks/main track 70 seconds.ogg");
 
     public String path;
 
     private SFX(String path) {
-        this.path = path;
+        this.path = "audio/" + path;
     }
 
     public void queueLoad() {

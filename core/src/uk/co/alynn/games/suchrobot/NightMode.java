@@ -121,6 +121,7 @@ public class NightMode implements GameMode {
                         box.robots[i] = RobotClass.GEORGE;
                         box.metal -= robotCost;
                         purchased = true;
+                        SFX.PURCHASE_NEW.play();
                     }
                 }
             } else if (purchased && mo && box.robots[i] == RobotClass.GEORGE) {
@@ -130,6 +131,7 @@ public class NightMode implements GameMode {
                     if (box.metal >= robotCost) {
                         box.metal -= robotCost;
                         box.robots[i] = RobotClass.PAUL;
+                        SFX.PURCHASE_UPGRADE.play();
                     }
                 }
             } else if (purchased && mo && box.robots[i] == RobotClass.PAUL) {
@@ -139,6 +141,7 @@ public class NightMode implements GameMode {
                     if (box.metal >= robotCost) {
                         box.metal -= robotCost;
                         box.robots[i] = RobotClass.JOHN;
+                        SFX.PURCHASE_UPGRADE.play();
                     }
                 }
             }

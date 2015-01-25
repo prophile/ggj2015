@@ -29,7 +29,6 @@ public class TitleScreen extends ScreenMode {
         for (int i = 0; i < Constants.INITIAL_ROBOTS.asInt(); ++i) {
             box.robots[i] = RobotClass.GEORGE;
         }
-        SFX.THUNK.play();
         return new MainMode(box);
     }
 

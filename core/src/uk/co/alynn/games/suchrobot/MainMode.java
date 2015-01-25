@@ -75,6 +75,8 @@ public class MainMode implements GameMode {
         }
 
         dayCounter = 0;
+
+        SFX.MUSIC.play();
     }
 
     @Override
@@ -359,6 +361,7 @@ public class MainMode implements GameMode {
                 results.add("I managed to make the repairs");
                 results.add("Finally I can escape!");
                 results.add("You Escaped! – Click to play again");
+                SFX.WIN.play();
                 return new ResultsScreen(results, null);
             }
             if (box.isLoss()) {
@@ -367,6 +370,7 @@ public class MainMode implements GameMode {
                 results.add("They came in the night to take me away");
                 results.add("I’ll never see my planet again…");
                 results.add("Game over – Click to try again");
+                SFX.LOSE.play();
                 return new ResultsScreen(results, null);
             }
 
@@ -545,6 +549,7 @@ public class MainMode implements GameMode {
             }
         }
         selectedRobot.selectTarget(nearestNode);
+        SFX.SELECT_TARGET.play();
     }
 
     @Override
@@ -570,6 +575,7 @@ public class MainMode implements GameMode {
         if (selectedRobot != null) {
             selectedRobot.perilDelta = -1.0f;
             System.err.println("SELECT GUY");
+            SFX.SELECT_ROBOT.play();
         } else {
             System.err.println("UNSELECT GUY");
         }
