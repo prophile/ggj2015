@@ -237,7 +237,7 @@ public class MainMode implements GameMode {
                 drawnSprite.draw(batch, robot.x(), robot.y());
             }
             Animation.endPhase();
-            final float ICON_OFFSET = 60.0f;
+            final float ICON_OFFSET = 50.0f;
             if (robot.peril > 0.0f && robot.perilDelta >= 0.0f) {
                 Sprite.ICON_OFFSCREEN_FLAIL.draw(batch, robot.x(), robot.y()
                         + ICON_OFFSET);
@@ -350,6 +350,7 @@ public class MainMode implements GameMode {
             NightMode nm = new NightMode(box);
             List<String> messages = new ArrayList<String>();
             messages.add("Day " + box.day + " is over.");
+
             if (initialBox.activeRobots() > box.activeRobots()) {
                 messages.add((initialBox.activeRobots() - box.activeRobots())
                         + " robots didn't make it back.");
@@ -396,6 +397,7 @@ public class MainMode implements GameMode {
         final float W = WORLD_WIDTH / (THE_SCALE * 2);
         final float W_ = W - MARKER_INSET;
         final float H = WORLD_HEIGHT / (THE_SCALE * 2);
+
         final float H_ = H - MARKER_INSET;
         for (Robot robot : robots) {
             float effectiveX = robot.x() - offX;
