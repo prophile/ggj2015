@@ -307,14 +307,27 @@ public class MainMode implements GameMode {
 
         renderOffscreenIndicators();
 
+        Color INFOCOL = Color.WHITE;
+
         BitmapFont fnt = Overlord.get().assetManager.get("bitstream.fnt",
                 BitmapFont.class);
         batch.setShader(Overlord.get().getFontShader());
-        fnt.drawMultiLine(batch, "Time: " + (int) dayCounter + "\nDay: "
-                + box.day, -(1024 / 2) + 10, (640 / 2) - 10);
+        fnt.setColor(INFOCOL);
+        fnt.drawMultiLine(batch, "Day: " + box.day, -(1024 / 2) + 10,
+                (640 / 2) - 10);
+        fnt.setColor(Color.WHITE);
         batch.setShader(null);
         box.displayInfo(batch, (1024 / 2) - 30, (640 / 2) - 30, 1.0f, false);
         batch.end();
+
+        sr.setColor(INFOCOL);
+        sr.setProjectionMatrix(proj);
+        sr.begin(ShapeType.Filled);
+        final float LENS = 70;
+        sr.rect(-LENS, 250f,
+                (float) (LENS * 2f * (1.0f - (dayCounter / Constants.DAY_LENGTH
+                        .asFloat()))), 30f);
+        sr.end();
 
         dayCounter += dt;
 
@@ -343,17 +356,17 @@ public class MainMode implements GameMode {
             if (box.isWin()) {
                 ArrayList<String> results = new ArrayList<String>();
                 results.add("The robots proved their worth");
-				results.add("I managed to make the repairs");
-				results.add("Finally I can escape!");
-				results.add("You Escaped! – Click to play again");
+                results.add("I managed to make the repairs");
+                results.add("Finally I can escape!");
+                results.add("You Escaped! – Click to play again");
                 return new ResultsScreen(results, null);
             }
             if (box.isLoss()) {
                 ArrayList<String> results = new ArrayList<String>();
                 results.add("Without water I was too weak to fight");
-				results.add("They came in the night to take me away");
-				results.add("I’ll never see my planet again…");
-				results.add("Game over – Click to try again");
+                results.add("They came in the night to take me away");
+                results.add("I’ll never see my planet again…");
+                results.add("Game over – Click to try again");
                 return new ResultsScreen(results, null);
             }
 
