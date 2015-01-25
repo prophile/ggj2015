@@ -238,21 +238,26 @@ public class MainMode implements GameMode {
             }
             Animation.endPhase();
             final float ICON_OFFSET = 60.0f;
-            switch (robot.carrying) {
-            case NOTHING:
-                break;
-            case WATER:
-                Sprite.ICON_WATER.draw(batch, robot.x(), robot.y()
+            if (robot.peril > 0.0f && robot.perilDelta >= 0.0f) {
+                Sprite.ICON_OFFSCREEN_FLAIL.draw(batch, robot.x(), robot.y()
                         + ICON_OFFSET);
-                break;
-            case METAL:
-                Sprite.ICON_METAL.draw(batch, robot.x(), robot.y()
-                        + ICON_OFFSET);
-                break;
-            case SALVAGE:
-                Sprite.ICON_SALVAGE.draw(batch, robot.x(), robot.y()
-                        + ICON_OFFSET);
-                break;
+            } else {
+                switch (robot.carrying) {
+                case NOTHING:
+                    break;
+                case WATER:
+                    Sprite.ICON_WATER.draw(batch, robot.x(), robot.y()
+                            + ICON_OFFSET);
+                    break;
+                case METAL:
+                    Sprite.ICON_METAL.draw(batch, robot.x(), robot.y()
+                            + ICON_OFFSET);
+                    break;
+                case SALVAGE:
+                    Sprite.ICON_SALVAGE.draw(batch, robot.x(), robot.y()
+                            + ICON_OFFSET);
+                    break;
+                }
             }
         }
 
