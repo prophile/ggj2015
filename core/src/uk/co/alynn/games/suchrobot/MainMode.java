@@ -125,8 +125,6 @@ public class MainMode implements GameMode {
                     if (visited != robot.spawnNode) {
                         break;
                     }
-                    // fall-through
-                case BASE:
                     if (robot.offload(CargoType.WATER)) {
                         box.water += 1;
                     } else if (robot.offload(CargoType.METAL)) {
@@ -191,7 +189,6 @@ public class MainMode implements GameMode {
                     spr = Sprite.NODE_SALVAGE;
                 }
                 break;
-            case BASE:
             case WAYPOINT:
             case SPAWNER:
             case QUICKSAND:

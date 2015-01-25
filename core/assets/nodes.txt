@@ -1,5 +1,3 @@
-node BASE home 0 100 0
-
 node SPAWNER spwn_3 -100 0 0
 node SPAWNER spwn_2 -50 0 0
 node SPAWNER spwn_1 0 0 0
@@ -69,7 +67,6 @@ node WELL 60 500 -400 2
 node QUICKSAND 61 300 -550 0
 node WRECKAGE 62 600 -550 1
 
-conn home spwn_1
 conn spwn_1 spwn_2
 conn spwn_2 spwn_3
 conn spwn_1 spwn_4
