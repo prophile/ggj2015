@@ -15,6 +15,7 @@ public class NightMode implements GameMode {
     private Viewport viewport;
 
     private boolean update = false;
+    private boolean clicked = false;
 
     public NightMode(Box box) {
         this.box = box;
@@ -38,7 +39,6 @@ public class NightMode implements GameMode {
     @Override
     public GameMode tick(ScreenEdge screenEdge) {
         boolean nextSelected = mouseInND();
-        boolean buySelected = mouseInBuy();
 
         batch.setProjectionMatrix(viewport.getCamera().combined);
         Texture tex = Overlord.get().assetManager.get(
@@ -53,6 +53,10 @@ public class NightMode implements GameMode {
                 "UI/NightUIRough/Inactive robot.png", Texture.class);
         Texture robbieL1 = Overlord.get().assetManager.get(
                 "UI/NightUIRough/RoboBGlvl1.png", Texture.class);
+        Texture noRobbieMO = Overlord.get().assetManager.get(
+                "UI/NightUIRough/Inactive robotMO.png", Texture.class);
+        Texture robbieL1MO = Overlord.get().assetManager.get(
+                "UI/NightUIRough/RoboMOlvl1.png", Texture.class);
         batch.begin();
         batch.setShader(null);
         batch.draw(texBase, 0, 0, 1417, 1276);
@@ -61,23 +65,45 @@ public class NightMode implements GameMode {
         } else {
             batch.draw(tex, 0, 0, 1417, 1276);
         }
-        float buyScaleFactor = buySelected ? 1.2f : 0.95f;
-        batch.draw(buy, 708 - buy.getWidth() * 0.5f * buyScaleFactor,
-                480 - buy.getHeight() * 0.5f * buyScaleFactor, buy.getWidth()
-                        * buyScaleFactor, buy.getHeight() * buyScaleFactor);
         int maxRobots = Constants.MAX_ROBOTS.asInt();
         for (int i = 0; i < maxRobots; ++i) {
             int colIndex = (i % 4);
             int rowIndex = (i / 4);
             boolean purchased = i < box.robots;
             Texture robotex;
-            if (purchased) {
-                robotex = robbieL1;
-            } else {
-                robotex = noRobbie;
-            }
             int centrePointX = 402 + colIndex * 200;
             int centrePointY = 990 - rowIndex * 252;
+            int w = (int) (robbieL1.getWidth() * 0.5f), h = (int) (robbieL1
+                    .getHeight() * 0.5f);
+            int lbx = centrePointX - w;
+            int ubx = centrePointX + w;
+            int lby = centrePointY - h;
+            int uby = centrePointY + h;
+            boolean mo = mouseInBox(lbx, ubx, lby, uby);
+            if (!purchased) {
+                if (clicked) {
+                    int robotCost = Constants.ROBOT_METAL_COST.asInt();
+                    if (box.metal >= robotCost
+                            && box.robots < Constants.MAX_ROBOTS.asInt()) {
+                        box.robots += 1;
+                        box.metal -= robotCost;
+                        purchased = true;
+                    }
+                }
+            }
+            if (purchased) {
+                if (mo) {
+                    robotex = robbieL1MO;
+                } else {
+                    robotex = robbieL1;
+                }
+            } else {
+                if (mo) {
+                    robotex = noRobbieMO;
+                } else {
+                    robotex = noRobbie;
+                }
+            }
             batch.draw(robotex, centrePointX - robotex.getWidth() * 0.5f,
                     centrePointY - robotex.getHeight() * 0.5f);
             if (i == box.robots) {
@@ -88,43 +114,25 @@ public class NightMode implements GameMode {
         box.displayInfo(batch, 1030, 810);
         batch.end();
 
+        clicked = false;
+
         return update ? new MainMode(box) : this;
     }
 
-    private boolean mouseInND() {
+    private boolean mouseInBox(int left, int right, int bottom, int top) {
         int rawMouseX = Gdx.input.getX();
         int rawMouseY = Gdx.input.getY();
         Vector2 pickedMousePosition = viewport.unproject(new Vector2(rawMouseX,
                 rawMouseY));
-        final float NEXT_LEFT_BOUND = 880;
-        final float NEXT_RIGHT_BOUND = 1120;
-        final float NEXT_BOTTOM_BOUND = 100;
-        final float NEXT_TOP_BOUND = 250;
-
         float mx = pickedMousePosition.x;
         float my = pickedMousePosition.y;
 
-        boolean nextSelected = (mx >= NEXT_LEFT_BOUND && mx <= NEXT_RIGHT_BOUND
-                && my >= NEXT_BOTTOM_BOUND && my <= NEXT_TOP_BOUND);
+        boolean nextSelected = (mx >= left && mx <= right && my >= bottom && my <= top);
         return nextSelected;
     }
 
-    private boolean mouseInBuy() {
-        int rawMouseX = Gdx.input.getX();
-        int rawMouseY = Gdx.input.getY();
-        Vector2 pickedMousePosition = viewport.unproject(new Vector2(rawMouseX,
-                rawMouseY));
-        final float NEXT_LEFT_BOUND = 300;
-        final float NEXT_RIGHT_BOUND = 1100;
-        final float NEXT_BOTTOM_BOUND = 350;
-        final float NEXT_TOP_BOUND = 600;
-
-        float mx = pickedMousePosition.x;
-        float my = pickedMousePosition.y;
-
-        boolean nextSelected = (mx >= NEXT_LEFT_BOUND && mx <= NEXT_RIGHT_BOUND
-                && my >= NEXT_BOTTOM_BOUND && my <= NEXT_TOP_BOUND);
-        return nextSelected;
+    private boolean mouseInND() {
+        return mouseInBox(880, 1120, 100, 250);
     }
 
     @Override
@@ -137,14 +145,7 @@ public class NightMode implements GameMode {
         if (mouseInND()) {
             update = true;
         }
-        if (mouseInBuy()) {
-            int robotCost = Constants.ROBOT_METAL_COST.asInt();
-            if (box.metal >= robotCost
-                    && box.robots < Constants.MAX_ROBOTS.asInt()) {
-                box.robots += 1;
-                box.metal -= robotCost;
-            }
-        }
+        clicked = true;
     }
 
     @Override
