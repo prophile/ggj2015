@@ -5,10 +5,17 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 
 public abstract class NodeSetReader {
     public static NodeSet readNodeSet(String file) throws IOException {
-        InputStream rdr = Gdx.files.internal(file).read();
+        FileHandle handle = Gdx.files.external(file);
+        if (handle.exists()) {
+            System.err.println("USING OVERLOADED NODES");
+        } else {
+            handle = Gdx.files.internal(file);
+        }
+        InputStream rdr = handle.read();
         NodeSet nodes = new NodeSet();
 
         Scanner scan = new Scanner(rdr);
