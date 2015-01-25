@@ -30,8 +30,7 @@ public class TitleScreen extends ScreenMode {
             box.robots[i] = RobotClass.GEORGE;
         }
         SFX.THUNK.play();
-        box.metal = 10;
-        return new NightMode(box);
+        return new MainMode(box);
     }
 
 }
