@@ -13,7 +13,10 @@ public enum Sprite {
             512, 380), ROBOT_WALK("Animations/Robowalk/RoboWalk_%.png", 24,
             0.1f, 512, 380), ROBOT_EAT_DIRT(
             "Animations/RobColDirt/RobColDirt_%.png", 24, 0.1f, 512, 380), ROBOT_EAT_WATER(
-            "Animations/RobColWat/RobColWat_%.png", 24, 0.1f, 512, 380), NODE_MINE(
+            "Animations/RobColWat/RobColWat_%.png", 24, 0.1f, 512, 380), ROBOT_FLAIL_START(
+            "Animations/Robosink/Robosink_%.png", 24, 0.1f, 512, 380), ROBOT_FLAIL(
+            "Animations/Robopanic/RoboPanic_%.png", 24, 0.1f, 512, 380), ROBOT_FLAIL_END(
+            "Animations/RoboESC/RoboESC_%.png", 24, 0.1f, 512, 380), NODE_MINE(
             "NodesRough/MetalRough.png", 1, 0.1f, 425, 150), NODE_SALVAGE(
             "NodesRough/SalvageRough.png", 1, 0.1f, 500, 354), NODE_SHIP(
             "NodesRough/ShipRought.png", 1, 0.1f, 710, 522), NODE_WELL(

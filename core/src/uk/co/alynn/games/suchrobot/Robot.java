@@ -14,6 +14,9 @@ public final class Robot {
     public float accumulatedTimeAt = 0.0f;
     public boolean flipped;
     public final RobotClass cls;
+    public float peril;
+    public float perilDelta;
+    private boolean quicksandImmune;
 
     public Robot(RobotClass cls, NodeSet nodes, PathNode home) {
         nodeSet = nodes;
@@ -81,6 +84,16 @@ public final class Robot {
         } else {
             accumulatedTimeAt += dt;
         }
+        System.err.println("peril = " + peril + " pd = " + perilDelta);
+        peril += perilDelta * dt;
+        if (peril < 0.0f) {
+            peril = 0.0f;
+            perilDelta = 0.0f;
+        }
+        if (peril > 1.0f) {
+            perilDelta = 0.0f;
+            peril = 1.0f;
+        }
         if (sourceNode == destNode) {
             if (destNode != finalTarget) {
                 destNode = nodeSet.nextNodeFor(sourceNode, finalTarget);
@@ -102,15 +115,25 @@ public final class Robot {
         } else if (cls == RobotClass.JOHN) {
             increment *= Constants.L3_SPEED_FACTOR.asFloat();
         }
+        if (peril > 0.0f) {
+            increment = 0.0f;
+        }
         progress += increment;
-        if (progress >= 1.0f) {
-            progress = 0.0f;
-            sourceNode = destNode;
-            destNode = nodeSet.nextNodeFor(sourceNode, finalTarget);
-            if (destNode.x > sourceNode.x) {
-                flipped = false;
-            } else if (destNode.x < sourceNode.x) {
-                flipped = true;
+        if (progress >= 1.0f && peril == 0.0f) {
+            if (destNode.type == NodeType.QUICKSAND && !quicksandImmune) {
+                peril = 0.0001f;
+                perilDelta = 1.0f;
+                quicksandImmune = true;
+            } else {
+                progress = 0.0f;
+                sourceNode = destNode;
+                destNode = nodeSet.nextNodeFor(sourceNode, finalTarget);
+                if (destNode.x > sourceNode.x) {
+                    flipped = false;
+                } else if (destNode.x < sourceNode.x) {
+                    flipped = true;
+                }
+                quicksandImmune = false;
             }
         }
     }
