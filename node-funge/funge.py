@@ -51,6 +51,7 @@ labels = {'WAYPOINT': None,
           'BASE': 'HOME',
           'WELL': 'well',
           'MINE': 'mine',
+          'QUICKSAND': None,
           'WRECKAGE': 'wreckage'}
 
 with open(sys.argv[1]) as f:
