@@ -1,6 +1,7 @@
 dependencies:
   pre:
     - ./download-jres.sh
+    - pip install lxml
   cache_directories:
     - jres
 test:
@@ -10,4 +11,5 @@ test:
     - cp desktop/build/libs/desktop-1.0.jar $CIRCLE_ARTIFACTS/robogame.jar
     - ./generate-apps.sh
     - cp distributions/final/* $CIRCLE_ARTIFACTS/
+    - python node-funge/funge.py core/assets/nodes.txt $CIRCLE_ARTIFACTS/node-map.svg
 
