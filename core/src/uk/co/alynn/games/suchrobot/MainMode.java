@@ -342,12 +342,18 @@ public class MainMode implements GameMode {
 
             if (box.isWin()) {
                 ArrayList<String> results = new ArrayList<String>();
-                results.add("win");
+                results.add("The robots proved their worth");
+				results.add("I managed to make the repairs");
+				results.add("Finally I can escape!");
+				results.add("You Escaped! – Click to play again");
                 return new ResultsScreen(results, null);
             }
             if (box.isLoss()) {
                 ArrayList<String> results = new ArrayList<String>();
-                results.add("lose");
+                results.add("Without water I was too weak to fight");
+				results.add("They came in the night to take me away");
+				results.add("I’ll never see my planet again…");
+				results.add("Game over – Click to try again");
                 return new ResultsScreen(results, null);
             }
 
