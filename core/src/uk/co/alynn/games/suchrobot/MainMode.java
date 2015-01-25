@@ -293,13 +293,14 @@ public class MainMode implements GameMode {
         proj.val[10] /= THE_SCALE;
         batch.setProjectionMatrix(proj);
         batch.begin();
+
         BitmapFont fnt = Overlord.get().assetManager.get("bitstream.fnt",
                 BitmapFont.class);
         batch.setShader(Overlord.get().getFontShader());
-        fnt.drawMultiLine(batch, "Water: " + box.water + "\nMetal: "
-                + box.metal + "\nSalvg: " + box.salvage + "\nTime: "
-                + (int) dayCounter + "\nDay: " + box.day, 100, 300);
+        fnt.drawMultiLine(batch, "Time: " + (int) dayCounter + "\nDay: "
+                + box.day, -(1024 / 2) + 10, (640 / 2) - 10);
         batch.setShader(null);
+        box.displayInfo(batch, (1024 / 2) - 30, (640 / 2) - 30);
         batch.end();
 
         dayCounter += dt;
