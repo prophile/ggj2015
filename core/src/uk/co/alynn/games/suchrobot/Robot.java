@@ -97,6 +97,11 @@ public final class Robot {
         float distance = (float) Math.hypot(sourceNode.x - destNode.x,
                 sourceNode.y - destNode.y);
         float increment = Constants.SPEED.asFloat() * dt / distance;
+        if (cls == RobotClass.PAUL) {
+            increment *= Constants.L2_SPEED_FACTOR.asFloat();
+        } else if (cls == RobotClass.JOHN) {
+            increment *= Constants.L3_SPEED_FACTOR.asFloat();
+        }
         progress += increment;
         if (progress >= 1.0f) {
             progress = 0.0f;
