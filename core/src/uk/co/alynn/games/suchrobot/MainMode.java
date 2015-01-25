@@ -528,14 +528,27 @@ public class MainMode implements GameMode {
     public void click(int mouseX, int mouseY) {
         Vector2 worldCoords = viewport.unproject(new Vector2(mouseX, mouseY));
 
-        final float ROBOT_SELECT_DISTANCE = 30.0f;
+        final float ROBOT_SELECT_DISTANCE = 70.0f;
 
         selectedRobot = null;
+        float bestPointerDistance = Float.POSITIVE_INFINITY;
         for (Robot robot : robots) {
-            if (Math.hypot(robot.x() - worldCoords.x, robot.y() - worldCoords.y) < ROBOT_SELECT_DISTANCE) {
-                selectedRobot = robot;
-                selectedRobot.perilDelta = -1.0f;
+            float distanceFromPointer = (float) Math.hypot(robot.x()
+                    - worldCoords.x, robot.y() - worldCoords.y);
+            if (distanceFromPointer < ROBOT_SELECT_DISTANCE) {
+                if (selectedRobot == null
+                        || distanceFromPointer < bestPointerDistance) {
+                    selectedRobot = robot;
+                    bestPointerDistance = distanceFromPointer;
+                }
             }
+        }
+
+        if (selectedRobot != null) {
+            selectedRobot.perilDelta = -1.0f;
+            System.err.println("SELECT GUY");
+        } else {
+            System.err.println("UNSELECT GUY");
         }
     }
 }
