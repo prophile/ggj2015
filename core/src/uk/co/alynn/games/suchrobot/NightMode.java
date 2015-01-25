@@ -36,6 +36,37 @@ public class NightMode implements GameMode {
         batch.dispose();
     }
 
+    private Texture robotOverlayTexture(RobotClass cls, boolean mouseOver) {
+        Texture noRobbie = Overlord.get().assetManager.get(
+                "UI/NightUIRough/Inactive robot.png", Texture.class);
+        Texture robbieL1 = Overlord.get().assetManager.get(
+                "UI/NightUIRough/RoboBGlvl1.png", Texture.class);
+        Texture noRobbieMO = Overlord.get().assetManager.get(
+                "UI/NightUIRough/Inactive robotMO.png", Texture.class);
+        Texture robbieL1MO = Overlord.get().assetManager.get(
+                "UI/NightUIRough/RoboMOlvl1.png", Texture.class);
+        Texture robbieL2 = Overlord.get().assetManager.get(
+                "UI/NightUIRough/RoboBGlvl2.png", Texture.class);
+        Texture robbieL2MO = Overlord.get().assetManager.get(
+                "UI/NightUIRough/RoboMOlvl2.png", Texture.class);
+        Texture robbieL3 = Overlord.get().assetManager.get(
+                "UI/NightUIRough/RoboBGlvl3.png", Texture.class);
+        Texture robbieL3MO = Overlord.get().assetManager.get(
+                "UI/NightUIRough/RoboMOlvl3.png", Texture.class);
+        switch (cls) {
+        case GEORGE:
+            return mouseOver ? robbieL1MO : robbieL1;
+        case JOHN:
+            return mouseOver ? robbieL3MO : robbieL3;
+        case PAUL:
+            return mouseOver ? robbieL2MO : robbieL2;
+        case RINGO:
+            return mouseOver ? noRobbieMO : noRobbie;
+        default:
+            throw new RuntimeException("PETE BEST WAS NEVER A BEATLE DAMN IT");
+        }
+    }
+
     @Override
     public GameMode tick(ScreenEdge screenEdge) {
         boolean nextSelected = mouseInND();
@@ -49,14 +80,8 @@ public class NightMode implements GameMode {
                 "UI/NightUIRough/Robotmenubase.png", Texture.class);
         Texture buy = Overlord.get().assetManager.get(
                 "UI/NightUIRough/Addrobotbutton.png", Texture.class);
-        Texture noRobbie = Overlord.get().assetManager.get(
-                "UI/NightUIRough/Inactive robot.png", Texture.class);
         Texture robbieL1 = Overlord.get().assetManager.get(
                 "UI/NightUIRough/RoboBGlvl1.png", Texture.class);
-        Texture noRobbieMO = Overlord.get().assetManager.get(
-                "UI/NightUIRough/Inactive robotMO.png", Texture.class);
-        Texture robbieL1MO = Overlord.get().assetManager.get(
-                "UI/NightUIRough/RoboMOlvl1.png", Texture.class);
         batch.begin();
         batch.setShader(null);
         batch.draw(texBase, 0, 0, 1417, 1276);
@@ -83,7 +108,7 @@ public class NightMode implements GameMode {
             boolean mo = mouseInBox(lbx, ubx, lby, uby);
             boolean purchasable = !purchased && !anyPurchasesPresented;
             if (purchasable) {
-                if (clicked) {
+                if (clicked && mo) {
                     int robotCost = Constants.ROBOT_METAL_COST.asInt();
                     if (box.metal >= robotCost) {
                         box.robots[i] = RobotClass.GEORGE;
@@ -91,20 +116,24 @@ public class NightMode implements GameMode {
                         purchased = true;
                     }
                 }
-            }
-            if (purchased) {
-                if (mo) {
-                    robotex = robbieL1MO;
-                } else {
-                    robotex = robbieL1;
+            } else if (purchased && box.robots[i] == RobotClass.GEORGE) {
+                if (clicked && mo) {
+                    int robotCost = Constants.ROBOT_L2_COST.asInt();
+                    if (box.metal >= robotCost) {
+                        box.metal -= robotCost;
+                        box.robots[i] = RobotClass.PAUL;
+                    }
                 }
-            } else {
-                if (mo) {
-                    robotex = noRobbieMO;
-                } else {
-                    robotex = noRobbie;
+            } else if (purchased && box.robots[i] == RobotClass.PAUL) {
+                if (clicked && mo) {
+                    int robotCost = Constants.ROBOT_L3_COST.asInt();
+                    if (box.metal >= robotCost) {
+                        box.metal -= robotCost;
+                        box.robots[i] = RobotClass.JOHN;
+                    }
                 }
             }
+            robotex = robotOverlayTexture(box.robots[i], mo);
             batch.draw(robotex, centrePointX - robotex.getWidth() * 0.5f,
                     centrePointY - robotex.getHeight() * 0.5f);
             if (purchasable) {
