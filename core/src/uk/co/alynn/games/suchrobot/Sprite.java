@@ -28,7 +28,10 @@ public enum Sprite {
             "UI/CarryIcons/Salvage.png", 1, 0.035f, 1417 / 2, 1276 / 2), ICON_OFFSCREEN_FLAIL(
             "UI/CarryIcons/QSpanic.png", 1, 0.035f, 1417 / 2, 1276 / 2), ICON_OFFSCREEN_IDLE(
             "UI/CarryIcons/MarkerIDLE.png", 1, 0.035f, 1417 / 2, 1276 / 2), ICON_OFFSCREEN_WALK(
-            "UI/CarryIcons/MarkerWALK.png", 1, 0.035f, 1417 / 2, 1276 / 2);
+            "UI/CarryIcons/MarkerWALK.png", 1, 0.035f, 1417 / 2, 1276 / 2), CHEVRONS_L1(
+            "UI/LvlUP/Chevron1.png", 1, 0.02f, 1417 / 2, 400), CHEVRONS_L2(
+            "UI/LvlUP/Chevron2.png", 1, 0.02f, 1417 / 2, 400), CHEVRONS_L3(
+            "UI/LvlUP/Chevron3.png", 1, 0.02f, 1417 / 2, 400);
 
     private String path;
     private float scale;

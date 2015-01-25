@@ -259,6 +259,24 @@ public class MainMode implements GameMode {
                     break;
                 }
             }
+            Sprite rankPips = null;
+            switch (robot.cls) {
+            case GEORGE:
+                rankPips = Sprite.CHEVRONS_L1;
+                break;
+            case JOHN:
+                rankPips = Sprite.CHEVRONS_L2;
+                break;
+            case PAUL:
+                rankPips = Sprite.CHEVRONS_L3;
+                break;
+            case RINGO:
+            default:
+                throw new RuntimeException("PHANTOMS");
+            }
+            if (rankPips != null) {
+                rankPips.draw(batch, robot.x() + 18, robot.y() + 17);
+            }
         }
 
         batch.end();
