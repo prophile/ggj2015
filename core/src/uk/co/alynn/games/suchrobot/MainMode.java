@@ -184,14 +184,12 @@ public class MainMode implements GameMode {
                     spr = Sprite.NODE_MINE;
                 }
                 break;
-            case BASE:
-                spr = Sprite.NODE_SHIP;
-                break;
             case WRECKAGE:
                 if (node.reserves != 0) {
                     spr = Sprite.NODE_SALVAGE;
                 }
                 break;
+            case BASE:
             case WAYPOINT:
             case SPAWNER:
             case QUICKSAND:
