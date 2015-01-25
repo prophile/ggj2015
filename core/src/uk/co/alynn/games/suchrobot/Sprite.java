@@ -62,16 +62,27 @@ public enum Sprite {
         return tex;
     }
 
-    public void draw(SpriteBatch batch, float x, float y) {
+    public void draw(SpriteBatch batch, float x, float y, float scl) {
         Texture tex = getTexture();
-        batch.draw(tex, x - (this.anchorX * scale), y - (this.anchorY * scale),
-                tex.getWidth() * scale, tex.getHeight() * scale);
+        float scale_ = scl * scale;
+        batch.draw(tex, x - (this.anchorX * scale_), y
+                - (this.anchorY * scale_), tex.getWidth() * scale_,
+                tex.getHeight() * scale_);
+    }
+
+    public void draw(SpriteBatch batch, float x, float y) {
+        draw(batch, x, y, 1.0f);
+    }
+
+    public void drawFlipped(SpriteBatch batch, float x, float y, float scl) {
+        Texture tex = getTexture();
+        float scale_ = scl * scale;
+        batch.draw(tex, x - (this.anchorX * scale_) + tex.getWidth() * scale_,
+                y - (this.anchorY * scale_), -tex.getWidth() * scale_,
+                tex.getHeight() * scale_);
     }
 
     public void drawFlipped(SpriteBatch batch, float x, float y) {
-        Texture tex = getTexture();
-        batch.draw(tex, x - (this.anchorX * scale) + tex.getWidth() * scale, y
-                - (this.anchorY * scale), -tex.getWidth() * scale,
-                tex.getHeight() * scale);
+        drawFlipped(batch, x, y, 1.0f);
     }
 }

@@ -151,7 +151,7 @@ public class NightMode implements GameMode {
                 anyPurchasesPresented = true;
             }
         }
-        box.displayInfo(batch, 1030, 810);
+        box.displayInfo(batch, 1030, 810, 2.0f, true);
 
         BitmapFont fnt = Overlord.get().assetManager.get("bitstream.fnt",
                 BitmapFont.class);

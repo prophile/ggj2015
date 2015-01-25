@@ -60,19 +60,30 @@ public class Box {
         return false;
     }
 
-    public void displayInfo(SpriteBatch batch, int x, int y) {
-        final int SEPARATION_DISTANCE = Constants.RESOURCE_DISPLAY_SPACING
-                .asInt();
-        for (int i = 0; i < water; ++i) {
-            Sprite.ICON_WATER.draw(batch, x - SEPARATION_DISTANCE * i, y);
-        }
-        for (int i = 0; i < metal; ++i) {
-            Sprite.ICON_METAL.draw(batch, x - SEPARATION_DISTANCE * i, y
-                    - SEPARATION_DISTANCE);
-        }
-        for (int i = 0; i < salvage; ++i) {
-            Sprite.ICON_SALVAGE.draw(batch, x - SEPARATION_DISTANCE * i, y
-                    - SEPARATION_DISTANCE * 2);
+    public void displayInfo(SpriteBatch batch, int x, int y, float scale,
+            boolean onlyMetal) {
+        final float SEPARATION_DISTANCE = Constants.RESOURCE_DISPLAY_SPACING
+                .asFloat() * scale;
+        if (onlyMetal) {
+            for (int i = 0; i < metal; ++i) {
+                int colIndex = (i % 6);
+                int rowIndex = (i / 6);
+                Sprite.ICON_METAL.draw(batch, x - SEPARATION_DISTANCE
+                        * colIndex, y - SEPARATION_DISTANCE * rowIndex, scale);
+            }
+        } else {
+            for (int i = 0; i < water; ++i) {
+                Sprite.ICON_WATER.draw(batch, x - SEPARATION_DISTANCE * i, y,
+                        scale);
+            }
+            for (int i = 0; i < metal; ++i) {
+                Sprite.ICON_METAL.draw(batch, x - SEPARATION_DISTANCE * i, y
+                        - SEPARATION_DISTANCE, scale);
+            }
+            for (int i = 0; i < salvage; ++i) {
+                Sprite.ICON_SALVAGE.draw(batch, x - SEPARATION_DISTANCE * i, y
+                        - SEPARATION_DISTANCE * 2, scale);
+            }
         }
     }
 }

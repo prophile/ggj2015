@@ -283,7 +283,7 @@ public class MainMode implements GameMode {
         fnt.drawMultiLine(batch, "Time: " + (int) dayCounter + "\nDay: "
                 + box.day, -(1024 / 2) + 10, (640 / 2) - 10);
         batch.setShader(null);
-        box.displayInfo(batch, (1024 / 2) - 30, (640 / 2) - 30);
+        box.displayInfo(batch, (1024 / 2) - 30, (640 / 2) - 30, 1.0f, false);
         batch.end();
 
         dayCounter += dt;
