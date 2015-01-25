@@ -1,8 +1,8 @@
 package uk.co.alynn.games.suchrobot;
 
 public enum RobotClass {
-    RINGO(null), GEORGE(Sprite.CHEVRONS_L1), PAUL(Sprite.CHEVRONS_L2), JOHN(
-            Sprite.CHEVRONS_L3);
+    RINGO(null), GEORGE(null), PAUL(Sprite.CHEVRONS_L1), JOHN(
+            Sprite.CHEVRONS_L2);
 
     public Sprite pips;
 
