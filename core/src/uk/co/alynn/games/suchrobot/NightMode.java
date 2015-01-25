@@ -49,6 +49,8 @@ public class NightMode implements GameMode {
                 "UI/NightUIRough/Robotmenubase.png", Texture.class);
         Texture buy = Overlord.get().assetManager.get(
                 "UI/NightUIRough/Addrobotbutton.png", Texture.class);
+        Texture robbie = Overlord.get().assetManager.get(
+                "UI/NightUIRough/Inactive robot.png", Texture.class);
         batch.begin();
         batch.setShader(null);
         batch.draw(texBase, 0, 0, 1417, 1276);
@@ -61,6 +63,12 @@ public class NightMode implements GameMode {
         batch.draw(buy, 708 - buy.getWidth() * 0.5f * buyScaleFactor,
                 480 - buy.getHeight() * 0.5f * buyScaleFactor, buy.getWidth()
                         * buyScaleFactor, buy.getHeight() * buyScaleFactor);
+        box.robots = 5;
+        for (int i = 0; i < box.robots; ++i) {
+            int colIndex = (i % 4);
+            int rowIndex = (i / 4);
+            batch.draw(robbie, 310 + colIndex * 200, 868 - rowIndex * 252);
+        }
         box.displayInfo(batch, 1030, 1050);
         batch.end();
 
