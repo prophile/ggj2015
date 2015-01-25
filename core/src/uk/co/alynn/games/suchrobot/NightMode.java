@@ -2,7 +2,6 @@ package uk.co.alynn.games.suchrobot;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -64,10 +63,6 @@ public class NightMode implements GameMode {
                         * buyScaleFactor, buy.getHeight() * buyScaleFactor);
         box.water = 4;
         box.displayInfo(batch, 1030, 1050);
-        BitmapFont fnt = Overlord.get().assetManager.get("bitstream.fnt",
-                BitmapFont.class);
-        batch.setShader(Overlord.get().getFontShader());
-        fnt.draw(batch, "mtl " + box.metal + " / rob " + box.robots, 0, 60);
         batch.end();
 
         return update ? new MainMode(box) : this;
