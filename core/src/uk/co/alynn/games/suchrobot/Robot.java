@@ -13,14 +13,16 @@ public final class Robot {
     public CargoType carrying = CargoType.NOTHING;
     public float accumulatedTimeAt = 0.0f;
     public boolean flipped;
+    public final RobotClass cls;
 
-    public Robot(NodeSet nodes, PathNode home) {
+    public Robot(RobotClass cls, NodeSet nodes, PathNode home) {
         nodeSet = nodes;
         sourceNode = home;
         destNode = home;
         finalTarget = home;
         spawnNode = home;
         flipped = false;
+        this.cls = cls;
     }
 
     public boolean available() {

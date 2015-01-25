@@ -66,10 +66,11 @@ public class NightMode implements GameMode {
             batch.draw(tex, 0, 0, 1417, 1276);
         }
         int maxRobots = Constants.MAX_ROBOTS.asInt();
+        boolean anyPurchasesPresented = false;
         for (int i = 0; i < maxRobots; ++i) {
             int colIndex = (i % 4);
             int rowIndex = (i / 4);
-            boolean purchased = i < box.robots;
+            boolean purchased = box.robots[i] != RobotClass.RINGO;
             Texture robotex;
             int centrePointX = 402 + colIndex * 200;
             int centrePointY = 990 - rowIndex * 252;
@@ -80,12 +81,12 @@ public class NightMode implements GameMode {
             int lby = centrePointY - h;
             int uby = centrePointY + h;
             boolean mo = mouseInBox(lbx, ubx, lby, uby);
-            if (!purchased) {
+            boolean purchasable = !purchased && !anyPurchasesPresented;
+            if (purchasable) {
                 if (clicked) {
                     int robotCost = Constants.ROBOT_METAL_COST.asInt();
-                    if (box.metal >= robotCost
-                            && box.robots < Constants.MAX_ROBOTS.asInt()) {
-                        box.robots += 1;
+                    if (box.metal >= robotCost) {
+                        box.robots[i] = RobotClass.GEORGE;
                         box.metal -= robotCost;
                         purchased = true;
                     }
@@ -106,9 +107,10 @@ public class NightMode implements GameMode {
             }
             batch.draw(robotex, centrePointX - robotex.getWidth() * 0.5f,
                     centrePointY - robotex.getHeight() * 0.5f);
-            if (i == box.robots) {
+            if (purchasable) {
                 batch.draw(buy, centrePointX - buy.getWidth() * 0.5f,
                         centrePointY - buy.getHeight() * 0.5f);
+                anyPurchasesPresented = true;
             }
         }
         box.displayInfo(batch, 1030, 810);

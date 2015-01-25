@@ -58,18 +58,20 @@ public class MainMode implements GameMode {
             throw new RuntimeException("nodes not initted");
         }
 
-        int requiredRobots = box.robots;
+        int requiredRobotIndex = 0;
         for (PathNode node : nodes) {
-            if (node.type == NodeType.SPAWNER) {
-                Robot robot = new Robot(nodes, node);
-                robots.add(robot);
-                requiredRobots -= 1;
-                if (requiredRobots == 0)
-                    break;
+            while (requiredRobotIndex < box.robots.length
+                    && box.robots[requiredRobotIndex] == RobotClass.RINGO) {
+                ++requiredRobotIndex;
             }
-        }
-        if (requiredRobots > 0) {
-            throw new RuntimeException("Not enough spawn pads.");
+            if (requiredRobotIndex >= box.robots.length)
+                break;
+            if (node.type == NodeType.SPAWNER) {
+                Robot robot = new Robot(box.robots[requiredRobotIndex], nodes,
+                        node);
+                robots.add(robot);
+                ++requiredRobotIndex;
+            }
         }
 
         dayCounter = 0;
@@ -284,13 +286,15 @@ public class MainMode implements GameMode {
         if (dayCounter > Constants.DAY_LENGTH.asFloat()) {
             final float ROBOT_SAFE_DISTANCE = Constants.SAFE_ZONE_RADIUS
                     .asFloat();
-            box.robots = 0;
+            box.clearRobots();
+            int robotIndex = 0;
             PathNode home = nodes.lookup("home");
             for (Robot robot : robots) {
                 float distance = (float) Math.hypot(robot.x() - home.x,
                         robot.y() - home.y);
                 if (distance <= ROBOT_SAFE_DISTANCE) {
-                    box.robots += 1;
+                    box.robots[robotIndex] = robot.cls;
+                    ++robotIndex;
                 }
             }
 
@@ -302,8 +306,8 @@ public class MainMode implements GameMode {
             NightMode nm = new NightMode(box);
             List<String> messages = new ArrayList<String>();
             messages.add("Day " + box.day + " is over.");
-            if (initialBox.robots > box.robots) {
-                messages.add((initialBox.robots - box.robots)
+            if (initialBox.activeRobots() > box.activeRobots()) {
+                messages.add((initialBox.activeRobots() - box.activeRobots())
                         + " robots didn't make it back.");
             }
             if (initialBox.salvage < box.salvage) {

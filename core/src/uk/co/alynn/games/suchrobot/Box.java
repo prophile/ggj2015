@@ -7,16 +7,41 @@ public class Box {
     public int salvage = Constants.INITIAL_SALVAGE.asInt();
     public int metal = Constants.INITIAL_METAL.asInt();
 
-    public int robots = Constants.INITIAL_ROBOTS.asInt();
+    public final RobotClass[] robots;
 
     public int day = 1;
 
+    public Box() {
+        int numSlots = Constants.MAX_ROBOTS.asInt();
+        robots = new RobotClass[numSlots];
+        clearRobots();
+    }
+
+    public void clearRobots() {
+        for (int i = 0; i < robots.length; ++i) {
+            robots[i] = RobotClass.RINGO;
+        }
+    }
+
+    public int activeRobots() {
+        int active = 0;
+        for (RobotClass robot : robots) {
+            if (robot != RobotClass.RINGO) {
+                ++active;
+            }
+        }
+        return active;
+    }
+
     public Box copy() {
+        int numSlots = Constants.MAX_ROBOTS.asInt();
         Box cp = new Box();
         cp.water = water;
         cp.salvage = salvage;
         cp.metal = metal;
-        cp.robots = robots;
+        for (int i = 0; i < numSlots; ++i) {
+            cp.robots[i] = robots[i];
+        }
         cp.day = day;
         return cp;
     }
@@ -30,7 +55,7 @@ public class Box {
             return true;
         if (day > Constants.LAST_DAY.asInt())
             return true;
-        if (robots == 0 && metal < Constants.ROBOT_METAL_COST.asInt())
+        if (activeRobots() == 0 && metal < Constants.ROBOT_METAL_COST.asInt())
             return true;
         return false;
     }
