@@ -48,11 +48,17 @@ public final class Overlord {
         TextureParameter param = new TextureParameter();
         param.genMipMaps = true;
         param.minFilter = TextureFilter.MipMapLinearLinear;
-        mgr.load("Layout/Rough/Level1.png", Texture.class, param);
-        mgr.load("Layout/Rough/Level2.png", Texture.class, param);
-        mgr.load("Layout/Rough/Level3.png", Texture.class, param);
-        mgr.load("Layout/Rough/Decorativemountains.png", Texture.class, param);
-        mgr.load("Layout/Rough/Sky.png", Texture.class, param);
+
+        mgr.load("Layout/LayoutPanes/Filter.png", Texture.class, param);
+        mgr.load("Layout/LayoutPanes/FrontObjects.png", Texture.class, param);
+        mgr.load("Layout/LayoutPanes/Nightcover.png", Texture.class, param);
+        mgr.load("Layout/LayoutPanes/Parallaxfront.png", Texture.class, param);
+        mgr.load("Layout/LayoutPanes/Parallaxrear1.png", Texture.class, param);
+        mgr.load("Layout/LayoutPanes/Parallaxrear2.png", Texture.class, param);
+        mgr.load("Layout/LayoutPanes/Robotplane.png", Texture.class, param);
+        mgr.load("Layout/LayoutPanes/Roughpaths.png", Texture.class, param);
+        mgr.load("Layout/LayoutPanes/Sky.png", Texture.class, param);
+
         mgr.load("UI/NightUIRough/NextDayUI.png", Texture.class, param);
         mgr.load("UI/NightUIRough/NextDayUIMO.png", Texture.class, param);
         mgr.load("UI/NightUIRough/Addrobotbutton.png", Texture.class, param);

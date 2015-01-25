@@ -93,11 +93,13 @@ public class MainMode implements GameMode {
         renderBG();
         batch.setProjectionMatrix(viewport.getCamera().combined);
 
-        Texture l1 = Overlord.get().assetManager.get("Layout/Rough/Level1.png",
-                Texture.class);
+        Texture l1 = Overlord.get().assetManager.get(
+                "Layout/LayoutPanes/Robotplane.png", Texture.class);
         batch.begin();
-        batch.draw(l1, -WORLD_WIDTH / 2, -WORLD_HEIGHT / 2, WORLD_WIDTH,
-                WORLD_HEIGHT);
+        float worldPlaneWidth = l1.getWidth() * 0.5f;
+        float worldPlaneHeight = l1.getHeight() * 0.5f;
+        batch.draw(l1, -worldPlaneWidth / 2, -worldPlaneHeight / 2,
+                worldPlaneWidth, worldPlaneHeight);
         batch.end();
 
         ShapeRenderer sr = new ShapeRenderer();
@@ -277,7 +279,17 @@ public class MainMode implements GameMode {
         }
         sr.end();
 
+        Texture fplane = Overlord.get().assetManager.get(
+                "Layout/LayoutPanes/FrontObjects.png", Texture.class);
+        batch.begin();
+        batch.draw(fplane, -worldPlaneWidth / 2, -worldPlaneHeight / 2,
+                worldPlaneWidth, worldPlaneHeight);
+
         Matrix4 proj = new Matrix4(batch.getProjectionMatrix());
+        batch.setProjectionMatrix(new Matrix4());
+        renderFG();
+        batch.end();
+
         proj.val[12] = 0.0f;
         proj.val[13] = 0.0f;
         proj.val[14] = 0.0f;
@@ -368,6 +380,12 @@ public class MainMode implements GameMode {
         }
     }
 
+    private void renderFG() {
+        Texture l3 = Overlord.get().assetManager.get(
+                "Layout/LayoutPanes/Filter.png", Texture.class);
+        batch.draw(l3, -1, -1, 2, 2);
+    }
+
     private void pan(ScreenEdge screenEdge, float dt) {
         float dx = 0.0f, dy = 0.0f;
         float diagonalPan = 0.78f;
@@ -413,22 +431,18 @@ public class MainMode implements GameMode {
     }
 
     private void renderBG() {
-        Texture l2 = Overlord.get().assetManager.get("Layout/Rough/Level2.png",
-                Texture.class);
-        Texture l3 = Overlord.get().assetManager.get("Layout/Rough/Level3.png",
-                Texture.class);
-        Texture mnt = Overlord.get().assetManager.get(
-                "Layout/Rough/Decorativemountains.png", Texture.class);
-        Texture sky = Overlord.get().assetManager.get("Layout/Rough/Sky.png",
-                Texture.class);
+        Texture l1 = Overlord.get().assetManager.get(
+                "Layout/LayoutPanes/Parallaxrear1.png", Texture.class);
+        Texture l2 = Overlord.get().assetManager.get(
+                "Layout/LayoutPanes/Parallaxrear2.png", Texture.class);
+        Texture l3 = Overlord.get().assetManager.get(
+                "Layout/LayoutPanes/Sky.png", Texture.class);
         batch.begin();
-        final float L2_FACTOR = 0.0006f;
-        final float L3_FACTOR = 0.0003f;
-        final float MNT_FACTOR = 0.00006f;
-        batch.draw(sky, -1, -1, 2, 2);
-        batch.draw(mnt, -1 - offX * MNT_FACTOR, -1 - offY * MNT_FACTOR, 2, 2);
-        batch.draw(l3, -1 - offX * L3_FACTOR, -1 - offY * L3_FACTOR, 2, 2);
+        final float L1_FACTOR = 0.0003f;
+        final float L2_FACTOR = 0.00006f;
+        batch.draw(l3, -1, -1, 2, 2);
         batch.draw(l2, -1 - offX * L2_FACTOR, -1 - offY * L2_FACTOR, 2, 2);
+        batch.draw(l1, -1 - offX * L1_FACTOR, -1 - offY * L1_FACTOR, 2, 2);
         batch.end();
     }
 
