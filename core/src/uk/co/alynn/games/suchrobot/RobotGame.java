@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 
@@ -25,12 +26,22 @@ public class RobotGame extends ApplicationAdapter {
         }
     }
 
-    @Override
-    public void create() {
+    private void loadConstants() {
         // load constants file
-        Scanner scn = new Scanner(Gdx.files.internal("constants.txt").read());
+        FileHandle handle = Gdx.files.external("constants.txt");
+        if (handle.exists()) {
+            System.err.println("USING OVERLOADED CONSTANTS");
+        } else {
+            handle = Gdx.files.internal("constants.txt");
+        }
+        Scanner scn = new Scanner(handle.read());
         Constants.loadConstants(scn);
         scn.close();
+    }
+
+    @Override
+    public void create() {
+        loadConstants();
         Overlord.init();
         setMode(new LoadingScreen());
         Gdx.input.setInputProcessor(new InputProcessor() {
