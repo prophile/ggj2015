@@ -13,7 +13,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class MainMode implements GameMode {
@@ -48,7 +48,7 @@ public class MainMode implements GameMode {
 
     @Override
     public void start() {
-        viewport = new ExtendViewport(WORLD_WIDTH / THE_SCALE, WORLD_HEIGHT
+        viewport = new FitViewport(WORLD_WIDTH / THE_SCALE, WORLD_HEIGHT
                 / THE_SCALE);
         batch = new SpriteBatch();
 
