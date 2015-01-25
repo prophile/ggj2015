@@ -85,31 +85,7 @@ public class MainMode implements GameMode {
         final float CURVE_A = 10.0f, CURVE_B = 8.0f, CURVE_C = 7.0f;
         float dt = Gdx.graphics.getDeltaTime();
 
-        switch (screenEdge) {
-        case TOP:
-            viewport.getCamera().translate(0.0f,
-                    Constants.SCROLL_SPEED.asFloat() * dt, 0.0f);
-            offY += Constants.SCROLL_SPEED.asFloat() * dt;
-            break;
-        case BOTTOM:
-            viewport.getCamera().translate(0.0f,
-                    -Constants.SCROLL_SPEED.asFloat() * dt, 0.0f);
-            offY -= Constants.SCROLL_SPEED.asFloat() * dt;
-            break;
-        case LEFT:
-            viewport.getCamera().translate(
-                    -Constants.SCROLL_SPEED.asFloat() * dt, 0.0f, 0.0f);
-            offX -= Constants.SCROLL_SPEED.asFloat() * dt;
-            break;
-        case RIGHT:
-            viewport.getCamera().translate(
-                    Constants.SCROLL_SPEED.asFloat() * dt, 0.0f, 0.0f);
-            offX += Constants.SCROLL_SPEED.asFloat() * dt;
-            break;
-        case NONE:
-            break;
-        }
-        viewport.getCamera().update();
+        pan(screenEdge, dt);
 
         batch.setProjectionMatrix(new Matrix4());
         renderBG();
@@ -365,6 +341,50 @@ public class MainMode implements GameMode {
         } else {
             return this;
         }
+    }
+
+    private void pan(ScreenEdge screenEdge, float dt) {
+        float dx = 0.0f, dy = 0.0f;
+        float diagonalPan = 0.78f;
+        switch (screenEdge) {
+        case NONE:
+            break;
+        case BOTTOM:
+            dy = -1;
+            break;
+        case BOTTOM_LEFT:
+            dx = -diagonalPan;
+            dy = -diagonalPan;
+            break;
+        case BOTTOM_RIGHT:
+            dx = diagonalPan;
+            dy = -diagonalPan;
+            break;
+        case LEFT:
+            dx = -1;
+            break;
+        case RIGHT:
+            dx = 1;
+            break;
+        case TOP:
+            dy = 1;
+            break;
+        case TOP_LEFT:
+            dx = -diagonalPan;
+            dy = diagonalPan;
+            break;
+        case TOP_RIGHT:
+            dx = diagonalPan;
+            dy = diagonalPan;
+            break;
+        default:
+            break;
+        }
+        float ss = Constants.SCROLL_SPEED.asFloat();
+        viewport.getCamera().translate(dx * ss * dt, dy * ss * dt, 0.0f);
+        offX += dx * dt * ss;
+        offY += dy * dt * ss;
+        viewport.getCamera().update();
     }
 
     private void renderBG() {

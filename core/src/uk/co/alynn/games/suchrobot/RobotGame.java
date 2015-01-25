@@ -4,8 +4,9 @@ import java.util.Scanner;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 
 public class RobotGame extends ApplicationAdapter {
@@ -112,17 +113,32 @@ public class RobotGame extends ApplicationAdapter {
         Animation.update();
         int mx = Gdx.input.getX();
         int my = Gdx.input.getY();
-        ScreenEdge edge = ScreenEdge.NONE;
+        int px = 0, py = 0;
         int margin = Constants.SCREEN_EDGE_WIDTH.asInt();
         if (mx < margin) {
-            edge = ScreenEdge.LEFT;
+            px = -1;
         } else if (mx > (Gdx.graphics.getWidth() - margin)) {
-            edge = ScreenEdge.RIGHT;
-        } else if (my < margin) {
-            edge = ScreenEdge.TOP;
-        } else if (my > (Gdx.graphics.getHeight() - margin)) {
-            edge = ScreenEdge.BOTTOM;
+            px = 1;
         }
+        if (my < margin) {
+            py = 1;
+        } else if (my > (Gdx.graphics.getHeight() - margin)) {
+            py = -1;
+        }
+        if (Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP)) {
+            py += 1;
+        }
+        if (Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN)) {
+            py += -1;
+        }
+        if (Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT)) {
+            px += -1;
+        }
+        if (Gdx.input.isKeyPressed(Keys.D)
+                || Gdx.input.isKeyPressed(Keys.RIGHT)) {
+            px += 1;
+        }
+        ScreenEdge edge = ScreenEdge.getEdge(px, py);
         if (mode != null) {
             GameMode nextMode = mode.tick(edge);
             setMode(nextMode);
