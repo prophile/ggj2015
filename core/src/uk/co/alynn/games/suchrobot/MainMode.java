@@ -207,7 +207,7 @@ public class MainMode implements GameMode {
             Sprite drawnSprite = Sprite.ROBOT_IDLE;
             if (robot.sourceNode != robot.destNode) {
                 drawnSprite = Sprite.ROBOT_WALK;
-            } else if (robot.available()) {
+            } else if (robot.available() && robot.sourceNode.reserves != 0) {
                 switch (robot.sourceNode.type) {
                 case WELL:
                     drawnSprite = Sprite.ROBOT_EAT_WATER;
