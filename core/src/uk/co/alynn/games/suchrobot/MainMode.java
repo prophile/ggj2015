@@ -111,14 +111,19 @@ public class MainMode implements GameMode {
                 switch (visited.type) {
                 case WELL:
                     if (robot.available()
-                            && robot.accumulatedTimeAt > Constants.WELL_PUMP_TIME
-                                    .asFloat() && visited.reserves != 0) {
+                            && robot.gatheredFor(Constants.WELL_PUMP_TIME
+                                    .asFloat()) && visited.reserves != 0) {
                         robot.pickUp(CargoType.WATER);
                         if (visited.reserves > 0) {
                             visited.reserves -= 1;
                         }
                     }
                     break;
+                case SPAWNER:
+                    if (visited != robot.spawnNode) {
+                        break;
+                    }
+                    // fall-through
                 case BASE:
                     if (robot.offload(CargoType.WATER)) {
                         box.water += 1;
@@ -130,16 +135,16 @@ public class MainMode implements GameMode {
                     break;
                 case WRECKAGE:
                     if (robot.available()
-                            && robot.accumulatedTimeAt > Constants.SALVAGE_TIME
-                                    .asFloat() && visited.reserves != 0) {
+                            && robot.gatheredFor(Constants.SALVAGE_TIME
+                                    .asFloat()) && visited.reserves != 0) {
                         robot.pickUp(CargoType.SALVAGE);
                         visited.reserves -= 1;
                     }
                     break;
                 case MINE:
                     if (robot.available()
-                            && robot.accumulatedTimeAt > Constants.METAL_MINE_TIME
-                                    .asFloat() && visited.reserves != 0) {
+                            && robot.gatheredFor(Constants.METAL_MINE_TIME
+                                    .asFloat()) && visited.reserves != 0) {
                         robot.pickUp(CargoType.METAL);
                         if (visited.reserves > 0) {
                             visited.reserves -= 1;

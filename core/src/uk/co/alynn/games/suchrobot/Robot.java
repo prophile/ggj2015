@@ -124,4 +124,13 @@ public final class Robot {
             return sourceNode;
         return null;
     }
+
+    public boolean gatheredFor(float requiredTime) {
+        if (cls == RobotClass.PAUL) {
+            requiredTime /= Constants.L2_GATHER_FACTOR.asFloat();
+        } else if (cls == RobotClass.JOHN) {
+            requiredTime /= Constants.L3_GATHER_FACTOR.asFloat();
+        }
+        return accumulatedTimeAt > requiredTime;
+    }
 }
