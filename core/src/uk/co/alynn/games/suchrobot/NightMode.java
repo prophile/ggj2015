@@ -145,6 +145,10 @@ public class NightMode implements GameMode {
             robotex = robotOverlayTexture(box.robots[i], mo);
             batch.draw(robotex, centrePointX - robotex.getWidth() * 0.5f,
                     centrePointY - robotex.getHeight() * 0.5f);
+            Sprite rank = box.robots[i].pips;
+            if (rank != null) {
+                rank.draw(batch, centrePointX + 50f, centrePointY, 4.0f);
+            }
             if (purchasable) {
                 batch.draw(buy, centrePointX - buy.getWidth() * 0.5f,
                         centrePointY - buy.getHeight() * 0.5f);

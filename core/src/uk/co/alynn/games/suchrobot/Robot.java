@@ -78,6 +78,10 @@ public final class Robot {
         selectTarget(spawnNode);
     }
 
+    public Sprite rankSprite() {
+        return cls.pips;
+    }
+
     public void update(float dt) {
         if (at() == null) {
             accumulatedTimeAt = 0;
