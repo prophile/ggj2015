@@ -326,11 +326,18 @@ public class MainMode implements GameMode {
                     .asFloat();
             box.clearRobots();
             int robotIndex = 0;
-            PathNode home = nodes.lookup("home");
             for (Robot robot : robots) {
-                float distance = (float) Math.hypot(robot.x() - home.x,
-                        robot.y() - home.y);
-                if (distance <= ROBOT_SAFE_DISTANCE) {
+                boolean isSafe = false;
+                for (PathNode home : nodes) {
+                    if (home.type != NodeType.SPAWNER)
+                        continue;
+                    float distance = (float) Math.hypot(robot.x() - home.x,
+                            robot.y() - home.y);
+                    if (distance <= ROBOT_SAFE_DISTANCE) {
+                        isSafe = true;
+                    }
+                }
+                if (isSafe) {
                     box.robots[robotIndex] = robot.cls;
                     ++robotIndex;
                 }
