@@ -119,7 +119,10 @@ public final class Robot {
         }
         progress += increment;
         if (progress >= 1.0f && peril == 0.0f) {
-            if (destNode.type == NodeType.QUICKSAND && !quicksandImmune) {
+            if (destNode.type == NodeType.QUICKSAND
+                    && !quicksandImmune
+                    && MathUtils.randomBoolean(Constants.QUICKSAND_CHANCE
+                            .asFloat())) {
                 peril = 0.0001f;
                 perilDelta = 1.0f;
                 quicksandImmune = true;
