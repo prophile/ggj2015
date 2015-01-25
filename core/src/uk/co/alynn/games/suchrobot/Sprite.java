@@ -25,7 +25,10 @@ public enum Sprite {
             "NodesRough/MetalEmptyrough.png", 1, 0.1f, 425, 150), ICON_WATER(
             "UI/CarryIcons/Water.png", 1, 0.035f, 1417 / 2, 1276 / 2), ICON_METAL(
             "UI/CarryIcons/Metal.png", 1, 0.035f, 1417 / 2, 1276 / 2), ICON_SALVAGE(
-            "UI/CarryIcons/Salvage.png", 1, 0.035f, 1417 / 2, 1276 / 2);
+            "UI/CarryIcons/Salvage.png", 1, 0.035f, 1417 / 2, 1276 / 2), ICON_OFFSCREEN_FLAIL(
+            "UI/CarryIcons/QSpanic.png", 1, 0.035f, 1417 / 2, 1276 / 2), ICON_OFFSCREEN_IDLE(
+            "UI/CarryIcons/MarkerIDLE.png", 1, 0.035f, 1417 / 2, 1276 / 2), ICON_OFFSCREEN_WALK(
+            "UI/CarryIcons/MarkerWALK.png", 1, 0.035f, 1417 / 2, 1276 / 2);
 
     private String path;
     private float scale;

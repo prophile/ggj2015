@@ -299,6 +299,8 @@ public class MainMode implements GameMode {
         batch.setProjectionMatrix(proj);
         batch.begin();
 
+        renderOffscreenIndicators();
+
         BitmapFont fnt = Overlord.get().assetManager.get("bitstream.fnt",
                 BitmapFont.class);
         batch.setShader(Overlord.get().getFontShader());
@@ -377,6 +379,47 @@ public class MainMode implements GameMode {
             return new ResultsScreen(messages, nm);
         } else {
             return this;
+        }
+    }
+
+    private void renderOffscreenIndicators() {
+        final float MARKER_INSET = 10.0f;
+        final float W = WORLD_WIDTH / (THE_SCALE * 2);
+        final float W_ = W - MARKER_INSET;
+        final float H = WORLD_HEIGHT / (THE_SCALE * 2);
+        final float H_ = H - MARKER_INSET;
+        for (Robot robot : robots) {
+            float effectiveX = robot.x() - offX;
+            float effectiveY = robot.y() - offY;
+            if (effectiveX < W && effectiveX > -W && effectiveY < H
+                    && effectiveY > -H)
+                continue;
+            Sprite selectedSprite;
+            if (robot.peril > 0.0f) {
+                selectedSprite = Sprite.ICON_OFFSCREEN_FLAIL;
+            } else if (robot.sourceNode != robot.destNode) {
+                selectedSprite = Sprite.ICON_OFFSCREEN_WALK;
+            } else {
+                selectedSprite = Sprite.ICON_OFFSCREEN_IDLE;
+            }
+            if (effectiveX > W_) {
+                effectiveY *= (W_ / effectiveX);
+                effectiveX = W_;
+            }
+            if (effectiveY > H_) {
+                effectiveX *= (H_ / effectiveY);
+                effectiveY = H_;
+            }
+            if (effectiveY < -H_) {
+                effectiveX *= (-H_ / effectiveY);
+                effectiveY = -H_;
+            }
+            if (effectiveX < -W_) {
+                effectiveY *= (-W_ / effectiveX);
+                effectiveX = -W_;
+            }
+            selectedSprite.draw(batch, effectiveX * THE_SCALE, effectiveY
+                    * THE_SCALE, 1.6f);
         }
     }
 
