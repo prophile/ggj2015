@@ -27,7 +27,7 @@ public class TitleScreen extends ScreenMode {
     synchronized GameMode advance(int x, int y) {
         Box box = new Box();
         SFX.THUNK.play();
-        return new MainMode(box);
+        return new NightMode(box);
     }
 
 }

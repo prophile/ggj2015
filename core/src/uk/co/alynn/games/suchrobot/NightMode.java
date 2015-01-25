@@ -39,6 +39,7 @@ public class NightMode implements GameMode {
     @Override
     public GameMode tick(ScreenEdge screenEdge) {
         boolean nextSelected = mouseInND();
+        boolean buySelected = mouseInBuy();
 
         batch.setProjectionMatrix(viewport.getCamera().combined);
         Texture tex = Overlord.get().assetManager.get(
@@ -47,6 +48,8 @@ public class NightMode implements GameMode {
                 "UI/NightUIRough/NextDayUIMO.png", Texture.class);
         Texture texBase = Overlord.get().assetManager.get(
                 "UI/NightUIRough/Robotmenubase.png", Texture.class);
+        Texture buy = Overlord.get().assetManager.get(
+                "UI/NightUIRough/Addrobotbutton.png", Texture.class);
         batch.begin();
         batch.setShader(null);
         batch.draw(texBase, 0, 0, 1417, 1276);
@@ -55,6 +58,10 @@ public class NightMode implements GameMode {
         } else {
             batch.draw(tex, 0, 0, 1417, 1276);
         }
+        float buyScaleFactor = buySelected ? 1.2f : 0.95f;
+        batch.draw(buy, 708 - buy.getWidth() * 0.5f * buyScaleFactor,
+                480 - buy.getHeight() * 0.5f * buyScaleFactor, buy.getWidth()
+                        * buyScaleFactor, buy.getHeight() * buyScaleFactor);
         BitmapFont fnt = Overlord.get().assetManager.get("bitstream.fnt",
                 BitmapFont.class);
         batch.setShader(Overlord.get().getFontShader());
@@ -82,6 +89,24 @@ public class NightMode implements GameMode {
         return nextSelected;
     }
 
+    private boolean mouseInBuy() {
+        int rawMouseX = Gdx.input.getX();
+        int rawMouseY = Gdx.input.getY();
+        Vector2 pickedMousePosition = viewport.unproject(new Vector2(rawMouseX,
+                rawMouseY));
+        final float NEXT_LEFT_BOUND = 300;
+        final float NEXT_RIGHT_BOUND = 1100;
+        final float NEXT_BOTTOM_BOUND = 350;
+        final float NEXT_TOP_BOUND = 600;
+
+        float mx = pickedMousePosition.x;
+        float my = pickedMousePosition.y;
+
+        boolean nextSelected = (mx >= NEXT_LEFT_BOUND && mx <= NEXT_RIGHT_BOUND
+                && my >= NEXT_BOTTOM_BOUND && my <= NEXT_TOP_BOUND);
+        return nextSelected;
+    }
+
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height);
@@ -92,15 +117,19 @@ public class NightMode implements GameMode {
         if (mouseInND()) {
             update = true;
         }
+        if (mouseInBuy()) {
+            int robotCost = Constants.ROBOT_METAL_COST.asInt();
+            if (box.metal >= robotCost
+                    && box.robots < Constants.MAX_ROBOTS.asInt()) {
+                box.robots += 1;
+                box.metal -= robotCost;
+            }
+        }
     }
 
     @Override
     public void rightClick(int mouseX, int mouseY) {
-        int robotCost = Constants.ROBOT_METAL_COST.asInt();
-        if (box.metal >= robotCost && box.robots < Constants.MAX_ROBOTS.asInt()) {
-            box.robots += 1;
-            box.metal -= robotCost;
-        }
+        click(mouseX, mouseY);
     }
 
 }
