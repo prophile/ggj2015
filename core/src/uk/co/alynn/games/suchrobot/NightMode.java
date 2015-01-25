@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -37,12 +38,23 @@ public class NightMode implements GameMode {
 
     @Override
     public GameMode tick(ScreenEdge screenEdge) {
+        boolean nextSelected = mouseInND();
+
         batch.setProjectionMatrix(viewport.getCamera().combined);
         Texture tex = Overlord.get().assetManager.get(
                 "UI/NightUIRough/NextDayUI.png", Texture.class);
+        Texture texMO = Overlord.get().assetManager.get(
+                "UI/NightUIRough/NextDayUIMO.png", Texture.class);
+        Texture texBase = Overlord.get().assetManager.get(
+                "UI/NightUIRough/Robotmenubase.png", Texture.class);
         batch.begin();
         batch.setShader(null);
-        batch.draw(tex, 0, 0, 1417, 1276);
+        batch.draw(texBase, 0, 0, 1417, 1276);
+        if (nextSelected) {
+            batch.draw(texMO, 0, 0, 1417, 1276);
+        } else {
+            batch.draw(tex, 0, 0, 1417, 1276);
+        }
         BitmapFont fnt = Overlord.get().assetManager.get("bitstream.fnt",
                 BitmapFont.class);
         batch.setShader(Overlord.get().getFontShader());
@@ -52,6 +64,24 @@ public class NightMode implements GameMode {
         return update ? new MainMode(box) : this;
     }
 
+    private boolean mouseInND() {
+        int rawMouseX = Gdx.input.getX();
+        int rawMouseY = Gdx.input.getY();
+        Vector2 pickedMousePosition = viewport.unproject(new Vector2(rawMouseX,
+                rawMouseY));
+        final float NEXT_LEFT_BOUND = 880;
+        final float NEXT_RIGHT_BOUND = 1120;
+        final float NEXT_BOTTOM_BOUND = 100;
+        final float NEXT_TOP_BOUND = 250;
+
+        float mx = pickedMousePosition.x;
+        float my = pickedMousePosition.y;
+
+        boolean nextSelected = (mx >= NEXT_LEFT_BOUND && mx <= NEXT_RIGHT_BOUND
+                && my >= NEXT_BOTTOM_BOUND && my <= NEXT_TOP_BOUND);
+        return nextSelected;
+    }
+
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height);
@@ -59,7 +89,9 @@ public class NightMode implements GameMode {
 
     @Override
     public void click(int mouseX, int mouseY) {
-        update = true;
+        if (mouseInND()) {
+            update = true;
+        }
     }
 
     @Override

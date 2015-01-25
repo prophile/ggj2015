@@ -54,6 +54,12 @@ public final class Overlord {
         mgr.load("Layout/Rough/Decorativemountains.png", Texture.class, param);
         mgr.load("Layout/Rough/Sky.png", Texture.class, param);
         mgr.load("UI/NightUIRough/NextDayUI.png", Texture.class, param);
+        mgr.load("UI/NightUIRough/NextDayUIMO.png", Texture.class, param);
+        mgr.load("UI/NightUIRough/Addrobotbutton.png", Texture.class, param);
+        mgr.load("UI/NightUIRough/Inactive robot.png", Texture.class, param);
+        mgr.load("UI/NightUIRough/Robotmenubase.png", Texture.class, param);
+        mgr.load("UI/NightUIRough/Level up button.png", Texture.class, param);
+        mgr.load("UI/NightUIRough/Inactive robotMO.png", Texture.class, param);
         mgr.load("UI/GameOver.png", Texture.class, param);
         mgr.load("UI/Victory.png", Texture.class, param);
         mgr.load("UI/Titles.png", Texture.class, param);
