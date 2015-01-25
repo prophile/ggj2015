@@ -375,16 +375,26 @@ public class MainMode implements GameMode {
                 results.add("The robots proved their worth");
                 results.add("I managed to make the repairs");
                 results.add("Finally I can escape!");
-                results.add("You Escaped! – Click to play again");
+                results.add("You Escaped!");
                 SFX.WIN.play();
                 return new ResultsScreen(results, null);
             }
             if (box.isLoss()) {
                 ArrayList<String> results = new ArrayList<String>();
-                results.add("Without water I was too weak to fight");
-                results.add("They came in the night to take me away");
-                results.add("I’ll never see my planet again…");
-                results.add("Game over – Click to try again");
+                if (box.water <= 0) {
+                    results.add("Without water I was too weak to fight");
+                    results.add("They came in the night to take me away");
+                    results.add("I’ll never see my planet again...");
+                } else if (box.activeRobots() <= 0) {
+                    results.add("The robots are gone");
+                    results.add("With no scrap to build more, I'm done for");
+                    results.add("I’ll never see my planet again...");
+                } else {
+                    results.add("I took too long, they found me");
+                    results.add("Flashing lights and black suits");
+                    results.add("I’ll never see my planet again...");
+                }
+                results.add("Game over");
                 SFX.LOSE.play();
                 return new ResultsScreen(results, null);
             }
