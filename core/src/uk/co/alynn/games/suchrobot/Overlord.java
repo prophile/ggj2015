@@ -67,8 +67,6 @@ public final class Overlord {
         mgr.load("UI/NightUIRough/RoboMOlvl2.png", Texture.class, param);
         mgr.load("UI/NightUIRough/RoboMOlvl3.png", Texture.class, param);
         mgr.load("UI/NightUIRough/Level up button.png", Texture.class, param);
-        mgr.load("UI/GameOver.png", Texture.class, param);
-        mgr.load("UI/Victory.png", Texture.class, param);
         mgr.load("UI/Titles.png", Texture.class, param);
     }
 

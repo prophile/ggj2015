@@ -303,10 +303,16 @@ public class MainMode implements GameMode {
                 }
             }
 
-            if (box.isWin())
-                return new VictoryMode();
-            if (box.isLoss())
-                return new GameOverMode();
+            if (box.isWin()) {
+                ArrayList<String> results = new ArrayList<String>();
+                results.add("win");
+                return new ResultsScreen(results, null);
+            }
+            if (box.isLoss()) {
+                ArrayList<String> results = new ArrayList<String>();
+                results.add("lose");
+                return new ResultsScreen(results, null);
+            }
 
             NightMode nm = new NightMode(box);
             List<String> messages = new ArrayList<String>();

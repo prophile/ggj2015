@@ -66,7 +66,7 @@ public class ResultsScreen implements GameMode {
         }
         fnt.setColor(Color.WHITE);
         float endTargetTime = i * (PAUSE_TIME + FADE_TIME) + END_TIME;
-        if (time > endTargetTime)
+        if (time > endTargetTime && next != null)
             return next;
         time += Gdx.graphics.getDeltaTime();
         return this;
