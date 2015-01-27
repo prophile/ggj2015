@@ -29,6 +29,8 @@ public class LoadingScreen implements GameMode {
         AssetManager mgr = Overlord.get().assetManager;
         boolean complete = mgr.update(50);
         if (complete) {
+            String diagnostics = mgr.getDiagnostics();
+            System.out.println(diagnostics);
             return new TitleScreen();
         }
         renderer.setProjectionMatrix(port.getCamera().combined);
