@@ -56,19 +56,10 @@ public class NodeSet implements Iterable<PathNode> {
     }
 
     public void compile() {
-        System.err.println("computing routing tables");
         nextHops = new HashMap<RoutingKey, PathNode>();
         for (PathNode node : this) {
-            System.err.println("- " + node);
             runDijkstra(node);
         }
-        System.err.println("-- RT DATABASE --");
-        System.err.println("src\tdst\tnext");
-        for (Map.Entry<RoutingKey, PathNode> entry : nextHops.entrySet()) {
-            System.err.println(entry.getKey().sourceNode + "\t"
-                    + entry.getKey().destNode + "\t" + entry.getValue().name);
-        }
-        System.err.println("--");
     }
 
     private static float getOrDefault(Map<String, Float> map, String key,
@@ -90,13 +81,10 @@ public class NodeSet implements Iterable<PathNode> {
         distances.put(node.name, 0.0f);
         PathNode currentNode = node;
         while (true) {
-            System.err.println("\texploring node " + currentNode.name);
             float currentDistance = getOrDefault(distances, currentNode.name,
                     Float.POSITIVE_INFINITY);
             for (PathNode neighbour : connectionsFrom(currentNode)) {
                 if (!(unvisited.contains(neighbour.name))) {
-                    System.err.println("\tskipping " + neighbour.name
-                            + " since it has been visited");
                     continue;
                 }
                 float baseDistance = (float) Math.hypot(neighbour.x
@@ -107,12 +95,6 @@ public class NodeSet implements Iterable<PathNode> {
                 if (tentative < assignedDist) {
                     distances.put(neighbour.name, tentative);
                     predecessors.put(neighbour.name, currentNode.name);
-                    System.err.println("\tnew best path for " + neighbour.name
-                            + " discovered: via " + currentNode.name);
-                } else {
-                    System.err.println("\tnew path to " + neighbour.name
-                            + " discovered but suboptimal: " + tentative
-                            + " rather than " + assignedDist);
                 }
             }
             unvisited.remove(currentNode.name);
@@ -131,23 +113,18 @@ public class NodeSet implements Iterable<PathNode> {
             currentNode = lookup(bestOption);
         }
 
-        for (Map.Entry<String, String> pred : predecessors.entrySet()) {
-            System.err.println("PRED TABLE " + pred.getValue() + " -> "
-                    + pred.getKey());
-        }
-
         for (PathNode targetNode : this) {
             RoutingKey key = new RoutingKey(node.name, targetNode.name);
             if (targetNode == node) {
                 nextHops.put(key, targetNode);
                 continue;
             }
-            System.err.println("\tbacktracking from " + targetNode.name);
             String last = targetNode.name;
             while (true) {
                 String backtrack = predecessors.get(last);
                 if (backtrack == null) {
                     // bifurcated network, mark as stay in place
+                    System.err.println("WARNING: bifurcated graph");
                     nextHops.put(key, lookup(key.sourceNode));
                     break;
                 }
