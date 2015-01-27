@@ -1,5 +1,6 @@
 package uk.co.alynn.games.suchrobot;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 import com.badlogic.gdx.ApplicationAdapter;
@@ -36,7 +37,7 @@ public class RobotGame extends ApplicationAdapter {
             handle = Gdx.files.internal("constants.txt");
         }
         Scanner scn = new Scanner(handle.read());
-        Constants.loadConstants(scn);
+        Constants.loadConstants(scn.useLocale(Locale.UK));
         scn.close();
     }
 

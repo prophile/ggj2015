@@ -20,20 +20,20 @@ public abstract class NodeSetReader {
         NodeSet nodes = new NodeSet();
 
         Scanner scan = new Scanner(rdr);
-        scan.useLocale(Locale.UK);
+        Scanner globalScan = scan.useLocale(Locale.UK);
 
         while (scan.hasNext()) {
-            String command = scan.next();
+            String command = globalScan.next();
             if (command.equals("node")) {
-                String type = scan.next();
-                String name = scan.next();
-                int x = scan.nextInt();
-                int y = scan.nextInt();
-                int reserves = scan.nextInt();
+                String type = globalScan.next();
+                String name = globalScan.next();
+                int x = globalScan.nextInt();
+                int y = globalScan.nextInt();
+                int reserves = globalScan.nextInt();
                 nodes.addNode(type, name, x, y, reserves);
             } else if (command.equals("conn")) {
-                String source = scan.next();
-                String dest = scan.next();
+                String source = globalScan.next();
+                String dest = globalScan.next();
                 nodes.addConnection(source, dest);
             }
         }
