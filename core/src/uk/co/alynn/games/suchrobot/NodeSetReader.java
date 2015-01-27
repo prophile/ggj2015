@@ -2,6 +2,7 @@ package uk.co.alynn.games.suchrobot;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Locale;
 import java.util.Scanner;
 
 import com.badlogic.gdx.Gdx;
@@ -19,6 +20,7 @@ public abstract class NodeSetReader {
         NodeSet nodes = new NodeSet();
 
         Scanner scan = new Scanner(rdr);
+        scan.useLocale(Locale.UK);
 
         while (scan.hasNext()) {
             String command = scan.next();
