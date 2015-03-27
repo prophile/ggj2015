@@ -422,9 +422,6 @@ public class MainMode implements GameMode {
                 messages.add("Picked up " + (box.metal - initialBox.metal)
                         + " metal.");
             }
-            if (box.metal > 0) {
-                messages.add(box.metal + " metal now.");
-            }
             messages.add((10 - box.salvage) + " pieces of ship left to get.");
             if (box.water <= 1) {
                 messages.add("Water is running very low.");
