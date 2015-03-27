@@ -44,6 +44,7 @@ public enum Sprite {
         this.scale = scale;
         this.anchorX = anchorX;
         this.anchorY = anchorY;
+        System.out.printf("%s,%s,%d,%f,%d,%d\n", name(), path, frameCount, scale, anchorX, anchorY);
     }
 
     public void queueLoad() {
