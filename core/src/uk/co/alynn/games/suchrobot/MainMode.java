@@ -21,6 +21,7 @@ public class MainMode implements GameMode {
     public static final float WORLD_WIDTH = 1024.0f;
     public static final float WORLD_HEIGHT = 640.0f;
     private SpriteBatch batch = null;
+    private ShapeRenderer sr = null;
     private Viewport viewport = null;
     private static NodeSet nodes = null;
     private List<Robot> robots = new ArrayList<Robot>();
@@ -32,6 +33,8 @@ public class MainMode implements GameMode {
     private final Box initialBox;
 
     private float offX, offY;
+
+    private final Matrix4 overlayProjection = new Matrix4();
 
     public static void init() {
         try {
@@ -51,6 +54,7 @@ public class MainMode implements GameMode {
         viewport = new FitViewport(WORLD_WIDTH / THE_SCALE, WORLD_HEIGHT
                 / THE_SCALE);
         batch = new SpriteBatch();
+        sr = new ShapeRenderer();
 
         viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
@@ -84,6 +88,8 @@ public class MainMode implements GameMode {
         batch.dispose();
     }
 
+    static final Matrix4 IDENTITY_MATRIX = new Matrix4();
+
     @Override
     public GameMode tick(ScreenEdge screenEdge) {
         final float CURVE_A = 10.0f, CURVE_B = 8.0f, CURVE_C = 7.0f;
@@ -91,7 +97,7 @@ public class MainMode implements GameMode {
 
         pan(screenEdge, dt);
 
-        batch.setProjectionMatrix(new Matrix4());
+        batch.setProjectionMatrix(IDENTITY_MATRIX);
         renderBG();
         batch.setProjectionMatrix(viewport.getCamera().combined);
 
@@ -104,7 +110,6 @@ public class MainMode implements GameMode {
                 worldPlaneWidth, worldPlaneHeight);
         batch.end();
 
-        ShapeRenderer sr = new ShapeRenderer();
         sr.setProjectionMatrix(viewport.getCamera().combined);
 
         for (Robot robot : robots) {
@@ -312,8 +317,9 @@ public class MainMode implements GameMode {
         batch.draw(fplane, -worldPlaneWidth / 2, -worldPlaneHeight / 2,
                 worldPlaneWidth, worldPlaneHeight);
 
-        Matrix4 proj = new Matrix4(batch.getProjectionMatrix());
-        batch.setProjectionMatrix(new Matrix4());
+        Matrix4 proj = overlayProjection;
+        proj.set(batch.getProjectionMatrix());
+        batch.setProjectionMatrix(IDENTITY_MATRIX);
         renderFG();
         batch.end();
 
@@ -571,11 +577,15 @@ public class MainMode implements GameMode {
         viewport.update(width, height);
     }
 
+    private final Vector2 rcUnproject = new Vector2();
+
     @Override
     public void rightClick(int mouseX, int mouseY) {
         if (selectedRobot == null)
             return;
-        Vector2 worldCoords = viewport.unproject(new Vector2(mouseX, mouseY));
+        rcUnproject.x = mouseX;
+        rcUnproject.y = mouseY;
+        Vector2 worldCoords = viewport.unproject(rcUnproject);
 
         PathNode nearestNode = null;
         float nearestDist = Float.POSITIVE_INFINITY;
@@ -593,7 +603,9 @@ public class MainMode implements GameMode {
 
     @Override
     public void click(int mouseX, int mouseY) {
-        Vector2 worldCoords = viewport.unproject(new Vector2(mouseX, mouseY));
+        rcUnproject.x = mouseX;
+        rcUnproject.y = mouseY;
+        Vector2 worldCoords = viewport.unproject(rcUnproject);
 
         final float ROBOT_SELECT_DISTANCE = 70.0f;
 
