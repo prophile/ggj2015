@@ -12,7 +12,7 @@ public class DesktopLauncher {
         config.width = 1024;
         config.height = 640;
 
-        config.title = "Robot Game";
+        config.title = "Salvage";
         config.vSyncEnabled = true;
         config.resizable = true;
 
