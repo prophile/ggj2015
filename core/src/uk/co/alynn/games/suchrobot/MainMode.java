@@ -530,10 +530,23 @@ public class MainMode implements GameMode {
         default:
             break;
         }
+        final float limitX = Constants.PAN_LIMIT_X.asFloat();
+        final float limitY = Constants.PAN_LIMIT_Y.asFloat();
+
+        if (offX < -limitX && dx < 0)
+            dx = 0;
+        if (offX > limitX && dx > 0)
+            dx = 0;
+        if (offY < -limitY && dy < 0)
+            dy = 0;
+        if (offY > limitY && dy > 0)
+            dy = 0;
+
         float ss = Constants.SCROLL_SPEED.asFloat();
         viewport.getCamera().translate(dx * ss * dt, dy * ss * dt, 0.0f);
         offX += dx * dt * ss;
         offY += dy * dt * ss;
+
         viewport.getCamera().update();
     }
 
