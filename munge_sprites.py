@@ -34,7 +34,7 @@ with open('sprites.txt', 'r') as csvfile:
                 dst_file = sprite(target_path, frm)
                 command = ('convert', src_file, '-resize', '{0:.3f}%'.format(process_scale * 100), tf_name)
                 subprocess.check_call(command)
-                command = ('pngcrush', tf_name, '-new', dst_file)
+                command = ('pngcrush', '-new', tf_name, dst_file)
                 subprocess.check_call(command)
                 command = ('git', 'rm', src_file)
                 subprocess.check_call(command)

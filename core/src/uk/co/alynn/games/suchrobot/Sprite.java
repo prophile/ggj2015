@@ -7,30 +7,30 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public enum Sprite {
-    ROBOT_DEBUG("robot.png", 1, 1.0f, 16, 16),
-    NODE_DEBUG("node.png", 1, 1.0f, 16, 16),
-    ROBOT_IDLE("Animations/RoboidleAlpha/RoboIdle/RoboIdle_00001_%.png", 24, 0.1f, 512, 380),
-    ROBOT_WALK("Animations/Robowalk/RoboWalk_%.png", 24, 0.1f, 512, 380),
-    ROBOT_EAT_DIRT("Animations/RobColDirt/RobColDirt_%.png", 24, 0.1f, 512, 380),
-    ROBOT_EAT_WATER("Animations/RobColWat/RobColWat_%.png", 24, 0.1f, 512, 380),
-    ROBOT_FLAIL_START("Animations/Robosink/Robosink_%.png", 24, 0.1f, 512, 380),
-    ROBOT_FLAIL("Animations/Robopanic/RoboPanic_%.png", 24, 0.1f, 512, 380),
-    ROBOT_FLAIL_END("Animations/RoboESC/RoboESC_%.png", 24, 0.1f, 512, 380),
-    NODE_MINE("NodesRough/MetalRough.png", 1, 0.1f, 425, 150),
-    NODE_SALVAGE("NodesRough/SalvageRough.png", 1, 0.1f, 500, 354),
-    NODE_SHIP("NodesRough/ShipRought.png", 1, 0.1f, 710, 522),
-    NODE_WELL("NodesRough/WellRough.png", 1, 0.1f, 441, 120),
-    NODE_WELL_DEPLETED("NodesRough/WellBrokenRough.png", 1, 0.1f, 441, 120),
-    NODE_MINE_DEPLETED("NodesRough/MetalEmptyrough.png", 1, 0.1f, 425, 150),
-    ICON_WATER("UI/CarryIcons/Water.png", 1, 0.035f, 1417 / 2, 1276 / 2),
-    ICON_METAL("UI/CarryIcons/Metal.png", 1, 0.035f, 1417 / 2, 1276 / 2),
-    ICON_SALVAGE("UI/CarryIcons/Salvage.png", 1, 0.035f, 1417 / 2, 1276 / 2),
-    ICON_OFFSCREEN_FLAIL("UI/CarryIcons/QSpanic.png", 1, 0.035f, 1417 / 2, 1276 / 2),
-    ICON_OFFSCREEN_IDLE("UI/CarryIcons/MarkerIDLE.png", 1, 0.035f, 1417 / 2, 1276 / 2),
-    ICON_OFFSCREEN_WALK("UI/CarryIcons/MarkerWALK.png", 1, 0.035f, 1417 / 2, 1276 / 2),
-    CHEVRONS_L1("UI/LvlUP/Chevron1.png", 1, 0.02f, 1417 / 2, 400),
-    CHEVRONS_L2("UI/LvlUP/Chevron2.png", 1, 0.02f, 1417 / 2, 400),
-    CHEVRONS_L3("UI/LvlUP/Chevron3.png", 1, 0.02f, 1417 / 2, 400);
+    ROBOT_DEBUG("robot-debug.png", 1, 1.0f, 16, 16),
+    NODE_DEBUG("node-debug.png", 1, 1.0f, 16, 16),
+    ROBOT_IDLE("animations-robot-idle-%.png", 24, 0.5f, 102, 76),
+    ROBOT_WALK("animations-robot-walk-%.png", 24, 0.5f, 102, 76),
+    ROBOT_EAT_DIRT("animations-robot-eat-dirt-%.png", 24, 0.5f, 102, 76),
+    ROBOT_EAT_WATER("animations-robot-eat-water-%.png", 24, 0.5f, 102, 76),
+    ROBOT_FLAIL_START("animations-robot-flail-start-%.png", 24, 0.5f, 102, 76),
+    ROBOT_FLAIL("animations-robot-flail-%.png", 24, 0.5f, 102, 76),
+    ROBOT_FLAIL_END("animations-robot-flail-end-%.png", 24, 0.5f, 102, 76),
+    NODE_MINE("nodesrough-node-mine.png", 1, 0.5f, 85, 30),
+    NODE_SALVAGE("nodesrough-node-salvage.png", 1, 0.5f, 100, 70),
+    NODE_SHIP("nodesrough-node-ship.png", 1, 0.5f, 142, 104),
+    NODE_WELL("nodesrough-node-well.png", 1, 0.5f, 88, 24),
+    NODE_WELL_DEPLETED("nodesrough-node-well-depleted.png", 1, 0.5f, 88, 24),
+    NODE_MINE_DEPLETED("nodesrough-node-mine-depleted.png", 1, 0.5f, 85, 30),
+    ICON_WATER("ui-icon-water.png", 1, 0.5f, 49, 44),
+    ICON_METAL("ui-icon-metal.png", 1, 0.5f, 49, 44),
+    ICON_SALVAGE("ui-icon-salvage.png", 1, 0.5f, 49, 44),
+    ICON_OFFSCREEN_FLAIL("ui-icon-offscreen-flail.png", 1, 0.5f, 49, 44),
+    ICON_OFFSCREEN_IDLE("ui-icon-offscreen-idle.png", 1, 0.5f, 49, 44),
+    ICON_OFFSCREEN_WALK("ui-icon-offscreen-walk.png", 1, 0.5f, 49, 44),
+    CHEVRONS_L1("ui-chevrons-l1.png", 1, 0.5f, 28, 16),
+    CHEVRONS_L2("ui-chevrons-l2.png", 1, 0.5f, 28, 16),
+    CHEVRONS_L3("ui-chevrons-l3.png", 1, 0.5f, 28, 16);
 
     private String path;
     private float scale;
@@ -44,7 +44,6 @@ public enum Sprite {
         this.scale = scale;
         this.anchorX = anchorX;
         this.anchorY = anchorY;
-        System.out.printf("%s,%s,%d,%f,%d,%d\n", name(), path, frameCount, scale, anchorX, anchorY);
     }
 
     public void queueLoad() {
