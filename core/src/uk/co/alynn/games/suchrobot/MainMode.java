@@ -413,7 +413,7 @@ public class MainMode implements GameMode {
             }
             if (initialBox.salvage < box.salvage) {
                 if (initialBox.salvage == 0) {
-                    messages.add("Picked up the first parts of the ship today.");
+                    messages.add("Started the salvage today.");
                 } else {
                     messages.add("Salvaged more parts from the ship.");
                 }
