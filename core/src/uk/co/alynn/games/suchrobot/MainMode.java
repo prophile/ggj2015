@@ -173,15 +173,6 @@ public class MainMode implements GameMode {
                 SFX.ENGINES.loop();
             }
         }
-        sr.begin(ShapeType.Line);
-        sr.setColor(Color.YELLOW);
-        if (selectedRobot != null) {
-            sr.curve(selectedRobot.x() - CURVE_A, selectedRobot.y(),
-                    selectedRobot.x() - CURVE_B, selectedRobot.y() + CURVE_C,
-                    selectedRobot.x() + CURVE_B, selectedRobot.y() + CURVE_C,
-                    selectedRobot.x() + CURVE_A, selectedRobot.y(), 32);
-        }
-        sr.end();
 
         batch.begin();
         for (PathNode node : nodes) {
@@ -218,6 +209,19 @@ public class MainMode implements GameMode {
                 spr.draw(batch, node.x, node.y);
             }
         }
+        batch.end();
+
+        sr.begin(ShapeType.Line);
+        sr.setColor(Color.YELLOW);
+        if (selectedRobot != null) {
+            sr.curve(selectedRobot.x() - CURVE_A, selectedRobot.y(),
+                    selectedRobot.x() - CURVE_B, selectedRobot.y() + CURVE_C,
+                    selectedRobot.x() + CURVE_B, selectedRobot.y() + CURVE_C,
+                    selectedRobot.x() + CURVE_A, selectedRobot.y(), 32);
+        }
+        sr.end();
+
+        batch.begin();
         for (Robot robot : robots) {
             Sprite drawnSprite = Sprite.ROBOT_IDLE;
             if (robot.peril > 0.0f) {
