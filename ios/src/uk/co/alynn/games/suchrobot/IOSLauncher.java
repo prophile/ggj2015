@@ -12,8 +12,8 @@ public class IOSLauncher extends IOSApplication.Delegate {
         IOSApplicationConfiguration config = new IOSApplicationConfiguration();
         config.useCompass = false;
         config.useAccelerometer = false;
-        config.orientationLandscape = false;
-        config.orientationPortrait = true;
+        config.orientationLandscape = true;
+        config.orientationPortrait = false;
         config.preventScreenDimming = true;
 
         return new IOSApplication(new RobotGame(), config);
