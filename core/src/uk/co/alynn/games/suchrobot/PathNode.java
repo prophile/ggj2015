@@ -7,12 +7,16 @@ public final class PathNode {
     public final float y;
     public int reserves;
 
+    public int id;
+
     public PathNode(NodeType nodeType, String nodeName, float nodeX, float nodeY) {
         type = nodeType;
         name = nodeName;
         x = nodeX;
         y = nodeY;
         reserves = 3;
+
+        id = -1;
     }
 
     @Override

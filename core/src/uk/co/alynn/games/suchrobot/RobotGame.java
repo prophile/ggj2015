@@ -28,7 +28,7 @@ public class RobotGame extends ApplicationAdapter {
         }
     }
 
-    private void loadConstants() {
+    private static void loadConstants() {
         // load constants file
         FileHandle handle = Gdx.files.external("constants.txt");
         if (handle.exists()) {

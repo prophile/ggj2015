@@ -39,23 +39,15 @@ public class NightMode implements GameMode {
         batch.dispose();
     }
 
-    private Texture robotOverlayTexture(RobotClass cls, boolean mouseOver) {
-        Texture noRobbie = Overlord.get().assetManager.get(
-                "UI/NightUIRough/Inactive robot.png", Texture.class);
-        Texture robbieL1 = Overlord.get().assetManager.get(
-                "UI/NightUIRough/RoboBGlvl1.png", Texture.class);
-        Texture noRobbieMO = Overlord.get().assetManager.get(
-                "UI/NightUIRough/Inactive robotMO.png", Texture.class);
-        Texture robbieL1MO = Overlord.get().assetManager.get(
-                "UI/NightUIRough/RoboMOlvl1.png", Texture.class);
-        Texture robbieL2 = Overlord.get().assetManager.get(
-                "UI/NightUIRough/RoboBGlvl2.png", Texture.class);
-        Texture robbieL2MO = Overlord.get().assetManager.get(
-                "UI/NightUIRough/RoboMOlvl2.png", Texture.class);
-        Texture robbieL3 = Overlord.get().assetManager.get(
-                "UI/NightUIRough/RoboBGlvl3.png", Texture.class);
-        Texture robbieL3MO = Overlord.get().assetManager.get(
-                "UI/NightUIRough/RoboMOlvl3.png", Texture.class);
+    private static Texture robotOverlayTexture(RobotClass cls, boolean mouseOver) {
+        Texture noRobbie = Overlord.get().assetManager.get("UI/NightUIRough/Inactive robot.png", Texture.class);
+        Texture robbieL1 = Overlord.get().assetManager.get("UI/NightUIRough/RoboBGlvl1.png", Texture.class);
+        Texture noRobbieMO = Overlord.get().assetManager.get("UI/NightUIRough/Inactive robotMO.png", Texture.class);
+        Texture robbieL1MO = Overlord.get().assetManager.get("UI/NightUIRough/RoboMOlvl1.png", Texture.class);
+        Texture robbieL2 = Overlord.get().assetManager.get("UI/NightUIRough/RoboBGlvl2.png", Texture.class);
+        Texture robbieL2MO = Overlord.get().assetManager.get("UI/NightUIRough/RoboMOlvl2.png", Texture.class);
+        Texture robbieL3 = Overlord.get().assetManager.get("UI/NightUIRough/RoboBGlvl3.png", Texture.class);
+        Texture robbieL3MO = Overlord.get().assetManager.get("UI/NightUIRough/RoboMOlvl3.png", Texture.class);
         switch (cls) {
         case GEORGE:
             return mouseOver ? robbieL1MO : robbieL1;
@@ -77,16 +69,11 @@ public class NightMode implements GameMode {
         boolean nextSelected = mouseInND();
 
         batch.setProjectionMatrix(viewport.getCamera().combined);
-        Texture tex = Overlord.get().assetManager.get(
-                "UI/NightUIRough/NextDayUI.png", Texture.class);
-        Texture texMO = Overlord.get().assetManager.get(
-                "UI/NightUIRough/NextDayUIMO.png", Texture.class);
-        Texture texBase = Overlord.get().assetManager.get(
-                "UI/NightUIRough/Robotmenubase.png", Texture.class);
-        Texture buy = Overlord.get().assetManager.get(
-                "UI/NightUIRough/Addrobotbutton.png", Texture.class);
-        Texture robbieL1 = Overlord.get().assetManager.get(
-                "UI/NightUIRough/RoboBGlvl1.png", Texture.class);
+        Texture tex = Overlord.get().assetManager.get("UI/NightUIRough/NextDayUI.png", Texture.class);
+        Texture texMO = Overlord.get().assetManager.get("UI/NightUIRough/NextDayUIMO.png", Texture.class);
+        Texture texBase = Overlord.get().assetManager.get("UI/NightUIRough/Robotmenubase.png", Texture.class);
+        Texture buy = Overlord.get().assetManager.get("UI/NightUIRough/Addrobotbutton.png", Texture.class);
+        Texture robbieL1 = Overlord.get().assetManager.get("UI/NightUIRough/RoboBGlvl1.png", Texture.class);
         batch.begin();
         batch.setShader(null);
         batch.draw(texBase, 0, 0, 1417, 1276);
@@ -149,21 +136,21 @@ public class NightMode implements GameMode {
             }
             robotex = robotOverlayTexture(box.robots[i], mo);
             batch.draw(robotex, centrePointX - robotex.getWidth() * 0.5f,
-                    centrePointY - robotex.getHeight() * 0.5f);
+                       centrePointY - robotex.getHeight() * 0.5f);
             Sprite rank = box.robots[i].pips;
             if (rank != null) {
                 rank.draw(batch, centrePointX + 50f, centrePointY, 4.0f);
             }
             if (purchasable) {
                 batch.draw(buy, centrePointX - buy.getWidth() * 0.5f,
-                        centrePointY - buy.getHeight() * 0.5f);
+                           centrePointY - buy.getHeight() * 0.5f);
                 anyPurchasesPresented = true;
             }
         }
         box.displayInfo(batch, 1030, 810, 2.0f, true);
 
         BitmapFont fnt = Overlord.get().assetManager.get("bitstream.fnt",
-                BitmapFont.class);
+                                                         BitmapFont.class);
 
         batch.setShader(Overlord.get().getFontShader());
         if (robotCost > 0) {
@@ -175,7 +162,7 @@ public class NightMode implements GameMode {
             TextBounds bounds = fnt.getMultiLineBounds(str);
             fnt.setColor(Color.BLACK);
             fnt.drawMultiLine(batch, str, (1417 / 2) - bounds.width * 0.5f,
-                    480 + (bounds.height / 2));
+                              480 + (bounds.height / 2));
             fnt.setColor(Color.WHITE);
         }
         batch.setShader(null);
@@ -190,7 +177,7 @@ public class NightMode implements GameMode {
         int rawMouseX = Gdx.input.getX();
         int rawMouseY = Gdx.input.getY();
         Vector2 pickedMousePosition = viewport.unproject(new Vector2(rawMouseX,
-                rawMouseY));
+                                                                     rawMouseY));
         float mx = pickedMousePosition.x;
         float my = pickedMousePosition.y;
 

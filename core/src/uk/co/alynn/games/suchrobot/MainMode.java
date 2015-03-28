@@ -28,6 +28,8 @@ public class MainMode implements GameMode {
     private Robot selectedRobot = null;
     private double dayCounter;
 
+    private String dayText;
+
     private final boolean DEBUG = Constants.DEBUG_NODES.asBoolean();
     private final Box box;
     private final Box initialBox;
@@ -79,6 +81,8 @@ public class MainMode implements GameMode {
         }
 
         dayCounter = 0;
+
+        dayText = "Day " + box.day;
 
         SFX.MUSIC.play();
     }
@@ -171,6 +175,7 @@ public class MainMode implements GameMode {
                     if (robot.peril > 0.0f) {
                         SFX.QUICKSAND.loop();
                     }
+                    break;
                 default:
                     break;
                 }
@@ -340,7 +345,7 @@ public class MainMode implements GameMode {
                                                          BitmapFont.class);
         batch.setShader(Overlord.get().getFontShader());
         fnt.setColor(INFOCOL);
-        fnt.drawMultiLine(batch, "Day: " + box.day, -(1024 / 2) + 10,
+        fnt.drawMultiLine(batch, dayText, -(1024 / 2) + 10,
                           (640 / 2) - 10);
         fnt.setColor(Color.WHITE);
         batch.setShader(null);

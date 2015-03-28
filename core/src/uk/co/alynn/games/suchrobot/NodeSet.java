@@ -37,7 +37,8 @@ public class NodeSet implements Iterable<PathNode> {
 
     private List<PathNode> nodes = new ArrayList<PathNode>();
     private Map<String, List<PathNode>> directConnections = new HashMap<String, List<PathNode>>();
-    private Map<RoutingKey, PathNode> nextHops = null;
+
+    private int[] routingTable = null;
 
     public NodeSet() {
 
@@ -56,9 +57,28 @@ public class NodeSet implements Iterable<PathNode> {
     }
 
     public void compile() {
-        nextHops = new HashMap<RoutingKey, PathNode>();
+        Map<RoutingKey, PathNode> nextHops = new HashMap<RoutingKey, PathNode>();
         for (PathNode node : this) {
-            runDijkstra(node);
+            runDijkstra(nextHops, node);
+        }
+        generateRoutingTable(nextHops);
+    }
+
+    private void generateRoutingTable(Map<RoutingKey, PathNode> nextHops) {
+        int numNodes = nodes.size();
+        for (int i = 0; i < numNodes; ++i) {
+            nodes.get(i).id = i;
+        }
+        routingTable = new int[numNodes * numNodes];
+        for (int src = 0; src < numNodes; ++src) {
+            String sourceName = nodes.get(src).name;
+            for (int dst = 0; dst < numNodes; ++dst) {
+                String destName = nodes.get(dst).name;
+                RoutingKey key = new RoutingKey(sourceName, destName);
+                PathNode nxt = nextHops.get(key);
+                int index = src*numNodes + dst;
+                routingTable[index] = nxt.id;
+            }
         }
     }
 
@@ -71,7 +91,7 @@ public class NodeSet implements Iterable<PathNode> {
         }
     }
 
-    private void runDijkstra(PathNode node) {
+    private void runDijkstra(Map<RoutingKey, PathNode> nextHops, PathNode node) {
         Map<String, Float> distances = new HashMap<String, Float>();
         Map<String, String> predecessors = new HashMap<String, String>();
         Set<String> unvisited = new HashSet<String>();
@@ -82,16 +102,16 @@ public class NodeSet implements Iterable<PathNode> {
         PathNode currentNode = node;
         while (true) {
             float currentDistance = getOrDefault(distances, currentNode.name,
-                    Float.POSITIVE_INFINITY);
+                                                 Float.POSITIVE_INFINITY);
             for (PathNode neighbour : connectionsFrom(currentNode)) {
                 if (!(unvisited.contains(neighbour.name))) {
                     continue;
                 }
                 float baseDistance = (float) Math.hypot(neighbour.x
-                        - currentNode.x, neighbour.y - currentNode.y);
+                                                        - currentNode.x, neighbour.y - currentNode.y);
                 float tentative = currentDistance + baseDistance;
                 float assignedDist = getOrDefault(distances, neighbour.name,
-                        Float.POSITIVE_INFINITY);
+                                                  Float.POSITIVE_INFINITY);
                 if (tentative < assignedDist) {
                     distances.put(neighbour.name, tentative);
                     predecessors.put(neighbour.name, currentNode.name);
@@ -102,7 +122,7 @@ public class NodeSet implements Iterable<PathNode> {
             float bestDistance = Float.POSITIVE_INFINITY;
             for (String option : unvisited) {
                 float calcDist = getOrDefault(distances, option,
-                        Float.POSITIVE_INFINITY);
+                                              Float.POSITIVE_INFINITY);
                 if (calcDist <= bestDistance) {
                     bestOption = option;
                     bestDistance = calcDist;
@@ -150,8 +170,8 @@ public class NodeSet implements Iterable<PathNode> {
     }
 
     public PathNode nextNodeFor(PathNode from, PathNode to) {
-        RoutingKey key = new RoutingKey(from.name, to.name);
-        return nextHops.get(key);
+        int index = from.id*nodes.size() + to.id;
+        return nodes.get(routingTable[index]);
     }
 
     @Override

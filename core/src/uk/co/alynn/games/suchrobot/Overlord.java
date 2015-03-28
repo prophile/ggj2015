@@ -19,10 +19,10 @@ public final class Overlord {
     private Overlord() {
         assetManager = new AssetManager();
         fontShader = new ShaderProgram(Gdx.files.internal("text.vert"),
-                Gdx.files.internal("text.frag"));
+                                       Gdx.files.internal("text.frag"));
     }
 
-    private void configure() {
+    private static void configure() {
         initSprites();
         initFont();
         initBGImages();
@@ -85,7 +85,7 @@ public final class Overlord {
             throw new RuntimeException("Reinit of Overlord");
         }
         s_instance = new Overlord();
-        s_instance.configure();
+        configure();
     }
 
     public static Overlord get() {

@@ -7,6 +7,7 @@ public class TitleScreen extends ScreenMode {
         return "UI/Titles.png";
     }
 
+    @SuppressWarnings("static-method")
     private synchronized void loadThings() {
         MainMode.init();
     }
