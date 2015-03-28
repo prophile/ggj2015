@@ -21,6 +21,6 @@ public final class PathNode {
 
     @Override
     public String toString() {
-        return "<PathNode " + name + ">";
+        return name;
     }
 }
