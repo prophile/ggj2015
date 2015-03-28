@@ -62,6 +62,7 @@ public class NodeSet implements Iterable<PathNode> {
             runDijkstra(nextHops, node);
         }
         generateRoutingTable(nextHops);
+        System.gc();
     }
 
     private void generateRoutingTable(Map<RoutingKey, PathNode> nextHops) {
