@@ -116,18 +116,20 @@ public enum Sprite {
                    scale_ * (flipX ? -1.0f : 1.0f),
                    scale_,
                    0.0f);
-        batch.end();
-        if (debugRenderer == null)
-            debugRenderer = new ShapeRenderer();
-        ShapeRenderer sr = debugRenderer;
-        sr.setProjectionMatrix(batch.getProjectionMatrix());
-        sr.setTransformMatrix(batch.getTransformMatrix());
-        sr.begin(ShapeType.Line);
-        xmts(sr, 0.0f, 0.0f, 1.0f, x, y);
-        box(sr, 0.0f, 1.0f, 0.0f, x - anchorX*scale_, y - anchorY*scale_, tex.originalWidth*scale_, tex.originalHeight*scale_);
-        box(sr, 1.0f, 0.0f, 0.0f, x - anchorX*scale_ + tex.offsetX*scale_, y - anchorY*scale_ + tex.offsetY*scale_, tex.packedWidth*scale_, tex.packedHeight*scale_);
-        sr.end();
-        batch.begin();
+        if (Constants.DEBUG_SPRITES.asBoolean()) {
+            batch.end();
+            if (debugRenderer == null)
+                debugRenderer = new ShapeRenderer();
+            ShapeRenderer sr = debugRenderer;
+            sr.setProjectionMatrix(batch.getProjectionMatrix());
+            sr.setTransformMatrix(batch.getTransformMatrix());
+            sr.begin(ShapeType.Line);
+            xmts(sr, 0.0f, 0.0f, 1.0f, x, y);
+            box(sr, 0.0f, 1.0f, 0.0f, x - anchorX*scale_, y - anchorY*scale_, tex.originalWidth*scale_, tex.originalHeight*scale_);
+            box(sr, 1.0f, 0.0f, 0.0f, x - anchorX*scale_ + tex.offsetX*scale_, y - anchorY*scale_ + tex.offsetY*scale_, tex.packedWidth*scale_, tex.packedHeight*scale_);
+            sr.end();
+            batch.begin();
+        }
     }
 
     public void draw(SpriteBatch batch, float x, float y, float scl) {

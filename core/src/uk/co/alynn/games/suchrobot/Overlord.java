@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.Application;
 
 public final class Overlord {
     private static Overlord s_instance = null;
@@ -20,6 +21,32 @@ public final class Overlord {
         assetManager = new AssetManager();
         fontShader = new ShaderProgram(Gdx.files.internal("text.vert"),
                                        Gdx.files.internal("text.frag"));
+    }
+
+    public static void systemMipmapOptions(TextureParameter param, boolean knownPOT) {
+        switch (Gdx.app.getType()) {
+        case Desktop:
+            param.magFilter = TextureFilter.Linear;
+            param.minFilter = TextureFilter.MipMapLinearLinear;
+            param.genMipMaps = true;
+            break;
+        case iOS:
+            if (knownPOT) {
+                param.magFilter = TextureFilter.Linear;
+                param.minFilter = TextureFilter.MipMapLinearLinear;
+                param.genMipMaps = true;
+            } else {
+                param.magFilter = TextureFilter.Linear;
+                param.minFilter = TextureFilter.Linear;
+                param.genMipMaps = false;
+            }
+            break;
+        default:
+            param.magFilter = TextureFilter.Linear;
+            param.minFilter = TextureFilter.Nearest;
+            param.genMipMaps = false;
+            break;
+        }
     }
 
     private static void configure() {
@@ -46,8 +73,7 @@ public final class Overlord {
     private static void initBGImages() {
         AssetManager mgr = s_instance.assetManager;
         TextureParameter param = new TextureParameter();
-        param.genMipMaps = true;
-        param.minFilter = TextureFilter.MipMapLinearLinear;
+        systemMipmapOptions(param, false);
 
         mgr.load("Layout/LayoutPanes/Filter.png", Texture.class, param);
         mgr.load("Layout/LayoutPanes/FrontObjects.png", Texture.class, param);
