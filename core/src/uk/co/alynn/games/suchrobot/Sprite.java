@@ -48,8 +48,10 @@ public enum Sprite {
 
     public void queueLoad() {
         TextureParameter param = new TextureParameter();
-        param.minFilter = TextureFilter.MipMapLinearLinear;
-        param.genMipMaps = true;
+        //param.minFilter = TextureFilter.MipMapLinearLinear;
+        //param.genMipMaps = true;
+        param.minFilter = TextureFilter.Linear;
+        //param.genMipMaps = true;
         AssetManager mgr = Overlord.get().assetManager;
         for (int i = 0; i < this.frames; ++i) {
             String longDigits = String.format("%05d", i);
