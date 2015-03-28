@@ -97,7 +97,6 @@ public enum Sprite {
                    scale_ * (flipX ? -1.0f : 1.0f),
                    scale_,
                    0.0f);
-        batch.begin();
     }
 
     public void draw(SpriteBatch batch, float x, float y, float scl) {
