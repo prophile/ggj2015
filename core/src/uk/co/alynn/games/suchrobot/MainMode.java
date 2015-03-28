@@ -394,15 +394,15 @@ public class MainMode implements GameMode {
                 if (box.water <= 0) {
                     results.add("Without water I was too weak to fight");
                     results.add("They came in the night to take me away");
-                    results.add("I’ll never see my planet again...");
+                    results.add("I'll never see my planet again...");
                 } else if (box.activeRobots() <= 0) {
                     results.add("The robots are gone");
-                    results.add("With no scrap to build more, I'm done for");
-                    results.add("I’ll never see my planet again...");
+                    results.add("No scrap to build more, I'm done for");
+                    results.add("I'll never see my planet again...");
                 } else {
                     results.add("I took too long, they found me");
                     results.add("Flashing lights and black suits");
-                    results.add("I’ll never see my planet again...");
+                    results.add("I'll never see my planet again...");
                 }
                 results.add("Game over");
                 SFX.LOSE.play();
