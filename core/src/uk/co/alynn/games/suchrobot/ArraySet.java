@@ -46,7 +46,7 @@ public class ArraySet<E> extends AbstractSet<E> {
 
     private void makeReadReady() {
         if (!readReady) {
-            elements.sort(compar);
+            Collections.sort(elements, compar);
             E previous = null;
             Iterator<E> iter = elements.iterator();
             while (iter.hasNext()) {
