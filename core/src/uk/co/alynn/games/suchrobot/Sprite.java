@@ -3,8 +3,6 @@ package uk.co.alynn.games.suchrobot;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public enum Sprite {
     ROBOT_DEBUG("robot-debug", 1, 1.0f, 16, 16),
@@ -86,23 +84,6 @@ public enum Sprite {
         return regions[frameIndex];
     }
 
-    private static void xmts(ShapeRenderer sr, float r, float g, float b, float x, float y) {
-        sr.setColor(r, g, b, 1.0f);
-        final float SIZE = 9.0f;
-        sr.line(x + SIZE,  y + SIZE, x - SIZE, y - SIZE);
-        sr.line(x + SIZE, y - SIZE, x - SIZE, y + SIZE);
-    }
-
-    private static void box(ShapeRenderer sr, float r, float g, float b, float x, float y, float w, float h) {
-        sr.setColor(r, g, b, 1.0f);
-        sr.line(x, y, x + w, y);
-        sr.line(x + w, y, x + w, y + h);
-        sr.line(x + w, y + h, x, y + h);
-        sr.line(x, y, x, y + h);
-    }
-
-    private static ShapeRenderer debugRenderer = null;
-
     private void drawDispatch(SpriteBatch batch, float x, float y, float scl, boolean flipX) {
         TextureAtlas.AtlasRegion tex = getRegion();
         float scale_ = scl * scale;
@@ -116,17 +97,6 @@ public enum Sprite {
                    scale_ * (flipX ? -1.0f : 1.0f),
                    scale_,
                    0.0f);
-        if (debugRenderer == null)
-            debugRenderer = new ShapeRenderer();
-        ShapeRenderer sr = debugRenderer;
-        batch.end();
-        sr.setProjectionMatrix(batch.getProjectionMatrix());
-        sr.setTransformMatrix(batch.getTransformMatrix());
-        sr.begin(ShapeType.Line);
-        xmts(sr, 0.0f, 0.0f, 1.0f, x, y);
-        box(sr, 0.0f, 1.0f, 0.0f, x - anchorX*scale_, y - anchorY*scale_, tex.originalWidth*scale_, tex.originalHeight*scale_);
-        box(sr, 1.0f, 0.0f, 0.0f, x - anchorX*scale_ + tex.offsetX*scale_, y - anchorY*scale_ + tex.offsetY*scale_, tex.packedWidth*scale_, tex.packedHeight*scale_);
-        sr.end();
         batch.begin();
     }
 
