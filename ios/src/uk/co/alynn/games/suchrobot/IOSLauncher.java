@@ -20,7 +20,6 @@ public class IOSLauncher extends IOSApplication.Delegate {
     }
 
     public static void main(String[] args) {
-        System.err.println("Hello, world!");
         NSAutoreleasePool pool = new NSAutoreleasePool();
         UIApplication.main(args, null, IOSLauncher.class);
         pool.close();
