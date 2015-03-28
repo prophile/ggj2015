@@ -100,40 +100,30 @@ public class NodeSet implements Iterable<PathNode> {
             unvisited.add(allNodes.name);
         }
         distances.put(node.name, 0.0f);
+
+        runDijkstraExploration(node, distances, predecessors, unvisited);
+
+        runDijkstraBacktrackConstruction(nextHops, node, predecessors);
+    }
+
+    private void runDijkstraExploration(PathNode node,
+            Map<String, Float> distances, Map<String, String> predecessors,
+            Set<String> unvisited) {
         PathNode currentNode = node;
         while (true) {
-            float currentDistance = getOrDefault(distances, currentNode.name,
-                                                 Float.POSITIVE_INFINITY);
-            for (PathNode neighbour : connectionsFrom(currentNode)) {
-                if (!(unvisited.contains(neighbour.name))) {
-                    continue;
-                }
-                float baseDistance = (float) Math.hypot(neighbour.x
-                                                        - currentNode.x, neighbour.y - currentNode.y);
-                float tentative = currentDistance + baseDistance;
-                float assignedDist = getOrDefault(distances, neighbour.name,
-                                                  Float.POSITIVE_INFINITY);
-                if (tentative < assignedDist) {
-                    distances.put(neighbour.name, tentative);
-                    predecessors.put(neighbour.name, currentNode.name);
-                }
-            }
-            unvisited.remove(currentNode.name);
-            String bestOption = null;
-            float bestDistance = Float.POSITIVE_INFINITY;
-            for (String option : unvisited) {
-                float calcDist = getOrDefault(distances, option,
-                                              Float.POSITIVE_INFINITY);
-                if (calcDist <= bestDistance) {
-                    bestOption = option;
-                    bestDistance = calcDist;
-                }
-            }
+            String bestOption = runDijkstraExplorationStep(distances,
+                                                           predecessors,
+                                                           unvisited,
+                                                           currentNode);
             if (bestOption == null)
                 break;
             currentNode = lookup(bestOption);
         }
+    }
 
+    private void runDijkstraBacktrackConstruction(
+            Map<RoutingKey, PathNode> nextHops, PathNode node,
+            Map<String, String> predecessors) {
         for (PathNode targetNode : this) {
             RoutingKey key = new RoutingKey(node.name, targetNode.name);
             if (targetNode == node) {
@@ -156,6 +146,39 @@ public class NodeSet implements Iterable<PathNode> {
                 last = backtrack;
             }
         }
+    }
+
+    private String runDijkstraExplorationStep(Map<String, Float> distances,
+            Map<String, String> predecessors, Set<String> unvisited,
+            PathNode currentNode) {
+        float currentDistance = getOrDefault(distances, currentNode.name,
+                                             Float.POSITIVE_INFINITY);
+        for (PathNode neighbour : connectionsFrom(currentNode)) {
+            if (!(unvisited.contains(neighbour.name))) {
+                continue;
+            }
+            float baseDistance = (float) Math.hypot(neighbour.x
+                                                    - currentNode.x, neighbour.y - currentNode.y);
+            float tentative = currentDistance + baseDistance;
+            float assignedDist = getOrDefault(distances, neighbour.name,
+                                              Float.POSITIVE_INFINITY);
+            if (tentative < assignedDist) {
+                distances.put(neighbour.name, tentative);
+                predecessors.put(neighbour.name, currentNode.name);
+            }
+        }
+        unvisited.remove(currentNode.name);
+        String bestOption = null;
+        float bestDistance = Float.POSITIVE_INFINITY;
+        for (String option : unvisited) {
+            float calcDist = getOrDefault(distances, option,
+                                          Float.POSITIVE_INFINITY);
+            if (calcDist <= bestDistance) {
+                bestOption = option;
+                bestDistance = calcDist;
+            }
+        }
+        return bestOption;
     }
 
     public PathNode lookup(String name) {

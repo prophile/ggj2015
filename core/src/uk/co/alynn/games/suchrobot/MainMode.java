@@ -195,7 +195,7 @@ public class MainMode implements GameMode {
     }
 
     private void renderSelectionCircleLower() {
-        sr.begin();
+        sr.begin(ShapeType.Line);
         if (selectedRobot != null) {
             sr.setColor(Color.YELLOW);
             sr.curve(selectedRobot.x() - CURVE_A, selectedRobot.y(),
@@ -409,57 +409,21 @@ public class MainMode implements GameMode {
     }
 
     private GameMode levelCompleteNextScreen() {
-        final float ROBOT_SAFE_DISTANCE = Constants.SAFE_ZONE_RADIUS
-                .asFloat();
-        box.clearRobots();
-        int robotIndex = 0;
-        for (Robot robot : robots) {
-            boolean isSafe = false;
-            for (PathNode home : nodes) {
-                if (home.type != NodeType.SPAWNER)
-                    continue;
-                float distance = (float) Math.hypot(robot.x() - home.x,
-                                                    robot.y() - home.y);
-                if (distance <= ROBOT_SAFE_DISTANCE) {
-                    isSafe = true;
-                }
-            }
-            if (isSafe) {
-                box.robots[robotIndex] = robot.cls;
-                ++robotIndex;
-            }
-        }
+        updateForRobotLosses();
 
         if (box.isWin()) {
-            ArrayList<String> results = new ArrayList<String>();
-            results.add("The robots proved their worth");
-            results.add("I managed to make the repairs");
-            results.add("Finally I can escape!");
-            results.add("You Escaped!");
-            SFX.WIN.play();
-            return new ResultsScreen(results, null);
+            return generateWinScreen();
         }
         if (box.isLoss()) {
-            ArrayList<String> results = new ArrayList<String>();
-            if (box.water <= 0) {
-                results.add("Without water I was too weak to fight");
-                results.add("They came in the night to take me away");
-                results.add("I'll never see my planet again...");
-            } else if (box.activeRobots() <= 0) {
-                results.add("The robots are gone");
-                results.add("No scrap to build more, I'm done for");
-                results.add("I'll never see my planet again...");
-            } else {
-                results.add("I took too long, they found me");
-                results.add("Flashing lights and black suits");
-                results.add("I'll never see my planet again...");
-            }
-            results.add("Game over");
-            SFX.LOSE.play();
-            return new ResultsScreen(results, null);
+            return generateLossScreen();
         }
 
         NightMode nm = new NightMode(box);
+        List<String> messages = generateNightMessages();
+        return new ResultsScreen(messages, nm);
+    }
+
+    private List<String> generateNightMessages() {
         List<String> messages = new ArrayList<String>();
         messages.add("Day " + box.day + " is over.");
 
@@ -495,7 +459,60 @@ public class MainMode implements GameMode {
             messages.add("Not long now.");
             break;
         }
-        return new ResultsScreen(messages, nm);
+        return messages;
+    }
+
+    private GameMode generateLossScreen() {
+        ArrayList<String> results = new ArrayList<String>();
+        if (box.water <= 0) {
+            results.add("Without water I was too weak to fight");
+            results.add("They came in the night to take me away");
+            results.add("I'll never see my planet again...");
+        } else if (box.activeRobots() <= 0) {
+            results.add("The robots are gone");
+            results.add("No scrap to build more, I'm done for");
+            results.add("I'll never see my planet again...");
+        } else {
+            results.add("I took too long, they found me");
+            results.add("Flashing lights and black suits");
+            results.add("I'll never see my planet again...");
+        }
+        results.add("Game over");
+        SFX.LOSE.play();
+        return new ResultsScreen(results, null);
+    }
+
+    private GameMode generateWinScreen() {
+        ArrayList<String> results = new ArrayList<String>();
+        results.add("The robots proved their worth");
+        results.add("I managed to make the repairs");
+        results.add("Finally I can escape!");
+        results.add("You Escaped!");
+        SFX.WIN.play();
+        return new ResultsScreen(results, null);
+    }
+
+    private void updateForRobotLosses() {
+        final float ROBOT_SAFE_DISTANCE = Constants.SAFE_ZONE_RADIUS
+                .asFloat();
+        box.clearRobots();
+        int robotIndex = 0;
+        for (Robot robot : robots) {
+            boolean isSafe = false;
+            for (PathNode home : nodes) {
+                if (home.type != NodeType.SPAWNER)
+                    continue;
+                float distance = (float) Math.hypot(robot.x() - home.x,
+                                                    robot.y() - home.y);
+                if (distance <= ROBOT_SAFE_DISTANCE) {
+                    isSafe = true;
+                }
+            }
+            if (isSafe) {
+                box.robots[robotIndex] = robot.cls;
+                ++robotIndex;
+            }
+        }
     }
 
     private boolean dayOver() {
@@ -608,12 +625,9 @@ public class MainMode implements GameMode {
     }
 
     private void renderBG() {
-        Texture l1 = Overlord.get().assetManager.get(
-                                                     "Layout/LayoutPanes/Parallaxrear1.png", Texture.class);
-        Texture l2 = Overlord.get().assetManager.get(
-                                                     "Layout/LayoutPanes/Parallaxrear2.png", Texture.class);
-        Texture l3 = Overlord.get().assetManager.get(
-                                                     "Layout/LayoutPanes/Sky.png", Texture.class);
+        Texture l1 = Overlord.get().assetManager.get("Layout/LayoutPanes/Parallaxrear1.png", Texture.class);
+        Texture l2 = Overlord.get().assetManager.get("Layout/LayoutPanes/Parallaxrear2.png", Texture.class);
+        Texture l3 = Overlord.get().assetManager.get("Layout/LayoutPanes/Sky.png", Texture.class);
         batch.begin();
         final float L1_FACTOR = 0.0003f;
         final float L2_FACTOR = 0.00006f;
