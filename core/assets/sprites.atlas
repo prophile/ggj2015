@@ -1,0 +1,1299 @@
+sprites.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+animations-robot-eat-dirt-00000
+  rotate: false
+  xy: 153, 748
+  size: 79, 104
+  orig: 216, 216
+  offset: 89, 58
+  index: -1
+animations-robot-eat-dirt-00001
+  rotate: false
+  xy: 153, 534
+  size: 79, 105
+  orig: 216, 216
+  offset: 89, 58
+  index: -1
+animations-robot-eat-dirt-00002
+  rotate: false
+  xy: 153, 854
+  size: 79, 100
+  orig: 216, 216
+  offset: 89, 58
+  index: -1
+animations-robot-eat-dirt-00003
+  rotate: false
+  xy: 1631, 511
+  size: 78, 95
+  orig: 216, 216
+  offset: 90, 58
+  index: -1
+animations-robot-eat-dirt-00004
+  rotate: false
+  xy: 620, 510
+  size: 78, 96
+  orig: 216, 216
+  offset: 90, 58
+  index: -1
+animations-robot-eat-dirt-00005
+  rotate: false
+  xy: 467, 645
+  size: 79, 97
+  orig: 216, 216
+  offset: 90, 58
+  index: -1
+animations-robot-eat-dirt-00006
+  rotate: false
+  xy: 302, 402
+  size: 81, 98
+  orig: 216, 216
+  offset: 90, 58
+  index: -1
+animations-robot-eat-dirt-00007
+  rotate: false
+  xy: 457, 546
+  size: 80, 97
+  orig: 216, 216
+  offset: 91, 58
+  index: -1
+animations-robot-eat-dirt-00008
+  rotate: false
+  xy: 1138, 507
+  size: 77, 95
+  orig: 216, 216
+  offset: 91, 58
+  index: -1
+animations-robot-eat-dirt-00009
+  rotate: false
+  xy: 847, 613
+  size: 71, 94
+  orig: 216, 216
+  offset: 91, 58
+  index: -1
+animations-robot-eat-dirt-00010
+  rotate: false
+  xy: 700, 510
+  size: 65, 98
+  orig: 216, 216
+  offset: 91, 58
+  index: -1
+animations-robot-eat-dirt-00011
+  rotate: false
+  xy: 392, 600
+  size: 63, 101
+  orig: 216, 216
+  offset: 91, 58
+  index: -1
+animations-robot-eat-dirt-00012
+  rotate: false
+  xy: 388, 494
+  size: 61, 104
+  orig: 216, 216
+  offset: 91, 58
+  index: -1
+animations-robot-eat-dirt-00013
+  rotate: false
+  xy: 1688, 88
+  size: 61, 106
+  orig: 216, 216
+  offset: 90, 58
+  index: -1
+animations-robot-eat-dirt-00014
+  rotate: false
+  xy: 847, 508
+  size: 60, 103
+  orig: 216, 216
+  offset: 89, 58
+  index: -1
+animations-robot-eat-dirt-00015
+  rotate: false
+  xy: 790, 799
+  size: 60, 98
+  orig: 216, 216
+  offset: 89, 58
+  index: -1
+animations-robot-eat-dirt-00016
+  rotate: false
+  xy: 1171, 786
+  size: 64, 95
+  orig: 216, 216
+  offset: 89, 58
+  index: -1
+animations-robot-eat-dirt-00017
+  rotate: false
+  xy: 989, 504
+  size: 65, 96
+  orig: 216, 216
+  offset: 90, 58
+  index: -1
+animations-robot-eat-dirt-00018
+  rotate: false
+  xy: 314, 502
+  size: 72, 99
+  orig: 216, 216
+  offset: 90, 58
+  index: -1
+animations-robot-eat-dirt-00019
+  rotate: false
+  xy: 314, 603
+  size: 76, 99
+  orig: 216, 216
+  offset: 91, 58
+  index: -1
+animations-robot-eat-dirt-00020
+  rotate: false
+  xy: 767, 508
+  size: 78, 96
+  orig: 216, 216
+  offset: 91, 58
+  index: -1
+animations-robot-eat-dirt-00021
+  rotate: false
+  xy: 1056, 507
+  size: 80, 93
+  orig: 216, 216
+  offset: 90, 58
+  index: -1
+animations-robot-eat-dirt-00022
+  rotate: false
+  xy: 315, 805
+  size: 78, 98
+  orig: 216, 216
+  offset: 91, 58
+  index: -1
+animations-robot-eat-dirt-00023
+  rotate: false
+  xy: 234, 503
+  size: 78, 105
+  orig: 216, 216
+  offset: 90, 58
+  index: -1
+animations-robot-eat-water-00000
+  rotate: false
+  xy: 234, 717
+  size: 79, 104
+  orig: 216, 216
+  offset: 89, 58
+  index: -1
+animations-robot-eat-water-00001
+  rotate: false
+  xy: 153, 641
+  size: 79, 105
+  orig: 216, 216
+  offset: 89, 58
+  index: -1
+animations-robot-eat-water-00002
+  rotate: false
+  xy: 234, 823
+  size: 79, 100
+  orig: 216, 216
+  offset: 89, 58
+  index: -1
+animations-robot-eat-water-00003
+  rotate: false
+  xy: 700, 610
+  size: 78, 95
+  orig: 216, 216
+  offset: 90, 58
+  index: -1
+animations-robot-eat-water-00004
+  rotate: false
+  xy: 909, 504
+  size: 78, 96
+  orig: 216, 216
+  offset: 90, 58
+  index: -1
+animations-robot-eat-water-00005
+  rotate: false
+  xy: 539, 546
+  size: 79, 97
+  orig: 216, 216
+  offset: 90, 58
+  index: -1
+animations-robot-eat-water-00006
+  rotate: false
+  xy: 317, 905
+  size: 81, 98
+  orig: 216, 216
+  offset: 90, 58
+  index: -1
+animations-robot-eat-water-00007
+  rotate: false
+  xy: 548, 645
+  size: 80, 97
+  orig: 216, 216
+  offset: 91, 58
+  index: -1
+animations-robot-eat-water-00008
+  rotate: false
+  xy: 710, 707
+  size: 77, 95
+  orig: 216, 216
+  offset: 91, 58
+  index: -1
+animations-robot-eat-water-00009
+  rotate: false
+  xy: 475, 843
+  size: 71, 94
+  orig: 216, 216
+  offset: 91, 58
+  index: -1
+animations-robot-eat-water-00010
+  rotate: false
+  xy: 780, 606
+  size: 65, 98
+  orig: 216, 216
+  offset: 91, 58
+  index: -1
+animations-robot-eat-water-00011
+  rotate: false
+  xy: 852, 798
+  size: 63, 101
+  orig: 216, 216
+  offset: 91, 58
+  index: -1
+animations-robot-eat-water-00012
+  rotate: false
+  xy: 917, 798
+  size: 61, 104
+  orig: 216, 216
+  offset: 91, 58
+  index: -1
+animations-robot-eat-water-00013
+  rotate: false
+  xy: 1688, 196
+  size: 61, 106
+  orig: 216, 216
+  offset: 90, 58
+  index: -1
+animations-robot-eat-water-00014
+  rotate: false
+  xy: 980, 798
+  size: 60, 103
+  orig: 216, 216
+  offset: 89, 58
+  index: -1
+animations-robot-eat-water-00015
+  rotate: false
+  xy: 1042, 788
+  size: 60, 98
+  orig: 216, 216
+  offset: 89, 58
+  index: -1
+animations-robot-eat-water-00016
+  rotate: false
+  xy: 1237, 786
+  size: 64, 95
+  orig: 216, 216
+  offset: 89, 58
+  index: -1
+animations-robot-eat-water-00017
+  rotate: false
+  xy: 1104, 788
+  size: 65, 96
+  orig: 216, 216
+  offset: 90, 58
+  index: -1
+animations-robot-eat-water-00018
+  rotate: false
+  xy: 393, 703
+  size: 72, 99
+  orig: 216, 216
+  offset: 90, 58
+  index: -1
+animations-robot-eat-water-00019
+  rotate: false
+  xy: 315, 704
+  size: 76, 99
+  orig: 216, 216
+  offset: 91, 58
+  index: -1
+animations-robot-eat-water-00020
+  rotate: false
+  xy: 1217, 504
+  size: 78, 96
+  orig: 216, 216
+  offset: 91, 58
+  index: -1
+animations-robot-eat-water-00021
+  rotate: false
+  xy: 920, 602
+  size: 80, 93
+  orig: 216, 216
+  offset: 90, 58
+  index: -1
+animations-robot-eat-water-00022
+  rotate: false
+  xy: 395, 804
+  size: 78, 98
+  orig: 216, 216
+  offset: 91, 58
+  index: -1
+animations-robot-eat-water-00023
+  rotate: false
+  xy: 234, 610
+  size: 78, 105
+  orig: 216, 216
+  offset: 90, 58
+  index: -1
+animations-robot-flail-00000
+  rotate: false
+  xy: 301, 234
+  size: 149, 72
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-00001
+  rotate: false
+  xy: 782, 81
+  size: 149, 74
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-00002
+  rotate: false
+  xy: 631, 109
+  size: 149, 75
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-00003
+  rotate: false
+  xy: 933, 84
+  size: 149, 76
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-00004
+  rotate: false
+  xy: 1084, 87
+  size: 149, 76
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-00005
+  rotate: false
+  xy: 1235, 88
+  size: 149, 76
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-00006
+  rotate: false
+  xy: 1386, 88
+  size: 149, 76
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-00007
+  rotate: false
+  xy: 1537, 88
+  size: 149, 76
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-00008
+  rotate: false
+  xy: 958, 2
+  size: 149, 80
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-00009
+  rotate: false
+  xy: 1109, 2
+  size: 149, 83
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-00010
+  rotate: false
+  xy: 1260, 2
+  size: 149, 84
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-00011
+  rotate: false
+  xy: 1411, 2
+  size: 149, 84
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-00012
+  rotate: false
+  xy: 1562, 2
+  size: 149, 84
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-00013
+  rotate: false
+  xy: 782, 157
+  size: 149, 82
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-00014
+  rotate: false
+  xy: 933, 162
+  size: 149, 83
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-00015
+  rotate: false
+  xy: 1084, 165
+  size: 149, 83
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-00016
+  rotate: false
+  xy: 1235, 166
+  size: 149, 84
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-00017
+  rotate: false
+  xy: 457, 112
+  size: 149, 83
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-00018
+  rotate: false
+  xy: 452, 295
+  size: 149, 81
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-00019
+  rotate: false
+  xy: 442, 378
+  size: 149, 78
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-00020
+  rotate: false
+  xy: 608, 186
+  size: 149, 75
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-00021
+  rotate: false
+  xy: 603, 360
+  size: 149, 73
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-00022
+  rotate: false
+  xy: 593, 435
+  size: 149, 73
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-00023
+  rotate: false
+  xy: 759, 241
+  size: 149, 71
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-end-00000
+  rotate: false
+  xy: 301, 234
+  size: 149, 72
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-end-00001
+  rotate: false
+  xy: 910, 247
+  size: 149, 72
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-end-00002
+  rotate: false
+  xy: 1061, 250
+  size: 149, 72
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-end-00003
+  rotate: false
+  xy: 1212, 252
+  size: 149, 72
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-end-00004
+  rotate: false
+  xy: 1363, 256
+  size: 149, 77
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-end-00005
+  rotate: false
+  xy: 1358, 335
+  size: 149, 83
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-end-00006
+  rotate: false
+  xy: 1386, 166
+  size: 149, 88
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-end-00007
+  rotate: false
+  xy: 1537, 166
+  size: 149, 94
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-end-00008
+  rotate: false
+  xy: 2, 854
+  size: 149, 99
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-end-00009
+  rotate: false
+  xy: 631, 2
+  size: 149, 105
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-end-00010
+  rotate: false
+  xy: 2, 535
+  size: 149, 110
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-end-00011
+  rotate: false
+  xy: 2, 416
+  size: 149, 117
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-end-00012
+  rotate: false
+  xy: 186, 148
+  size: 113, 123
+  orig: 216, 216
+  offset: 54, 55
+  index: -1
+animations-robot-flail-end-00013
+  rotate: false
+  xy: 163, 276
+  size: 76, 121
+  orig: 216, 216
+  offset: 72, 56
+  index: -1
+animations-robot-flail-end-00014
+  rotate: false
+  xy: 153, 416
+  size: 59, 116
+  orig: 216, 216
+  offset: 84, 58
+  index: -1
+animations-robot-flail-end-00015
+  rotate: false
+  xy: 475, 744
+  size: 75, 97
+  orig: 216, 216
+  offset: 83, 69
+  index: -1
+animations-robot-flail-end-00016
+  rotate: false
+  xy: 214, 402
+  size: 86, 99
+  orig: 216, 216
+  offset: 82, 66
+  index: -1
+animations-robot-flail-end-00017
+  rotate: false
+  xy: 1660, 404
+  size: 89, 99
+  orig: 216, 216
+  offset: 82, 63
+  index: -1
+animations-robot-flail-end-00018
+  rotate: false
+  xy: 1665, 304
+  size: 84, 98
+  orig: 216, 216
+  offset: 81, 61
+  index: -1
+animations-robot-flail-end-00019
+  rotate: false
+  xy: 400, 904
+  size: 73, 98
+  orig: 216, 216
+  offset: 81, 59
+  index: -1
+animations-robot-flail-end-00020
+  rotate: false
+  xy: 630, 608
+  size: 68, 97
+  orig: 216, 216
+  offset: 69, 58
+  index: -1
+animations-robot-flail-end-00021
+  rotate: false
+  xy: 552, 744
+  size: 76, 96
+  orig: 216, 216
+  offset: 61, 58
+  index: -1
+animations-robot-flail-end-00022
+  rotate: false
+  xy: 1002, 602
+  size: 78, 95
+  orig: 216, 216
+  offset: 59, 58
+  index: -1
+animations-robot-flail-end-00023
+  rotate: false
+  xy: 1132, 604
+  size: 78, 92
+  orig: 216, 216
+  offset: 59, 58
+  index: -1
+animations-robot-flail-start-00000
+  rotate: false
+  xy: 630, 707
+  size: 78, 84
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-flail-start-00001
+  rotate: false
+  xy: 630, 793
+  size: 78, 84
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-flail-start-00002
+  rotate: false
+  xy: 234, 925
+  size: 81, 84
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-flail-start-00003
+  rotate: false
+  xy: 451, 458
+  size: 95, 86
+  orig: 216, 216
+  offset: 60, 55
+  index: -1
+animations-robot-flail-start-00004
+  rotate: false
+  xy: 1509, 511
+  size: 120, 86
+  orig: 216, 216
+  offset: 51, 54
+  index: -1
+animations-robot-flail-start-00005
+  rotate: false
+  xy: 905, 321
+  size: 149, 88
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-start-00006
+  rotate: false
+  xy: 241, 308
+  size: 149, 92
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-start-00007
+  rotate: false
+  xy: 1056, 324
+  size: 149, 92
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-start-00008
+  rotate: false
+  xy: 603, 263
+  size: 149, 95
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-start-00009
+  rotate: false
+  xy: 2, 751
+  size: 149, 101
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-start-00010
+  rotate: false
+  xy: 2, 647
+  size: 149, 102
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-start-00011
+  rotate: false
+  xy: 452, 197
+  size: 149, 96
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-start-00012
+  rotate: false
+  xy: 1514, 262
+  size: 149, 88
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-start-00013
+  rotate: false
+  xy: 301, 135
+  size: 149, 97
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-start-00014
+  rotate: false
+  xy: 1207, 326
+  size: 149, 90
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-start-00015
+  rotate: false
+  xy: 1509, 352
+  size: 149, 82
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-start-00016
+  rotate: false
+  xy: 754, 314
+  size: 149, 95
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-start-00017
+  rotate: false
+  xy: 754, 411
+  size: 149, 95
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-start-00018
+  rotate: false
+  xy: 905, 411
+  size: 149, 91
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-start-00019
+  rotate: false
+  xy: 1056, 418
+  size: 149, 87
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-start-00020
+  rotate: false
+  xy: 1207, 418
+  size: 149, 84
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-start-00021
+  rotate: false
+  xy: 1358, 420
+  size: 149, 79
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-start-00022
+  rotate: false
+  xy: 1509, 436
+  size: 149, 73
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-flail-start-00023
+  rotate: false
+  xy: 1358, 501
+  size: 149, 73
+  orig: 216, 216
+  offset: 37, 53
+  index: -1
+animations-robot-idle-00000
+  rotate: false
+  xy: 392, 308
+  size: 48, 91
+  orig: 216, 216
+  offset: 79, 58
+  index: -1
+animations-robot-idle-00001
+  rotate: false
+  xy: 392, 401
+  size: 48, 91
+  orig: 216, 216
+  offset: 79, 58
+  index: -1
+animations-robot-idle-00002
+  rotate: false
+  xy: 1297, 504
+  size: 48, 91
+  orig: 216, 216
+  offset: 79, 58
+  index: -1
+animations-robot-idle-00003
+  rotate: false
+  xy: 1082, 602
+  size: 48, 91
+  orig: 216, 216
+  offset: 79, 58
+  index: -1
+animations-robot-idle-00004
+  rotate: false
+  xy: 789, 706
+  size: 48, 91
+  orig: 216, 216
+  offset: 79, 58
+  index: -1
+animations-robot-idle-00005
+  rotate: false
+  xy: 1442, 576
+  size: 48, 90
+  orig: 216, 216
+  offset: 79, 58
+  index: -1
+animations-robot-idle-00006
+  rotate: false
+  xy: 1572, 599
+  size: 48, 90
+  orig: 216, 216
+  offset: 79, 58
+  index: -1
+animations-robot-idle-00007
+  rotate: false
+  xy: 1419, 668
+  size: 48, 90
+  orig: 216, 216
+  offset: 79, 58
+  index: -1
+animations-robot-idle-00008
+  rotate: false
+  xy: 1549, 691
+  size: 48, 90
+  orig: 216, 216
+  offset: 79, 58
+  index: -1
+animations-robot-idle-00009
+  rotate: false
+  xy: 1212, 604
+  size: 48, 91
+  orig: 216, 216
+  offset: 79, 58
+  index: -1
+animations-robot-idle-00010
+  rotate: false
+  xy: 1262, 602
+  size: 48, 91
+  orig: 216, 216
+  offset: 79, 58
+  index: -1
+animations-robot-idle-00011
+  rotate: false
+  xy: 1312, 597
+  size: 48, 91
+  orig: 216, 216
+  offset: 79, 58
+  index: -1
+animations-robot-idle-00012
+  rotate: false
+  xy: 1319, 690
+  size: 48, 91
+  orig: 216, 216
+  offset: 79, 58
+  index: -1
+animations-robot-idle-00013
+  rotate: false
+  xy: 1369, 664
+  size: 48, 91
+  orig: 216, 216
+  offset: 79, 58
+  index: -1
+animations-robot-idle-00014
+  rotate: false
+  xy: 1303, 786
+  size: 48, 91
+  orig: 216, 216
+  offset: 79, 58
+  index: -1
+animations-robot-idle-00015
+  rotate: false
+  xy: 1679, 700
+  size: 48, 91
+  orig: 216, 216
+  offset: 79, 58
+  index: -1
+animations-robot-idle-00016
+  rotate: false
+  xy: 1353, 783
+  size: 48, 91
+  orig: 216, 216
+  offset: 79, 58
+  index: -1
+animations-robot-idle-00017
+  rotate: false
+  xy: 1613, 781
+  size: 48, 90
+  orig: 216, 216
+  offset: 79, 58
+  index: -1
+animations-robot-idle-00018
+  rotate: false
+  xy: 1702, 608
+  size: 47, 90
+  orig: 216, 216
+  offset: 79, 58
+  index: -1
+animations-robot-idle-00019
+  rotate: false
+  xy: 785, 899
+  size: 48, 90
+  orig: 216, 216
+  offset: 79, 58
+  index: -1
+animations-robot-idle-00020
+  rotate: false
+  xy: 995, 903
+  size: 48, 90
+  orig: 216, 216
+  offset: 79, 58
+  index: -1
+animations-robot-idle-00021
+  rotate: false
+  xy: 1125, 886
+  size: 48, 90
+  orig: 216, 216
+  offset: 79, 58
+  index: -1
+animations-robot-idle-00022
+  rotate: false
+  xy: 1403, 760
+  size: 48, 91
+  orig: 216, 216
+  offset: 79, 58
+  index: -1
+animations-robot-idle-00023
+  rotate: false
+  xy: 548, 843
+  size: 48, 91
+  orig: 216, 216
+  offset: 79, 58
+  index: -1
+animations-robot-walk-00000
+  rotate: false
+  xy: 630, 707
+  size: 78, 84
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-walk-00001
+  rotate: false
+  xy: 710, 804
+  size: 78, 84
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-walk-00002
+  rotate: false
+  xy: 1492, 599
+  size: 78, 84
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-walk-00003
+  rotate: false
+  xy: 1622, 608
+  size: 78, 84
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-walk-00004
+  rotate: false
+  xy: 1469, 685
+  size: 78, 83
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-walk-00005
+  rotate: false
+  xy: 1453, 770
+  size: 78, 83
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-walk-00006
+  rotate: false
+  xy: 1533, 783
+  size: 78, 82
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-walk-00007
+  rotate: false
+  xy: 1663, 793
+  size: 78, 82
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-walk-00008
+  rotate: false
+  xy: 705, 890
+  size: 78, 83
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-walk-00009
+  rotate: false
+  xy: 1239, 700
+  size: 78, 84
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-walk-00010
+  rotate: false
+  xy: 1599, 694
+  size: 78, 85
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-walk-00011
+  rotate: false
+  xy: 1159, 698
+  size: 78, 86
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-walk-00012
+  rotate: false
+  xy: 839, 709
+  size: 78, 87
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-walk-00013
+  rotate: false
+  xy: 919, 709
+  size: 78, 87
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-walk-00014
+  rotate: false
+  xy: 999, 699
+  size: 78, 87
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-walk-00015
+  rotate: false
+  xy: 1079, 699
+  size: 78, 87
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-walk-00016
+  rotate: false
+  xy: 1362, 576
+  size: 78, 86
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-walk-00017
+  rotate: false
+  xy: 625, 879
+  size: 78, 85
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-walk-00018
+  rotate: false
+  xy: 835, 901
+  size: 78, 84
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-walk-00019
+  rotate: false
+  xy: 915, 904
+  size: 78, 83
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-walk-00020
+  rotate: false
+  xy: 1175, 883
+  size: 78, 83
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-walk-00021
+  rotate: false
+  xy: 1255, 883
+  size: 78, 83
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-walk-00022
+  rotate: false
+  xy: 1335, 879
+  size: 78, 83
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+animations-robot-walk-00023
+  rotate: false
+  xy: 1045, 888
+  size: 78, 84
+  orig: 216, 216
+  offset: 59, 57
+  index: -1
+node-debug
+  rotate: false
+  xy: 1713, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+nodesrough-node-mine-depleted
+  rotate: false
+  xy: 782, 2
+  size: 174, 77
+  orig: 192, 142
+  offset: 10, 15
+  index: -1
+nodesrough-node-mine
+  rotate: false
+  xy: 280, 2
+  size: 175, 131
+  orig: 188, 153
+  offset: 7, 9
+  index: -1
+nodesrough-node-salvage
+  rotate: false
+  xy: 2, 148
+  size: 182, 126
+  orig: 196, 137
+  offset: 8, 4
+  index: -1
+nodesrough-node-ship
+  rotate: false
+  xy: 2, 2
+  size: 276, 144
+  orig: 283, 208
+  offset: 7, 17
+  index: -1
+nodesrough-node-well-depleted
+  rotate: false
+  xy: 457, 2
+  size: 172, 108
+  orig: 201, 122
+  offset: 13, 6
+  index: -1
+nodesrough-node-well
+  rotate: false
+  xy: 2, 276
+  size: 159, 138
+  orig: 172, 155
+  offset: 6, 7
+  index: -1
+robot-debug
+  rotate: false
+  xy: 548, 458
+  size: 32, 27
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+ui-chevrons-l1
+  rotate: false
+  xy: 1369, 757
+  size: 28, 17
+  orig: 57, 51
+  offset: 15, 11
+  index: -1
+ui-chevrons-l2
+  rotate: false
+  xy: 835, 987
+  size: 28, 26
+  orig: 57, 51
+  offset: 15, 11
+  index: -1
+ui-chevrons-l3
+  rotate: false
+  xy: 2, 955
+  size: 28, 34
+  orig: 57, 51
+  offset: 15, 11
+  index: -1
+ui-icon-metal
+  rotate: false
+  xy: 475, 939
+  size: 73, 74
+  orig: 99, 89
+  offset: 13, 9
+  index: -1
+ui-icon-offscreen-flail
+  rotate: false
+  xy: 550, 936
+  size: 73, 74
+  orig: 99, 89
+  offset: 13, 9
+  index: -1
+ui-icon-offscreen-idle
+  rotate: false
+  xy: 1415, 855
+  size: 73, 74
+  orig: 99, 89
+  offset: 13, 9
+  index: -1
+ui-icon-offscreen-walk
+  rotate: false
+  xy: 1415, 931
+  size: 73, 74
+  orig: 99, 89
+  offset: 13, 9
+  index: -1
+ui-icon-salvage
+  rotate: false
+  xy: 1490, 867
+  size: 73, 74
+  orig: 99, 89
+  offset: 13, 9
+  index: -1
+ui-icon-water
+  rotate: false
+  xy: 1565, 873
+  size: 73, 74
+  orig: 99, 89
+  offset: 13, 9
+  index: -1

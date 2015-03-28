@@ -77,9 +77,7 @@ public final class Overlord {
     }
 
     private static void initSprites() {
-        for (Sprite sprite : Sprite.values()) {
-            sprite.queueLoad();
-        }
+        Sprite.queueAtlasLoad();
     }
 
     public static void init() {
