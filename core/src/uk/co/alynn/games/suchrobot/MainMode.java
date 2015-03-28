@@ -52,7 +52,7 @@ public class MainMode implements GameMode {
     @Override
     public void start() {
         viewport = new FitViewport(WORLD_WIDTH / THE_SCALE, WORLD_HEIGHT
-                / THE_SCALE);
+                                   / THE_SCALE);
         batch = new SpriteBatch();
         sr = new ShapeRenderer();
 
@@ -72,7 +72,7 @@ public class MainMode implements GameMode {
                 break;
             if (node.type == NodeType.SPAWNER) {
                 Robot robot = new Robot(box.robots[requiredRobotIndex], nodes,
-                        node);
+                                        node);
                 robots.add(robot);
                 ++requiredRobotIndex;
             }
@@ -102,12 +102,12 @@ public class MainMode implements GameMode {
         batch.setProjectionMatrix(viewport.getCamera().combined);
 
         Texture l1 = Overlord.get().assetManager.get(
-                "Layout/LayoutPanes/Robotplane.png", Texture.class);
+                                                     "Layout/LayoutPanes/Robotplane.png", Texture.class);
         batch.begin();
         float worldPlaneWidth = l1.getWidth() * 0.5f;
         float worldPlaneHeight = l1.getHeight() * 0.5f;
         batch.draw(l1, -worldPlaneWidth / 2, -worldPlaneHeight / 2,
-                worldPlaneWidth, worldPlaneHeight);
+                   worldPlaneWidth, worldPlaneHeight);
         batch.end();
 
         sr.setProjectionMatrix(viewport.getCamera().combined);
@@ -121,7 +121,7 @@ public class MainMode implements GameMode {
                 case WELL:
                     if (robot.available()
                             && robot.gatheredFor(Constants.WELL_PUMP_TIME
-                                    .asFloat()) && visited.reserves != 0) {
+                                                 .asFloat()) && visited.reserves != 0) {
                         robot.pickUp(CargoType.WATER);
                         if (visited.reserves > 0) {
                             visited.reserves -= 1;
@@ -146,7 +146,7 @@ public class MainMode implements GameMode {
                 case WRECKAGE:
                     if (robot.available()
                             && robot.gatheredFor(Constants.SALVAGE_TIME
-                                    .asFloat()) && visited.reserves != 0) {
+                                                 .asFloat()) && visited.reserves != 0) {
                         robot.pickUp(CargoType.SALVAGE);
                         visited.reserves -= 1;
                     }
@@ -157,7 +157,7 @@ public class MainMode implements GameMode {
                 case MINE:
                     if (robot.available()
                             && robot.gatheredFor(Constants.METAL_MINE_TIME
-                                    .asFloat()) && visited.reserves != 0) {
+                                                 .asFloat()) && visited.reserves != 0) {
                         robot.pickUp(CargoType.METAL);
                         if (visited.reserves > 0) {
                             visited.reserves -= 1;
@@ -220,9 +220,9 @@ public class MainMode implements GameMode {
         sr.setColor(Color.YELLOW);
         if (selectedRobot != null) {
             sr.curve(selectedRobot.x() - CURVE_A, selectedRobot.y(),
-                    selectedRobot.x() - CURVE_B, selectedRobot.y() + CURVE_C,
-                    selectedRobot.x() + CURVE_B, selectedRobot.y() + CURVE_C,
-                    selectedRobot.x() + CURVE_A, selectedRobot.y(), 32);
+                     selectedRobot.x() - CURVE_B, selectedRobot.y() + CURVE_C,
+                     selectedRobot.x() + CURVE_B, selectedRobot.y() + CURVE_C,
+                     selectedRobot.x() + CURVE_A, selectedRobot.y(), 32);
         }
         sr.end();
 
@@ -263,22 +263,22 @@ public class MainMode implements GameMode {
             final float ICON_OFFSET = 50.0f;
             if (robot.peril > 0.0f && robot.perilDelta >= 0.0f) {
                 Sprite.ICON_OFFSCREEN_FLAIL.draw(batch, robot.x(), robot.y()
-                        + ICON_OFFSET);
+                                                 + ICON_OFFSET);
             } else {
                 switch (robot.carrying) {
                 case NOTHING:
                     break;
                 case WATER:
                     Sprite.ICON_WATER.draw(batch, robot.x(), robot.y()
-                            + ICON_OFFSET);
+                                           + ICON_OFFSET);
                     break;
                 case METAL:
                     Sprite.ICON_METAL.draw(batch, robot.x(), robot.y()
-                            + ICON_OFFSET);
+                                           + ICON_OFFSET);
                     break;
                 case SALVAGE:
                     Sprite.ICON_SALVAGE.draw(batch, robot.x(), robot.y()
-                            + ICON_OFFSET);
+                                             + ICON_OFFSET);
                     break;
                 }
             }
@@ -305,17 +305,17 @@ public class MainMode implements GameMode {
         if (selectedRobot != null) {
             sr.setColor(Color.YELLOW);
             sr.curve(selectedRobot.x() - CURVE_A, selectedRobot.y(),
-                    selectedRobot.x() - CURVE_B, selectedRobot.y() - CURVE_C,
-                    selectedRobot.x() + CURVE_B, selectedRobot.y() - CURVE_C,
-                    selectedRobot.x() + CURVE_A, selectedRobot.y(), 32);
+                     selectedRobot.x() - CURVE_B, selectedRobot.y() - CURVE_C,
+                     selectedRobot.x() + CURVE_B, selectedRobot.y() - CURVE_C,
+                     selectedRobot.x() + CURVE_A, selectedRobot.y(), 32);
         }
         sr.end();
 
         Texture fplane = Overlord.get().assetManager.get(
-                "Layout/LayoutPanes/FrontObjects.png", Texture.class);
+                                                         "Layout/LayoutPanes/FrontObjects.png", Texture.class);
         batch.begin();
         batch.draw(fplane, -worldPlaneWidth / 2, -worldPlaneHeight / 2,
-                worldPlaneWidth, worldPlaneHeight);
+                   worldPlaneWidth, worldPlaneHeight);
 
         Matrix4 proj = overlayProjection;
         proj.set(batch.getProjectionMatrix());
@@ -337,11 +337,11 @@ public class MainMode implements GameMode {
         Color INFOCOL = Color.WHITE;
 
         BitmapFont fnt = Overlord.get().assetManager.get("bitstream.fnt",
-                BitmapFont.class);
+                                                         BitmapFont.class);
         batch.setShader(Overlord.get().getFontShader());
         fnt.setColor(INFOCOL);
         fnt.drawMultiLine(batch, "Day: " + box.day, -(1024 / 2) + 10,
-                (640 / 2) - 10);
+                          (640 / 2) - 10);
         fnt.setColor(Color.WHITE);
         batch.setShader(null);
         box.displayInfo(batch, (1024 / 2) - 30, (640 / 2) - 30, 1.0f, false);
@@ -369,7 +369,7 @@ public class MainMode implements GameMode {
                     if (home.type != NodeType.SPAWNER)
                         continue;
                     float distance = (float) Math.hypot(robot.x() - home.x,
-                            robot.y() - home.y);
+                                                        robot.y() - home.y);
                     if (distance <= ROBOT_SAFE_DISTANCE) {
                         isSafe = true;
                     }
@@ -415,7 +415,7 @@ public class MainMode implements GameMode {
 
             if (initialBox.activeRobots() > box.activeRobots()) {
                 messages.add((initialBox.activeRobots() - box.activeRobots())
-                        + " robots didn't make it back.");
+                             + " robots didn't make it back.");
             }
             if (initialBox.salvage < box.salvage) {
                 if (initialBox.salvage == 0) {
@@ -426,7 +426,7 @@ public class MainMode implements GameMode {
             }
             if (initialBox.metal < box.metal) {
                 messages.add("Picked up " + (box.metal - initialBox.metal)
-                        + " metal.");
+                             + " metal.");
             }
             messages.add((10 - box.salvage) + " pieces of ship left to get.");
             if (box.water <= 1) {
@@ -489,13 +489,13 @@ public class MainMode implements GameMode {
                 effectiveX = -W_;
             }
             selectedSprite.draw(batch, effectiveX * THE_SCALE, effectiveY
-                    * THE_SCALE, 1.6f);
+                                * THE_SCALE, 1.6f);
         }
     }
 
     private void renderFG() {
         Texture l3 = Overlord.get().assetManager.get(
-                "Layout/LayoutPanes/Filter.png", Texture.class);
+                                                     "Layout/LayoutPanes/Filter.png", Texture.class);
         batch.draw(l3, -1, -1, 2, 2);
     }
 
@@ -558,11 +558,11 @@ public class MainMode implements GameMode {
 
     private void renderBG() {
         Texture l1 = Overlord.get().assetManager.get(
-                "Layout/LayoutPanes/Parallaxrear1.png", Texture.class);
+                                                     "Layout/LayoutPanes/Parallaxrear1.png", Texture.class);
         Texture l2 = Overlord.get().assetManager.get(
-                "Layout/LayoutPanes/Parallaxrear2.png", Texture.class);
+                                                     "Layout/LayoutPanes/Parallaxrear2.png", Texture.class);
         Texture l3 = Overlord.get().assetManager.get(
-                "Layout/LayoutPanes/Sky.png", Texture.class);
+                                                     "Layout/LayoutPanes/Sky.png", Texture.class);
         batch.begin();
         final float L1_FACTOR = 0.0003f;
         final float L2_FACTOR = 0.00006f;
@@ -591,7 +591,7 @@ public class MainMode implements GameMode {
         float nearestDist = Float.POSITIVE_INFINITY;
         for (PathNode node : nodes) {
             float dist = (float) Math.hypot(node.x - worldCoords.x, node.y
-                    - worldCoords.y);
+                                            - worldCoords.y);
             if (dist <= nearestDist) {
                 nearestDist = dist;
                 nearestNode = node;
@@ -613,7 +613,7 @@ public class MainMode implements GameMode {
         float bestPointerDistance = Float.POSITIVE_INFINITY;
         for (Robot robot : robots) {
             float distanceFromPointer = (float) Math.hypot(robot.x()
-                    - worldCoords.x, robot.y() - worldCoords.y);
+                                                           - worldCoords.x, robot.y() - worldCoords.y);
             if (distanceFromPointer < ROBOT_SELECT_DISTANCE) {
                 if (selectedRobot == null
                         || distanceFromPointer < bestPointerDistance) {
