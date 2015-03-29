@@ -12,4 +12,3 @@ test:
     - ./generate-apps.sh
     - cp distributions/final/* $CIRCLE_ARTIFACTS/
     - python node-funge/funge.py core/assets/nodes.txt $CIRCLE_ARTIFACTS/node-map.svg
-
