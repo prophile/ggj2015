@@ -21,7 +21,6 @@ public class TitleScreen extends ScreenMode {
                 loadThings();
             }
         }).start();
-        loadThings();
     }
 
     @Override
