@@ -39,6 +39,9 @@ public class MainMode implements GameMode {
     private final Matrix4 overlayProjection = new Matrix4();
 
     public static void init() {
+        if (nodes != null) {
+            return;
+        }
         try {
             nodes = NodeSetReader.readNodeSet("nodes.txt");
         } catch (IOException e) {
@@ -479,7 +482,7 @@ public class MainMode implements GameMode {
         }
         results.add("Game over");
         SFX.LOSE.play();
-        return new ResultsScreen(results, null);
+        return new ResultsScreen(results, new TitleScreen());
     }
 
     private GameMode generateWinScreen() {
@@ -489,7 +492,7 @@ public class MainMode implements GameMode {
         results.add("Finally I can escape!");
         results.add("You Escaped!");
         SFX.WIN.play();
-        return new ResultsScreen(results, null);
+        return new ResultsScreen(results, new TitleScreen());
     }
 
     private void updateForRobotLosses() {
