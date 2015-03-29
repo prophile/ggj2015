@@ -357,7 +357,9 @@ public class MainMode implements GameMode {
                             visited.reserves -= 1;
                         }
                     }
-                    if (visited.reserves > 0) {
+                    if (visited.reserves > 0 &&
+                        robot.available() &&
+                        robot.carrying == CargoType.NOTHING) {
                         SFX.WATER_PUMP.loop();
                     }
                     break;
@@ -380,7 +382,9 @@ public class MainMode implements GameMode {
                         robot.pickUp(CargoType.SALVAGE);
                         visited.reserves -= 1;
                     }
-                    if (visited.reserves > 0) {
+                    if (visited.reserves > 0 &&
+                        robot.available() &&
+                        robot.carrying == CargoType.NOTHING) {
                         SFX.SALVAGE.loop();
                     }
                     break;
@@ -393,7 +397,9 @@ public class MainMode implements GameMode {
                             visited.reserves -= 1;
                         }
                     }
-                    if (visited.reserves > 0) {
+                    if (visited.reserves > 0 &&
+                        robot.available() &&
+                        robot.carrying == CargoType.NOTHING) {
                         SFX.METAL_MINE.loop();
                     }
                     break;
