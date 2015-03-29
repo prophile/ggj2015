@@ -57,12 +57,15 @@ public class NodeSet implements Iterable<PathNode> {
     }
 
     public void compile() {
+        long startTime = System.currentTimeMillis();
         Map<RoutingKey, PathNode> nextHops = new HashMap<RoutingKey, PathNode>();
         for (PathNode node : this) {
             runDijkstra(nextHops, node);
         }
         generateRoutingTable(nextHops);
         System.gc();
+        long endTime = System.currentTimeMillis();
+        System.err.println("Node map built in " + (endTime - startTime) + "ms");
     }
 
     private void generateRoutingTable(Map<RoutingKey, PathNode> nextHops) {
