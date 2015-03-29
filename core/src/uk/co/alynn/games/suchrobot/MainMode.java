@@ -106,8 +106,8 @@ public class MainMode implements GameMode {
 
         Texture l1 = Overlord.get().assetManager.get("Layout/LayoutPanes/Robotplane.png", Texture.class);
         batch.begin();
-        float worldPlaneWidth = l1.getWidth() * 0.5f;
-        float worldPlaneHeight = l1.getHeight() * 0.5f;
+        float worldPlaneWidth = l1.getWidth();
+        float worldPlaneHeight = l1.getHeight();
         batch.draw(l1, -worldPlaneWidth / 2, -worldPlaneHeight / 2,
                    worldPlaneWidth, worldPlaneHeight);
         batch.end();
