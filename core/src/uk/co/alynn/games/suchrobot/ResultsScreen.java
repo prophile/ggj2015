@@ -35,7 +35,7 @@ public class ResultsScreen implements GameMode {
     }
 
     @Override
-    public GameMode tick(ScreenEdge screenEdge) {
+    public GameMode tick() {
         final float FADE_TIME = Constants.RESULTS_FADE_TIME.asFloat();
         final float PAUSE_TIME = Constants.RESULTS_HOLD_TIME.asFloat();
         final float ADJUST = 60.0f;
@@ -44,7 +44,7 @@ public class ResultsScreen implements GameMode {
         int i = 0;
         float y = 150.0f;
         BitmapFont fnt = Overlord.get().assetManager.get("bitstream.fnt",
-                BitmapFont.class);
+                                                         BitmapFont.class);
         for (String resultLine : results) {
             float offsetTime = time - (i * (PAUSE_TIME + FADE_TIME));
             float alpha;
@@ -82,6 +82,6 @@ public class ResultsScreen implements GameMode {
     }
 
     @Override
-    public void rightClick(int mouseX, int mouseY) {
+    public void drag(int delX, int delY) {
     }
 }

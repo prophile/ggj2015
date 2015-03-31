@@ -32,7 +32,7 @@ public abstract class ScreenMode implements GameMode {
     }
 
     @Override
-    public GameMode tick(ScreenEdge screenEdge) {
+    public GameMode tick() {
         batch.setProjectionMatrix(viewport.getCamera().combined);
         batch.begin();
         batch.draw(tex, -(tex.getWidth() / 2), -(tex.getHeight() / 2));
@@ -60,8 +60,7 @@ public abstract class ScreenMode implements GameMode {
     }
 
     @Override
-    public void rightClick(int mouseX, int mouseY) {
-        click(mouseX, mouseY);
+    public void drag(int delX, int delY) {
     }
 
 }

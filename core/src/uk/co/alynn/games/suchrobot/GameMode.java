@@ -5,11 +5,10 @@ public interface GameMode {
 
     public void stop();
 
-    public GameMode tick(ScreenEdge screenEdge);
+    public GameMode tick();
 
     public void resize(int width, int height);
 
     public void click(int mouseX, int mouseY);
-
-    public void rightClick(int mouseX, int mouseY);
+    public void drag(int delX, int delY);
 }

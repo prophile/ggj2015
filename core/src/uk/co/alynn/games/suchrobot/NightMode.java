@@ -63,7 +63,7 @@ public class NightMode implements GameMode {
     }
 
     @Override
-    public GameMode tick(ScreenEdge screenEdge) {
+    public GameMode tick() {
         SFX.NIGHT_AMB.loop();
 
         boolean nextSelected = mouseInND();
@@ -203,8 +203,7 @@ public class NightMode implements GameMode {
     }
 
     @Override
-    public void rightClick(int mouseX, int mouseY) {
-        click(mouseX, mouseY);
+    public void drag(int delX, int delY) {
     }
 
 }

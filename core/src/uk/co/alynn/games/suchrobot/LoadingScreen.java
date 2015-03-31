@@ -25,7 +25,7 @@ public class LoadingScreen implements GameMode {
     }
 
     @Override
-    public GameMode tick(ScreenEdge screenEdge) {
+    public GameMode tick() {
         AssetManager mgr = Overlord.get().assetManager;
         boolean complete = mgr.update(50);
         if (complete) {
@@ -37,8 +37,8 @@ public class LoadingScreen implements GameMode {
         renderer.setColor(Color.WHITE);
         renderer.begin(ShapeType.Filled);
         renderer.arc(0.0f, 0.0f, Gdx.graphics.getHeight() * 0.02f, 90.0f,
-                -360.0f * mgr.getProgress(),
-                3 + (int) (180 * mgr.getProgress()));
+                     -360.0f * mgr.getProgress(),
+                     3 + (int) (180 * mgr.getProgress()));
         renderer.end();
         return this;
     }
@@ -53,7 +53,7 @@ public class LoadingScreen implements GameMode {
     }
 
     @Override
-    public void rightClick(int mouseX, int mouseY) {
+    public void drag(int delX, int delY) {
     }
 
 }

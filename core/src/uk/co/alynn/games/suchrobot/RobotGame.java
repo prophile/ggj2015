@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
@@ -47,6 +46,7 @@ public class RobotGame extends ApplicationAdapter {
         Overlord.init();
         setMode(new LoadingScreen());
         Gdx.input.setInputProcessor(new InputProcessor() {
+            private int oldX, oldY;
 
             @Override
             public boolean touchUp(int screenX, int screenY, int pointer,
@@ -57,8 +57,16 @@ public class RobotGame extends ApplicationAdapter {
 
             @Override
             public boolean touchDragged(int screenX, int screenY, int pointer) {
-                // TODO Auto-generated method stub
-                return false;
+                if (mode == null)
+                    return false;
+                if (pointer != 0)
+                    return false;
+                int dx = screenX - oldX;
+                int dy = screenY - oldY;
+                oldX = screenX;
+                oldY = screenY;
+                mode.drag(dx, -dy);
+                return true;
             }
 
             @Override
@@ -68,8 +76,6 @@ public class RobotGame extends ApplicationAdapter {
                     return false;
                 if (button == 0)
                     mode.click(screenX, screenY);
-                else if (button == 1)
-                    mode.rightClick(screenX, screenY);
                 else
                     return false;
                 return true;
@@ -83,6 +89,8 @@ public class RobotGame extends ApplicationAdapter {
 
             @Override
             public boolean mouseMoved(int screenX, int screenY) {
+                oldX = screenX;
+                oldY = screenY;
                 // TODO Auto-generated method stub
                 return false;
             }
@@ -112,36 +120,8 @@ public class RobotGame extends ApplicationAdapter {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Animation.update();
-        int mx = Gdx.input.getX();
-        int my = Gdx.input.getY();
-        int px = 0, py = 0;
-        int margin = Constants.SCREEN_EDGE_WIDTH.asInt();
-        if (mx < margin) {
-            px = -1;
-        } else if (mx > (Gdx.graphics.getWidth() - margin)) {
-            px = 1;
-        }
-        if (my < margin) {
-            py = 1;
-        } else if (my > (Gdx.graphics.getHeight() - margin)) {
-            py = -1;
-        }
-        if (Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP)) {
-            py += 1;
-        }
-        if (Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN)) {
-            py += -1;
-        }
-        if (Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT)) {
-            px += -1;
-        }
-        if (Gdx.input.isKeyPressed(Keys.D)
-                || Gdx.input.isKeyPressed(Keys.RIGHT)) {
-            px += 1;
-        }
-        ScreenEdge edge = ScreenEdge.getEdge(px, py);
         if (mode != null) {
-            GameMode nextMode = mode.tick(edge);
+            GameMode nextMode = mode.tick();
             setMode(nextMode);
         }
         SFX.updateLoops();

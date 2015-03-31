@@ -98,10 +98,8 @@ public class MainMode implements GameMode {
     static final Matrix4 IDENTITY_MATRIX = new Matrix4();
 
     @Override
-    public GameMode tick(ScreenEdge screenEdge) {
+    public GameMode tick() {
         float dt = Gdx.graphics.getDeltaTime();
-
-        pan(screenEdge, dt);
 
         batch.setProjectionMatrix(IDENTITY_MATRIX);
         renderBG();
@@ -358,8 +356,8 @@ public class MainMode implements GameMode {
                         }
                     }
                     if (visited.reserves > 0 &&
-                        robot.available() &&
-                        robot.carrying == CargoType.NOTHING) {
+                            robot.available() &&
+                            robot.carrying == CargoType.NOTHING) {
                         SFX.WATER_PUMP.loop();
                     }
                     break;
@@ -383,8 +381,8 @@ public class MainMode implements GameMode {
                         visited.reserves -= 1;
                     }
                     if (visited.reserves > 0 &&
-                        robot.available() &&
-                        robot.carrying == CargoType.NOTHING) {
+                            robot.available() &&
+                            robot.carrying == CargoType.NOTHING) {
                         SFX.SALVAGE.loop();
                     }
                     break;
@@ -398,8 +396,8 @@ public class MainMode implements GameMode {
                         }
                     }
                     if (visited.reserves > 0 &&
-                        robot.available() &&
-                        robot.carrying == CargoType.NOTHING) {
+                            robot.available() &&
+                            robot.carrying == CargoType.NOTHING) {
                         SFX.METAL_MINE.loop();
                     }
                     break;
@@ -576,43 +574,11 @@ public class MainMode implements GameMode {
         batch.draw(l3, -1, -1, 2, 2);
     }
 
-    private void pan(ScreenEdge screenEdge, float dt) {
-        float dx = 0.0f, dy = 0.0f;
-        float diagonalPan = 0.78f;
-        switch (screenEdge) {
-        case NONE:
-            break;
-        case BOTTOM:
-            dy = -1;
-            break;
-        case BOTTOM_LEFT:
-            dx = -diagonalPan;
-            dy = -diagonalPan;
-            break;
-        case BOTTOM_RIGHT:
-            dx = diagonalPan;
-            dy = -diagonalPan;
-            break;
-        case LEFT:
-            dx = -1;
-            break;
-        case RIGHT:
-            dx = 1;
-            break;
-        case TOP:
-            dy = 1;
-            break;
-        case TOP_LEFT:
-            dx = -diagonalPan;
-            dy = diagonalPan;
-            break;
-        case TOP_RIGHT:
-            dx = diagonalPan;
-            dy = diagonalPan;
-            break;
-        default:
-            break;
-        }
+    @Override
+    public void drag(int delX, int delY) {
+        float dx = -delX / THE_SCALE;
+        float dy = -delY / THE_SCALE;
+
         final float limitX = Constants.PAN_LIMIT_X.asFloat();
         final float limitY = Constants.PAN_LIMIT_Y.asFloat();
 
@@ -625,10 +591,9 @@ public class MainMode implements GameMode {
         if (offY > limitY && dy > 0)
             dy = 0;
 
-        float ss = Constants.SCROLL_SPEED.asFloat();
-        viewport.getCamera().translate(dx * ss * dt, dy * ss * dt, 0.0f);
-        offX += dx * dt * ss;
-        offY += dy * dt * ss;
+        viewport.getCamera().translate(dx, dy, 0.0f);
+        offX += dx;
+        offY += dy;
 
         viewport.getCamera().update();
     }
@@ -657,34 +622,14 @@ public class MainMode implements GameMode {
     private static final float CURVE_C = 7.0f;
 
     @Override
-    public void rightClick(int mouseX, int mouseY) {
-        if (selectedRobot == null)
-            return;
-        rcUnproject.x = mouseX;
-        rcUnproject.y = mouseY;
-        Vector2 worldCoords = viewport.unproject(rcUnproject);
-
-        PathNode nearestNode = null;
-        float nearestDist = Float.POSITIVE_INFINITY;
-        for (PathNode node : nodes) {
-            float dist = (float) Math.hypot(node.x - worldCoords.x, node.y
-                                            - worldCoords.y);
-            if (dist <= nearestDist) {
-                nearestDist = dist;
-                nearestNode = node;
-            }
-        }
-        selectedRobot.selectTarget(nearestNode);
-        SFX.SELECT_TARGET.play();
-    }
-
-    @Override
     public void click(int mouseX, int mouseY) {
         rcUnproject.x = mouseX;
         rcUnproject.y = mouseY;
         Vector2 worldCoords = viewport.unproject(rcUnproject);
 
         final float ROBOT_SELECT_DISTANCE = 70.0f;
+
+        Robot previousSelection = selectedRobot;
 
         selectedRobot = null;
         float bestPointerDistance = Float.POSITIVE_INFINITY;
@@ -702,10 +647,22 @@ public class MainMode implements GameMode {
 
         if (selectedRobot != null) {
             selectedRobot.perilDelta = -1.0f;
-            System.err.println("SELECT GUY");
             SFX.SELECT_ROBOT.play();
-        } else {
-            System.err.println("UNSELECT GUY");
+        } else if (previousSelection != null) {
+            selectedRobot = previousSelection;
+
+            PathNode nearestNode = null;
+            float nearestDist = Float.POSITIVE_INFINITY;
+            for (PathNode node : nodes) {
+                float dist = (float) Math.hypot(node.x - worldCoords.x, node.y
+                                                - worldCoords.y);
+                if (dist <= nearestDist) {
+                    nearestDist = dist;
+                    nearestNode = node;
+                }
+            }
+            selectedRobot.selectTarget(nearestNode);
+            SFX.SELECT_TARGET.play();
         }
     }
 }
