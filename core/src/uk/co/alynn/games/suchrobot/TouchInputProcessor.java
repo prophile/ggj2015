@@ -10,12 +10,23 @@ final class TouchInputProcessor implements InputProcessor {
     }
 
     private int oldX, oldY;
+    private int touchStartX, touchStartY;
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer,
             int button) {
-        // TODO Auto-generated method stub
-        return false;
+        if (pointer != 0 || button != 0)
+            return false;
+        oldX = screenX;
+        oldY = screenY;
+        if (robotGame.mode == null)
+            return false;
+        int squareDistance = (screenX - touchStartX)*(screenX - touchStartX) + (screenY - touchStartY)*(screenY - touchStartY);
+        if (squareDistance > 30*30) {
+            return false;
+        }
+        robotGame.mode.click(screenX, screenY);
+        return true;
     }
 
     @Override
@@ -35,14 +46,12 @@ final class TouchInputProcessor implements InputProcessor {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer,
             int button) {
-        if (robotGame.mode == null)
+        if (pointer != 0 || button != 0)
             return false;
-        if (button == 0) {
-            robotGame.mode.click(screenX, screenY);
-            oldX = screenX;
-            oldY = screenY;
-        } else
-            return false;
+        oldX = screenX;
+        touchStartX = screenX;
+        oldY = screenY;
+        touchStartY = screenY;
         return true;
     }
 
