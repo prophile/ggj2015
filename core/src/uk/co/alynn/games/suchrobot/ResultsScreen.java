@@ -25,7 +25,7 @@ public class ResultsScreen implements GameMode {
     public void start() {
         batch = new SpriteBatch();
         batch.setShader(Overlord.get().getFontShader());
-        viewport = new ExtendViewport(400.0f, 400.0f);
+        viewport = new ExtendViewport(600.0f, 600.0f);
         viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
@@ -42,7 +42,7 @@ public class ResultsScreen implements GameMode {
         final float END_TIME = Constants.RESULTS_END_TIME.asFloat();
         batch.setProjectionMatrix(viewport.getCamera().combined);
         int i = 0;
-        float y = 150.0f;
+        float y = 230.0f;
         BitmapFont fnt = Overlord.get().assetManager.get("bitstream.fnt",
                                                          BitmapFont.class);
         for (String resultLine : results) {
