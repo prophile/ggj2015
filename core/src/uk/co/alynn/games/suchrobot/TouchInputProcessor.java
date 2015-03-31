@@ -37,9 +37,11 @@ final class TouchInputProcessor implements InputProcessor {
             int button) {
         if (robotGame.mode == null)
             return false;
-        if (button == 0)
+        if (button == 0) {
             robotGame.mode.click(screenX, screenY);
-        else
+            oldX = screenX;
+            oldY = screenY;
+        } else
             return false;
         return true;
     }
