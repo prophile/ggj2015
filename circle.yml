@@ -6,6 +6,7 @@ dependencies:
     - jres
 test:
   override:
+    - ./compile-audio.sh ogg
     - gradle dist
   post:
     - cp desktop/build/libs/desktop-1.0.jar $CIRCLE_ARTIFACTS/robogame.jar

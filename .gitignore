@@ -66,3 +66,4 @@ build/
 distributions
 jres
 .nodertcache
+core/assets/audio

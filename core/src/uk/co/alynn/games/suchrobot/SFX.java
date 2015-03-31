@@ -4,21 +4,22 @@ import java.util.Set;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.Gdx;
 
 public enum SFX {
-    SELECT_ROBOT("sfx/menu sounds/click 3"),
-    SELECT_TARGET("sfx/menu sounds/new new robo attention"),
-    PURCHASE_NEW("sfx/roboto upgrade/electric saw spraying hammer"),
-    PURCHASE_UPGRADE("sfx/roboto upgrade/robo upgrade tada"),
-    WIN("sfx/lift off softer"),
-    LOSE("sfx/new alarm"),
-    MUSIC("music tracks/main track 70 seconds"),
-    METAL_MINE("sfx/hits/eargty hit 2"),
-    SALVAGE("sfx/hits/metal hit 1"),
-    WATER_PUMP("sfx/hits/water loop"),
-    QUICKSAND("sfx/robot noises/robot in distress 2"),
-    ENGINES("sfx/engine/new engine/full rev"),
-    NIGHT_AMB("ambience loops/wind loop ogg");
+    SELECT_ROBOT("intf-sel"),
+    SELECT_TARGET("intf-send"),
+    PURCHASE_NEW("intf-purchase"),
+    PURCHASE_UPGRADE("intf-upgrade"),
+    WIN("victory"),
+    LOSE("game-over"),
+    MUSIC("music"),
+    METAL_MINE("hit-mine"),
+    SALVAGE("hit-salvage"),
+    WATER_PUMP("hit-well"),
+    QUICKSAND("quicksand"),
+    ENGINES("engine"),
+    NIGHT_AMB("night-wind");
 
     private static Set<Sound> previousLooping = new ArraySet<Sound>(32);
     private static Set<Sound> currentLooping = new ArraySet<Sound>(32);
@@ -27,8 +28,19 @@ public enum SFX {
 
     public String path;
 
+    private static String extension() {
+        switch (Gdx.app.getType()) {
+        case iOS:
+            return ".aifc";
+        case Desktop:
+            return ".ogg";
+        default:
+            return ".wav";
+        }
+    }
+
     private SFX(String path) {
-        this.path = "audio/" + path + ".ogg";
+        this.path = "audio/" + path + extension();
     }
 
     public void queueLoad() {
