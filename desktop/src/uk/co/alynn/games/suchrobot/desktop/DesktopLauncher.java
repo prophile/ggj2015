@@ -16,6 +16,8 @@ public class DesktopLauncher {
         config.vSyncEnabled = true;
         config.resizable = true;
 
+        config.useHDPI = true;
+
         new LwjglApplication(new RobotGame(), config);
     }
 }
