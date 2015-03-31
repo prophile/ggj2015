@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 
@@ -45,74 +44,7 @@ public class RobotGame extends ApplicationAdapter {
         loadConstants();
         Overlord.init();
         setMode(new LoadingScreen());
-        Gdx.input.setInputProcessor(new InputProcessor() {
-            private int oldX, oldY;
-
-            @Override
-            public boolean touchUp(int screenX, int screenY, int pointer,
-                    int button) {
-                // TODO Auto-generated method stub
-                return false;
-            }
-
-            @Override
-            public boolean touchDragged(int screenX, int screenY, int pointer) {
-                if (mode == null)
-                    return false;
-                if (pointer != 0)
-                    return false;
-                int dx = screenX - oldX;
-                int dy = screenY - oldY;
-                oldX = screenX;
-                oldY = screenY;
-                mode.drag(dx, -dy);
-                return true;
-            }
-
-            @Override
-            public boolean touchDown(int screenX, int screenY, int pointer,
-                    int button) {
-                if (mode == null)
-                    return false;
-                if (button == 0)
-                    mode.click(screenX, screenY);
-                else
-                    return false;
-                return true;
-            }
-
-            @Override
-            public boolean scrolled(int amount) {
-                // TODO Auto-generated method stub
-                return false;
-            }
-
-            @Override
-            public boolean mouseMoved(int screenX, int screenY) {
-                oldX = screenX;
-                oldY = screenY;
-                // TODO Auto-generated method stub
-                return false;
-            }
-
-            @Override
-            public boolean keyUp(int keycode) {
-                // TODO Auto-generated method stub
-                return false;
-            }
-
-            @Override
-            public boolean keyTyped(char character) {
-                // TODO Auto-generated method stub
-                return false;
-            }
-
-            @Override
-            public boolean keyDown(int keycode) {
-                // TODO Auto-generated method stub
-                return false;
-            }
-        });
+        Gdx.input.setInputProcessor(new TouchInputProcessor(this));
     }
 
     @Override
