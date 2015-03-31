@@ -112,11 +112,11 @@ public final class Robot {
         }
         float distance = (float) Math.hypot(sourceNode.x - destNode.x,
                 sourceNode.y - destNode.y);
-        float increment = Constants.SPEED.asFloat() * dt / distance;
+        float increment = Constants.speed() * dt / distance;
         if (cls == RobotClass.PAUL) {
-            increment *= Constants.L2_SPEED_FACTOR.asFloat();
+            increment *= Constants.l2SpeedFactor();
         } else if (cls == RobotClass.JOHN) {
-            increment *= Constants.L3_SPEED_FACTOR.asFloat();
+            increment *= Constants.l3SpeedFactor();
         }
         if (peril > 0.0f) {
             increment = 0.0f;
@@ -125,8 +125,7 @@ public final class Robot {
         if (progress >= 1.0f && peril == 0.0f) {
             if (destNode.type == NodeType.QUICKSAND
                     && !quicksandImmune
-                    && MathUtils.randomBoolean(Constants.QUICKSAND_CHANCE
-                            .asFloat())) {
+                    && MathUtils.randomBoolean(Constants.quicksandChance())) {
                 peril = 0.0001f;
                 perilDelta = 1.0f;
                 quicksandImmune = true;
@@ -156,9 +155,9 @@ public final class Robot {
 
     public boolean gatheredFor(float requiredTime) {
         if (cls == RobotClass.PAUL) {
-            requiredTime /= Constants.L2_GATHER_FACTOR.asFloat();
+            requiredTime /= Constants.l2GatherFactor();
         } else if (cls == RobotClass.JOHN) {
-            requiredTime /= Constants.L3_GATHER_FACTOR.asFloat();
+            requiredTime /= Constants.l3GatherFactor();
         }
         return accumulatedTimeAt > requiredTime;
     }

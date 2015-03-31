@@ -27,7 +27,7 @@ public class TitleScreen extends ScreenMode {
     @Override
     synchronized GameMode advance(int x, int y) {
         Box box = new Box();
-        for (int i = 0; i < Constants.INITIAL_ROBOTS.asInt(); ++i) {
+        for (int i = 0; i < Constants.initialRobots(); ++i) {
             box.robots[i] = RobotClass.GEORGE;
         }
         return new MainMode(box);

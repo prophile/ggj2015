@@ -36,10 +36,10 @@ public class ResultsScreen implements GameMode {
 
     @Override
     public GameMode tick() {
-        final float FADE_TIME = Constants.RESULTS_FADE_TIME.asFloat();
-        final float PAUSE_TIME = Constants.RESULTS_HOLD_TIME.asFloat();
+        final float FADE_TIME = Constants.resultsFadeTime();
+        final float PAUSE_TIME = Constants.resultsHoldTime();
         final float ADJUST = 60.0f;
-        final float END_TIME = Constants.RESULTS_END_TIME.asFloat();
+        final float END_TIME = Constants.resultsEndTime();
         batch.setProjectionMatrix(viewport.getCamera().combined);
         int i = 0;
         float y = 230.0f;

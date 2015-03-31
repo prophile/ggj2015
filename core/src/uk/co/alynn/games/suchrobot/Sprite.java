@@ -116,7 +116,7 @@ public enum Sprite {
                    scale_ * (flipX ? -1.0f : 1.0f),
                    scale_,
                    0.0f);
-        if (Constants.DEBUG_SPRITES.asBoolean()) {
+        if (Constants.debugSprites()) {
             batch.end();
             if (debugRenderer == null)
                 debugRenderer = new ShapeRenderer();

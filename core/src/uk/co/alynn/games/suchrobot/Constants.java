@@ -1,44 +1,97 @@
 package uk.co.alynn.games.suchrobot;
 
-import java.util.Scanner;
-
-public enum Constants {
-    SCALE, SPEED,
-    L2_SPEED_FACTOR, L2_GATHER_FACTOR,
-    L3_SPEED_FACTOR, L3_GATHER_FACTOR,
-    RESOURCE_DISPLAY_SPACING,
-    INITIAL_ROBOTS, SCREEN_EDGE_WIDTH, MAX_ROBOTS,
-    ROBOT_L2_COST, ROBOT_L3_COST,
-    INITIAL_WATER, INITIAL_METAL, INITIAL_SALVAGE,
-    TARGET_SALVAGE, DAY_LENGTH,
-    WELL_PUMP_TIME, RESULTS_FADE_TIME, RESULTS_HOLD_TIME, RESULTS_END_TIME,
-    ROBOT_METAL_COST, QUICKSAND_CHANCE, ROBOT_ADDITIONAL_METAL_COST,
-    METAL_MINE_TIME, SALVAGE_TIME, SAFE_ZONE_RADIUS,
-    LAST_DAY,
-    DEBUG_NODES, DEBUG_SPRITES,
-    PAN_LIMIT_X, PAN_LIMIT_Y;
-
-    public float asFloat() {
-        return lookups[ordinal()];
+public abstract class Constants {
+    public static int robotL3Cost() {
+        return 4;
     }
-
-    public boolean asBoolean() {
-        return asFloat() > 0.5f;
+    public static int initialMetal() {
+        return 1;
     }
-
-    public int asInt() {
-        return (int) asFloat();
+    public static boolean debugNodes() {
+        return false;
     }
-
-    private static float lookups[];
-
-    public static void loadConstants(Scanner source) {
-        lookups = new float[Constants.values().length];
-        while (source.hasNext()) {
-            String name = source.next();
-            Constants k = Constants.valueOf(name);
-            float value = source.nextFloat();
-            lookups[k.ordinal()] = value;
-        }
+    public static float safeZoneRadius() {
+        return 100.0f;
+    }
+    public static int lastDay() {
+        return 10;
+    }
+    public static float resultsFadeTime() {
+        return 0.4f;
+    }
+    public static float speed() {
+        return 70.0f;
+    }
+    public static int initialWater() {
+        return 1;
+    }
+    public static float l2GatherFactor() {
+        return 1.5f;
+    }
+    public static int robotL2Cost() {
+        return 3;
+    }
+    public static float resourceDisplaySpacing() {
+        return 40.0f;
+    }
+    public static float panLimitX() {
+        return 600.0f;
+    }
+    public static float l3SpeedFactor() {
+        return 2.0f;
+    }
+    public static float wellPumpTime() {
+        return 5.0f;
+    }
+    public static float resultsEndTime() {
+        return 6.0f;
+    }
+    public static int robotAdditionalMetalCost() {
+        return 1;
+    }
+    public static int maxRobots() {
+        return 5;
+    }
+    public static boolean debugSprites() {
+        return false;
+    }
+    public static int initialRobots() {
+        return 1;
+    }
+    public static float quicksandChance() {
+        return 0.08f;
+    }
+    public static float l2SpeedFactor() {
+        return 1.5f;
+    }
+    public static int robotMetalCost() {
+        return 2;
+    }
+    public static float resultsHoldTime() {
+        return 0.3f;
+    }
+    public static int targetSalvage() {
+        return 10;
+    }
+    public static float scale() {
+        return 1.6f;
+    }
+    public static float panLimitY() {
+        return 500.0f;
+    }
+    public static float salvageTime() {
+        return 5.0f;
+    }
+    public static float dayLength() {
+        return 70.0f;
+    }
+    public static float l3GatherFactor() {
+        return 2.0f;
+    }
+    public static float metalMineTime() {
+        return 5.0f;
+    }
+    public static int initialSalvage() {
+        return 0;
     }
 }

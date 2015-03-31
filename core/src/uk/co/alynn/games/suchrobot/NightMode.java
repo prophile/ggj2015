@@ -84,7 +84,7 @@ public class NightMode implements GameMode {
         }
         String purchaseType = "";
         int robotCost = 0;
-        int maxRobots = Constants.MAX_ROBOTS.asInt();
+        int maxRobots = Constants.maxRobots();
         boolean anyPurchasesPresented = false;
         for (int i = 0; i < maxRobots; ++i) {
             int colIndex = (i % 4);
@@ -102,8 +102,8 @@ public class NightMode implements GameMode {
             boolean mo = mouseInBox(lbx, ubx, lby, uby);
             boolean purchasable = !purchased && !anyPurchasesPresented;
             if (purchasable && mo) {
-                robotCost = Constants.ROBOT_METAL_COST.asInt()
-                        + Constants.ROBOT_ADDITIONAL_METAL_COST.asInt() * i;
+                robotCost = Constants.robotMetalCost()
+                        + Constants.robotAdditionalMetalCost() * i;
                 purchaseType = "Buy Extra Robot";
                 if (clicked) {
                     if (box.metal >= robotCost) {
@@ -115,7 +115,7 @@ public class NightMode implements GameMode {
                 }
             } else if (purchased && mo && box.robots[i] == RobotClass.GEORGE) {
                 purchaseType = "Upgrade to level 2";
-                robotCost = Constants.ROBOT_L2_COST.asInt();
+                robotCost = Constants.robotL2Cost();
                 if (clicked) {
                     if (box.metal >= robotCost) {
                         box.metal -= robotCost;
@@ -125,7 +125,7 @@ public class NightMode implements GameMode {
                 }
             } else if (purchased && mo && box.robots[i] == RobotClass.PAUL) {
                 purchaseType = "Upgrade to level 3";
-                robotCost = Constants.ROBOT_L3_COST.asInt();
+                robotCost = Constants.robotL3Cost();
                 if (clicked) {
                     if (box.metal >= robotCost) {
                         box.metal -= robotCost;

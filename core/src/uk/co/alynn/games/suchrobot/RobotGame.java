@@ -26,22 +26,8 @@ public class RobotGame extends ApplicationAdapter {
         }
     }
 
-    private static void loadConstants() {
-        // load constants file
-        FileHandle handle = Gdx.files.external("constants.txt");
-        if (handle.exists()) {
-            System.err.println("USING OVERLOADED CONSTANTS");
-        } else {
-            handle = Gdx.files.internal("constants.txt");
-        }
-        Scanner scn = new Scanner(handle.read());
-        Constants.loadConstants(scn.useLocale(Locale.UK));
-        scn.close();
-    }
-
     @Override
     public void create() {
-        loadConstants();
         Overlord.init();
         setMode(new LoadingScreen());
         Gdx.input.setInputProcessor(new TouchInputProcessor(this));

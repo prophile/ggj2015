@@ -17,7 +17,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class MainMode implements GameMode {
-    private float THE_SCALE = Constants.SCALE.asFloat();
+    private float THE_SCALE = Constants.scale();
     public static final float WORLD_WIDTH = 1024.0f;
     public static final float WORLD_HEIGHT = 640.0f;
     private SpriteBatch batch = null;
@@ -30,7 +30,7 @@ public class MainMode implements GameMode {
 
     private String dayText;
 
-    private final boolean DEBUG = Constants.DEBUG_NODES.asBoolean();
+    private final boolean DEBUG = Constants.debugNodes();
     private final Box box;
     private final Box initialBox;
 
@@ -175,8 +175,7 @@ public class MainMode implements GameMode {
         sr.begin(ShapeType.Filled);
         final float LENS = 70;
         sr.rect(-LENS, 250f,
-                (float) (LENS * 2f * (1.0f - (dayCounter / Constants.DAY_LENGTH
-                        .asFloat()))), 30f);
+                (float) (LENS * 2f * (1.0f - (dayCounter / Constants.dayLength()))), 30f);
         sr.end();
     }
 
@@ -367,8 +366,7 @@ public class MainMode implements GameMode {
                 switch (visited.type) {
                 case WELL:
                     if (robot.available()
-                            && robot.gatheredFor(Constants.WELL_PUMP_TIME
-                                                 .asFloat()) && visited.reserves != 0) {
+                            && robot.gatheredFor(Constants.wellPumpTime()) && visited.reserves != 0) {
                         robot.pickUp(CargoType.WATER);
                         if (visited.reserves > 0) {
                             visited.reserves -= 1;
@@ -394,8 +392,7 @@ public class MainMode implements GameMode {
                     break;
                 case WRECKAGE:
                     if (robot.available()
-                            && robot.gatheredFor(Constants.SALVAGE_TIME
-                                                 .asFloat()) && visited.reserves != 0) {
+                            && robot.gatheredFor(Constants.salvageTime()) && visited.reserves != 0) {
                         robot.pickUp(CargoType.SALVAGE);
                         visited.reserves -= 1;
                     }
@@ -407,8 +404,7 @@ public class MainMode implements GameMode {
                     break;
                 case MINE:
                     if (robot.available()
-                            && robot.gatheredFor(Constants.METAL_MINE_TIME
-                                                 .asFloat()) && visited.reserves != 0) {
+                            && robot.gatheredFor(Constants.metalMineTime()) && visited.reserves != 0) {
                         robot.pickUp(CargoType.METAL);
                         if (visited.reserves > 0) {
                             visited.reserves -= 1;
@@ -515,8 +511,7 @@ public class MainMode implements GameMode {
     }
 
     private void updateForRobotLosses() {
-        final float ROBOT_SAFE_DISTANCE = Constants.SAFE_ZONE_RADIUS
-                .asFloat();
+        final float ROBOT_SAFE_DISTANCE = Constants.safeZoneRadius();
         box.clearRobots();
         int robotIndex = 0;
         for (Robot robot : robots) {
@@ -538,7 +533,7 @@ public class MainMode implements GameMode {
     }
 
     private boolean dayOver() {
-        return dayCounter > Constants.DAY_LENGTH.asFloat();
+        return dayCounter > Constants.dayLength();
     }
 
     private void renderOffscreenIndicators() {
@@ -594,8 +589,8 @@ public class MainMode implements GameMode {
         float dx = -delX / THE_SCALE;
         float dy = -delY / THE_SCALE;
 
-        final float limitX = Constants.PAN_LIMIT_X.asFloat();
-        final float limitY = Constants.PAN_LIMIT_Y.asFloat();
+        final float limitX = Constants.panLimitX();
+        final float limitY = Constants.panLimitY();
 
         if (offX < -limitX && dx < 0)
             dx = 0;

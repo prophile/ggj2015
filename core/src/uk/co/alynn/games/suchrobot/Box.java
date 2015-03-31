@@ -3,16 +3,16 @@ package uk.co.alynn.games.suchrobot;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Box {
-    public int water = Constants.INITIAL_WATER.asInt();
-    public int salvage = Constants.INITIAL_SALVAGE.asInt();
-    public int metal = Constants.INITIAL_METAL.asInt();
+    public int water = Constants.initialWater();
+    public int salvage = Constants.initialSalvage();
+    public int metal = Constants.initialMetal();
 
     public final RobotClass[] robots;
 
     public int day = 1;
 
     public Box() {
-        int numSlots = Constants.MAX_ROBOTS.asInt();
+        int numSlots = Constants.maxRobots();
         robots = new RobotClass[numSlots];
         clearRobots();
     }
@@ -34,7 +34,7 @@ public class Box {
     }
 
     public Box copy() {
-        int numSlots = Constants.MAX_ROBOTS.asInt();
+        int numSlots = Constants.maxRobots();
         Box cp = new Box();
         cp.water = water;
         cp.salvage = salvage;
@@ -47,23 +47,22 @@ public class Box {
     }
 
     public boolean isWin() {
-        return salvage >= Constants.TARGET_SALVAGE.asInt();
+        return salvage >= Constants.targetSalvage();
     }
 
     public boolean isLoss() {
         if (water <= 0)
             return true;
-        if (day > Constants.LAST_DAY.asInt())
+        if (day > Constants.lastDay())
             return true;
-        if (activeRobots() == 0 && metal < Constants.ROBOT_METAL_COST.asInt())
+        if (activeRobots() == 0 && metal < Constants.robotMetalCost())
             return true;
         return false;
     }
 
     public void displayInfo(SpriteBatch batch, int x, int y, float scale,
             boolean onlyMetal) {
-        final float SEPARATION_DISTANCE = Constants.RESOURCE_DISPLAY_SPACING
-                .asFloat() * scale;
+        final float SEPARATION_DISTANCE = Constants.resourceDisplaySpacing() * scale;
         if (onlyMetal) {
             for (int i = 0; i < metal; ++i) {
                 int colIndex = (i % 6);
