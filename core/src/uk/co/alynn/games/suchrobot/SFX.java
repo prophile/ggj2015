@@ -6,19 +6,19 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
 
 public enum SFX {
-    SELECT_ROBOT("sfx/menu sounds/click 3.ogg"),
-    SELECT_TARGET("sfx/menu sounds/new new robo attention.ogg"),
-    PURCHASE_NEW("sfx/roboto upgrade/electric saw spraying hammer.ogg"),
-    PURCHASE_UPGRADE("sfx/roboto upgrade/robo upgrade tada.ogg"),
-    WIN("sfx/lift off softer.ogg"),
-    LOSE("sfx/new alarm.ogg"),
-    MUSIC("music tracks/main track 70 seconds.ogg"),
-    METAL_MINE("sfx/hits/eargty hit 2.ogg"),
-    SALVAGE("sfx/hits/metal hit 1.ogg"),
-    WATER_PUMP("sfx/hits/water loop.ogg"),
-    QUICKSAND("sfx/robot noises/robot in distress 2.ogg"),
-    ENGINES("sfx/engine/new engine/full rev.ogg"),
-    NIGHT_AMB("ambience loops/wind loop ogg.ogg");
+    SELECT_ROBOT("sfx/menu sounds/click 3"),
+    SELECT_TARGET("sfx/menu sounds/new new robo attention"),
+    PURCHASE_NEW("sfx/roboto upgrade/electric saw spraying hammer"),
+    PURCHASE_UPGRADE("sfx/roboto upgrade/robo upgrade tada"),
+    WIN("sfx/lift off softer"),
+    LOSE("sfx/new alarm"),
+    MUSIC("music tracks/main track 70 seconds"),
+    METAL_MINE("sfx/hits/eargty hit 2"),
+    SALVAGE("sfx/hits/metal hit 1"),
+    WATER_PUMP("sfx/hits/water loop"),
+    QUICKSAND("sfx/robot noises/robot in distress 2"),
+    ENGINES("sfx/engine/new engine/full rev"),
+    NIGHT_AMB("ambience loops/wind loop ogg");
 
     private static Set<Sound> previousLooping = new ArraySet<Sound>(32);
     private static Set<Sound> currentLooping = new ArraySet<Sound>(32);
@@ -28,7 +28,7 @@ public enum SFX {
     public String path;
 
     private SFX(String path) {
-        this.path = "audio/" + path;
+        this.path = "audio/" + path + ".ogg";
     }
 
     public void queueLoad() {

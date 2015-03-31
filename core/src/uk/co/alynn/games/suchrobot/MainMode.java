@@ -251,6 +251,7 @@ public class MainMode implements GameMode {
                     break;
                 }
             }
+            robotAnimationSFX(drawnSprite);
             if (robot.flipped) {
                 drawnSprite.drawFlipped(batch, robot.x(), robot.y());
             } else {
@@ -286,6 +287,24 @@ public class MainMode implements GameMode {
         }
 
         batch.end();
+    }
+
+    private static void robotAnimationSFX(Sprite drawnSprite) {
+        switch (drawnSprite) {
+        case ROBOT_EAT_DIRT:
+            break;
+        case ROBOT_EAT_WATER:
+            break;
+        case ROBOT_FLAIL_START:
+        case ROBOT_FLAIL:
+            SFX.QUICKSAND.loop();
+            break;
+        case ROBOT_WALK:
+            SFX.ENGINES.loop();
+            break;
+        default:
+            break;
+        }
     }
 
     private void renderSelectionCircleUpper() {
@@ -402,15 +421,10 @@ public class MainMode implements GameMode {
                     }
                     break;
                 case QUICKSAND:
-                    if (robot.peril > 0.0f) {
-                        SFX.QUICKSAND.loop();
-                    }
                     break;
                 default:
                     break;
                 }
-            } else {
-                SFX.ENGINES.loop();
             }
         }
     }
