@@ -489,6 +489,7 @@ public class MainMode implements GameMode {
         return new ResultsScreen(results, new TitleScreen());
     }
 
+    @SuppressWarnings("static-method")
     private GameMode generateWinScreen() {
         ArrayList<String> results = new ArrayList<String>();
         results.add("The robots proved their worth");
