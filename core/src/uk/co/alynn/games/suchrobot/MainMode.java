@@ -444,9 +444,12 @@ public class MainMode implements GameMode {
         List<String> messages = new ArrayList<String>();
         messages.add("Day " + box.day + " is over.");
 
-        if (initialBox.activeRobots() > box.activeRobots()) {
-            messages.add((initialBox.activeRobots() - box.activeRobots())
+        int deadRobots = initialBox.activeRobots() - box.activeRobots();
+        if (deadRobots > 1) {
+            messages.add(deadRobots
                          + " robots didn't make it back.");
+        } else if (deadRobots == 1) {
+            messages.add("A robot didn't make it back.");
         }
         if (initialBox.salvage < box.salvage) {
             if (initialBox.salvage == 0) {
